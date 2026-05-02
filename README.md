@@ -78,11 +78,10 @@ apktool --version
 ### 1. Clone Repository
 
 ```bash
-git clone <your_repo_url>
+git clone https://anonymous.4open.science/r/libMVE-FB9F/
 cd libMVE
 ```
 
----
 ### Automated Setup (using setup.sh)
 
 Make executable:
@@ -99,8 +98,8 @@ Run:
 
 IMPORTANT: If the above setup.sh failed refer to the below manual installation steps
 
----
-## Manual Installation
+
+### Manual Installation
 
 ### I. Create Virtual Environment
 
@@ -115,8 +114,6 @@ Upgrade pip:
 pip install --upgrade pip
 ```
 
----
-
 ### II. Install Python Dependencies
 
 ```bash
@@ -126,6 +123,7 @@ pip install -r requirements.txt
 ---
 
 ## JADX and APKTOOL Insatallation (If not already available!)
+
 ### 1. Install JADX
 
 Download from the official release page and extract:
