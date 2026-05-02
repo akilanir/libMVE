@@ -171,13 +171,17 @@ IF NOT: alter JADX_CMD, APKTOOL_CMD in config.py and direct it to the executable
 ### TPLs, APKs, and Other Dependencies neede to run libMVE
 
 - TPLs: IN Datasets (TS1, TS2, TS3)
-        `TS1`: TPLs used with DS1 dataset (we have given the decompiled java and smali, if you need .jar and .dex please download from: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs and https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs_dex)
 
-        `TS2`: TPLs used with DS2 dataset (we have given the decompiled java and smali, .jar/.aar files)
+        `TS1`: .jar files of TS1 TPLs are provided. To run the libMVE, we need to decompile .jar files into java and smali 
+
+        `TS2`: TPLs used with DS2 dataset (we have given the .jar/.aar files)
 
         `TS3AndTS4`: Vulenrable and Tracker TPLs (.jar/.aar, decompiled java and smali files provided)
+
+        IMPORTANT: Script to automatically decomplie the .jar/.aar files are given in MISC/decompileLibFiles.py and follow the steps given in the script. Java and smali should be decompiled into lib_java and lib_smali folders and the fodler structure should be lib_java/LIB_NAME/sources | lib_Smali/LIB_NAME/smali
     
 - APKs: 
+
         `DS1`: We have given the same APKs provided by LibScan (For further details refer to Validation set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_threshold_apks Test set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_apks)
 
         `DS2`: R8 optimized APKs compiled from source code provided in Datasets/DS2 (Use APKs in validation directory to tune the hyperparameters and Use APKs in test folder to evaluate)
@@ -185,6 +189,7 @@ IF NOT: alter JADX_CMD, APKTOOL_CMD in config.py and direct it to the executable
         `DS3`: APKs sha values provided in `{year}-APKs.csv` with their metadata, you can download the APKs directly from AndroZoo: "https://androzoo.uni.lu/"
 
 - Supporting Files:
+
         `supportFilesLibScan`: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS1 dataset
 
         `supportFilesR8`: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS2 dataset
