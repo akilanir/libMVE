@@ -1,0 +1,71 @@
+package de.greenrobot.event.util;
+
+import android.R;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import de.greenrobot.event.EventBus;
+
+/* loaded from: eventbus-2.4.0.jar:de/greenrobot/event/util/ErrorDialogFragments.class */
+public class ErrorDialogFragments {
+    public static int ERROR_DIALOG_ICON = 0;
+    public static Class<?> EVENT_TYPE_ON_CLICK;
+
+    public static Dialog createDialog(Context context, Bundle arguments, DialogInterface.OnClickListener onClickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(arguments.getString(ErrorDialogManager.KEY_TITLE));
+        builder.setMessage(arguments.getString(ErrorDialogManager.KEY_MESSAGE));
+        if (ERROR_DIALOG_ICON != 0) {
+            builder.setIcon(ERROR_DIALOG_ICON);
+        }
+        builder.setPositiveButton(R.string.ok, onClickListener);
+        return builder.create();
+    }
+
+    public static void handleOnClick(DialogInterface dialog, int which, Activity activity, Bundle arguments) {
+        if (EVENT_TYPE_ON_CLICK != null) {
+            try {
+                Object event = EVENT_TYPE_ON_CLICK.newInstance();
+                EventBus eventBus = ErrorDialogManager.factory.config.getEventBus();
+                eventBus.post(event);
+            } catch (Exception e) {
+                throw new RuntimeException("Event cannot be constructed", e);
+            }
+        }
+        boolean finish = arguments.getBoolean(ErrorDialogManager.KEY_FINISH_AFTER_DIALOG, false);
+        if (finish && activity != null) {
+            activity.finish();
+        }
+    }
+
+    @TargetApi(11)
+    /* loaded from: eventbus-2.4.0.jar:de/greenrobot/event/util/ErrorDialogFragments$Honeycomb.class */
+    public static class Honeycomb extends DialogFragment implements DialogInterface.OnClickListener {
+        @Override // android.app.DialogFragment
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return ErrorDialogFragments.createDialog(getActivity(), getArguments(), this);
+        }
+
+        @Override // android.content.DialogInterface.OnClickListener
+        public void onClick(DialogInterface dialog, int which) {
+            ErrorDialogFragments.handleOnClick(dialog, which, getActivity(), getArguments());
+        }
+    }
+
+    /* loaded from: eventbus-2.4.0.jar:de/greenrobot/event/util/ErrorDialogFragments$Support.class */
+    public static class Support extends android.support.v4.app.DialogFragment implements DialogInterface.OnClickListener {
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return ErrorDialogFragments.createDialog(getActivity(), getArguments(), this);
+        }
+
+        @Override // android.content.DialogInterface.OnClickListener
+        public void onClick(DialogInterface dialog, int which) {
+            ErrorDialogFragments.handleOnClick(dialog, which, getActivity(), getArguments());
+        }
+    }
+}

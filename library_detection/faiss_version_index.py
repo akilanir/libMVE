@@ -9,11 +9,11 @@ import csv
 import numpy as np
 from typing import Dict, List, Tuple, Optional
 
-from config import FAISS_DIR, EMB_DTYPE
+from config import FAISS_DIR, EMB_DTYPE, LIB_MAP_CSV, LOG_FILE
 from utils import normalize_vec
 
 from logger import get_file_logger
-log_path = Path("logs/pipeline.log")
+log_path = Path(LOG_FILE)
 logger = get_file_logger(log_path)
 
 
@@ -25,7 +25,7 @@ def load_library_map(csv_path: str) -> Dict[str, Dict[str, str]]:
             library_map[jar.strip()] = {"library": library.strip(), "version": version.strip()}
     return library_map
 
-lib_map = load_library_map("LibMap.csv")
+lib_map = load_library_map(LIB_MAP_CSV)
 
 
 def build_library_specific_index(embeddings: list, lib_name: str, out_dir: Path) -> Tuple[Optional[Path], Optional[Path]]:

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.7.0_79-b14 (Oracle Corporation)
+Implementation-Vendor: Guardian Project
+Implementation-Title: NetCipher
+Implementation-URL: https://guardianproject.info/code/netcipher
+Implementation-Version: 1.2
+Git-Revision: 2f3e6f0bbea4755617286813b2dd80907d0a573f
+Android-SDK-Release: 24.3.4
+Android-SDK-Host-OS: linux
+

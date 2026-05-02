@@ -1,0 +1,21 @@
+package com.fasterxml.jackson.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target({ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
+@JacksonAnnotation
+@Retention(RetentionPolicy.RUNTIME)
+/* loaded from: jackson-annotations-2.4.0.jar:com/fasterxml/jackson/annotation/JsonProperty.class */
+public @interface JsonProperty {
+    public static final String USE_DEFAULT_NAME = "";
+    public static final int INDEX_UNKNOWN = -1;
+
+    String value() default "";
+
+    boolean required() default false;
+
+    int index() default -1;
+}

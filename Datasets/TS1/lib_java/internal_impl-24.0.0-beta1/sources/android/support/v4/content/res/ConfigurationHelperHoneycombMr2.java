@@ -1,0 +1,22 @@
+package android.support.v4.content.res;
+
+import android.content.res.Resources;
+import android.support.annotation.NonNull;
+
+/* loaded from: internal_impl-24.0.0-beta1.jar:android/support/v4/content/res/ConfigurationHelperHoneycombMr2.class */
+class ConfigurationHelperHoneycombMr2 {
+    ConfigurationHelperHoneycombMr2() {
+    }
+
+    static int getScreenHeightDp(@NonNull Resources resources) {
+        return resources.getConfiguration().screenHeightDp;
+    }
+
+    static int getScreenWidthDp(@NonNull Resources resources) {
+        return resources.getConfiguration().screenWidthDp;
+    }
+
+    static int getSmallestScreenWidthDp(@NonNull Resources resources) {
+        return resources.getConfiguration().smallestScreenWidthDp;
+    }
+}

@@ -1,0 +1,55 @@
+package com.nostra13.universalimageloader.core.listener;
+
+import android.widget.AbsListView;
+import com.nostra13.universalimageloader.BuildConfig;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+/* loaded from: universal-image-loader-1.9.5.jar:com/nostra13/universalimageloader/core/listener/PauseOnScrollListener.class */
+public class PauseOnScrollListener implements AbsListView.OnScrollListener {
+    private ImageLoader imageLoader;
+    private final boolean pauseOnScroll;
+    private final boolean pauseOnFling;
+    private final AbsListView.OnScrollListener externalListener;
+
+    public PauseOnScrollListener(ImageLoader imageLoader, boolean pauseOnScroll, boolean pauseOnFling) {
+        this(imageLoader, pauseOnScroll, pauseOnFling, null);
+    }
+
+    public PauseOnScrollListener(ImageLoader imageLoader, boolean pauseOnScroll, boolean pauseOnFling, AbsListView.OnScrollListener customListener) {
+        this.imageLoader = imageLoader;
+        this.pauseOnScroll = pauseOnScroll;
+        this.pauseOnFling = pauseOnFling;
+        this.externalListener = customListener;
+    }
+
+    @Override // android.widget.AbsListView.OnScrollListener
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        switch (scrollState) {
+            case BuildConfig.DEBUG /* 0 */:
+                this.imageLoader.resume();
+                break;
+            case 1:
+                if (this.pauseOnScroll) {
+                    this.imageLoader.pause();
+                    break;
+                }
+                break;
+            case 2:
+                if (this.pauseOnFling) {
+                    this.imageLoader.pause();
+                    break;
+                }
+                break;
+        }
+        if (this.externalListener != null) {
+            this.externalListener.onScrollStateChanged(view, scrollState);
+        }
+    }
+
+    @Override // android.widget.AbsListView.OnScrollListener
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (this.externalListener != null) {
+            this.externalListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        }
+    }
+}

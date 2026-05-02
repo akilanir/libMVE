@@ -1,0 +1,169 @@
+package org.apache.commons.io.output;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+/* loaded from: commons-io-1.3.2.jar:org/apache/commons/io/output/LockableFileWriter.class */
+public class LockableFileWriter extends Writer {
+    private static final String LCK = ".lck";
+    private final Writer out;
+    private final File lockFile;
+    static Class class$org$apache$commons$io$output$LockableFileWriter;
+
+    public LockableFileWriter(String fileName) throws IOException {
+        this(fileName, false, (String) null);
+    }
+
+    public LockableFileWriter(String fileName, boolean append) throws IOException {
+        this(fileName, append, (String) null);
+    }
+
+    public LockableFileWriter(String fileName, boolean append, String lockDir) throws IOException {
+        this(new File(fileName), append, lockDir);
+    }
+
+    public LockableFileWriter(File file) throws IOException {
+        this(file, false, (String) null);
+    }
+
+    public LockableFileWriter(File file, boolean append) throws IOException {
+        this(file, append, (String) null);
+    }
+
+    public LockableFileWriter(File file, boolean append, String lockDir) throws IOException {
+        this(file, null, append, lockDir);
+    }
+
+    public LockableFileWriter(File file, String encoding) throws IOException {
+        this(file, encoding, false, null);
+    }
+
+    public LockableFileWriter(File file, String encoding, boolean append, String lockDir) throws IOException {
+        File file2 = file.getAbsoluteFile();
+        if (file2.getParentFile() != null) {
+            FileUtils.forceMkdir(file2.getParentFile());
+        }
+        if (file2.isDirectory()) {
+            throw new IOException("File specified is a directory");
+        }
+        File lockDirFile = new File(lockDir == null ? System.getProperty("java.io.tmpdir") : lockDir);
+        FileUtils.forceMkdir(lockDirFile);
+        testLockDir(lockDirFile);
+        this.lockFile = new File(lockDirFile, new StringBuffer().append(file2.getName()).append(LCK).toString());
+        createLock();
+        this.out = initWriter(file2, encoding, append);
+    }
+
+    private void testLockDir(File lockDir) throws IOException {
+        if (!lockDir.exists()) {
+            throw new IOException(new StringBuffer().append("Could not find lockDir: ").append(lockDir.getAbsolutePath()).toString());
+        }
+        if (!lockDir.canWrite()) {
+            throw new IOException(new StringBuffer().append("Could not write to lockDir: ").append(lockDir.getAbsolutePath()).toString());
+        }
+    }
+
+    private void createLock() throws IOException {
+        Class cls;
+        if (class$org$apache$commons$io$output$LockableFileWriter == null) {
+            cls = class$("org.apache.commons.io.output.LockableFileWriter");
+            class$org$apache$commons$io$output$LockableFileWriter = cls;
+        } else {
+            cls = class$org$apache$commons$io$output$LockableFileWriter;
+        }
+        Class cls2 = cls;
+        synchronized (cls) {
+            if (!this.lockFile.createNewFile()) {
+                throw new IOException(new StringBuffer().append("Can't write file, lock ").append(this.lockFile.getAbsolutePath()).append(" exists").toString());
+            }
+            this.lockFile.deleteOnExit();
+        }
+    }
+
+    static Class class$(String x0) {
+        try {
+            return Class.forName(x0);
+        } catch (ClassNotFoundException x1) {
+            throw new NoClassDefFoundError(x1.getMessage());
+        }
+    }
+
+    private Writer initWriter(File file, String encoding, boolean append) throws IOException {
+        boolean fileExistedAlready = file.exists();
+        OutputStream stream = null;
+        Writer writer = null;
+        try {
+            if (encoding == null) {
+                writer = new FileWriter(file.getAbsolutePath(), append);
+            } else {
+                stream = new FileOutputStream(file.getAbsolutePath(), append);
+                writer = new OutputStreamWriter(stream, encoding);
+            }
+            return writer;
+        } catch (IOException ex) {
+            IOUtils.closeQuietly(writer);
+            IOUtils.closeQuietly(stream);
+            this.lockFile.delete();
+            if (!fileExistedAlready) {
+                file.delete();
+            }
+            throw ex;
+        } catch (RuntimeException ex2) {
+            IOUtils.closeQuietly(writer);
+            IOUtils.closeQuietly(stream);
+            this.lockFile.delete();
+            if (!fileExistedAlready) {
+                file.delete();
+            }
+            throw ex2;
+        }
+    }
+
+    @Override // java.io.Writer, java.io.Closeable, java.lang.AutoCloseable
+    public void close() throws IOException {
+        try {
+            this.out.close();
+            this.lockFile.delete();
+        } catch (Throwable th) {
+            this.lockFile.delete();
+            throw th;
+        }
+    }
+
+    @Override // java.io.Writer
+    public void write(int idx) throws IOException {
+        this.out.write(idx);
+    }
+
+    @Override // java.io.Writer
+    public void write(char[] chr) throws IOException {
+        this.out.write(chr);
+    }
+
+    @Override // java.io.Writer
+    public void write(char[] chr, int st, int end) throws IOException {
+        this.out.write(chr, st, end);
+    }
+
+    @Override // java.io.Writer
+    public void write(String str) throws IOException {
+        this.out.write(str);
+    }
+
+    @Override // java.io.Writer
+    public void write(String str, int st, int end) throws IOException {
+        this.out.write(str, st, end);
+    }
+
+    @Override // java.io.Writer, java.io.Flushable
+    public void flush() throws IOException {
+        this.out.flush();
+    }
+}

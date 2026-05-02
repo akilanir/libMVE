@@ -48,7 +48,7 @@ libMVE/
 
 ### Python Environment
 
-* Python 3.10.12 (recommended)
+* Python 3.10.12 (3.10 or higher recommended)
 * Ubuntu/Linux environment recommended
 
 We strongly recommend using a Python virtual environment.
@@ -99,7 +99,7 @@ Run:
 IMPORTANT: If the above setup.sh failed refer to the below manual installation steps
 
 
-### Manual Installation
+### Manual Setup (If above automated process failed!!)
 
 ### I. Create Virtual Environment
 
@@ -140,8 +140,6 @@ export PATH=$PATH:/path/to/jadx/bin
 
 You may place this in `.bashrc` or `.zshrc`.
 
----
-
 ### 2. Install APKTool
 
 Download:
@@ -158,53 +156,81 @@ sudo apt install apktool
 
 or install manually from the official website.
 
+IMPORTANT: After installation please ensure both tools are accessible from your terminal:
+
+```bash
+jadx --version
+apktool --version
+```
+IF NOT: alter JADX_CMD, APKTOOL_CMD in config.py and direct it to the executable path of jadx and apktool
+
 ---
 
 ## Usage
 
+### TPLs, APKs, and Other Dependencies neede to run libMVE
+
+- TPLs: the decompiled TPLs repos (TS1, TS2, and TS3 are available in Datasets Directory)
+        TS1: TPLs used with DS1 dataset (we have given the decompiled java and smali, if you need .jar and .dex please download from: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs and https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs_dex)
+        TS2: TPLs used with DS2 dataset (we have given the decompiled java and smali, .jar/.aar files)
+        TS3AndTS4: Vulenrable and Tracker TPLs (.jar/.aar, decompiled java and smali files provided)
+    
+- APKs: 
+        DS1: you can download DS1 dataset from, Validation set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_threshold_apks Test set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_apks
+        DS2: R8 optimized APKs compiled from source code provided in Datasets/DS2 (Use APKs in validation directory to tune the hyperparameters and Use APKs in test folder to evaluate)
+        DS3: Sample APKs (few APKs from 8000 apps are given in the repo). Rest of the APKs sha values provided in APK-Sha.csv with their metadata you can donwload the APKs from AndroZoo: "https://androzoo.uni.lu/"
+
+- Supporting Files:
+        supportFilesLibScan: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS1 dataset
+        supportFilesR8: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS2 dataset
+        supportFilesVulnLib: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS3 and TS4 datasets.
+
+Makesure you have the correct dataset downloaded and ready to use!!!
+
 ### 1. Build Library Embeddings
+
+From TS{n} datasets first we need to generate TPL Database (this should be done only once per dataset)
+
+Make sure you change LIB_MAP_CSV = Path("supportFilesLibScan/LibMap.csv")  # CSV file mapping library JAR names to library info.
+
+Run following changing the location of TS1,TS2, and TS3 based on the dataset you used (eg: If you want to test DS1 you need to use TS1)
 
 ```bash
 python main.py build-embeddings \
-  --lib-java lib_java \
-  --lib-smali lib_smali \
-  --out faiss_data/Embedding.pkl
+  --lib-java Datasets/TS1/lib_java \
+  --lib-smali Datasets/TS1/lib_smali \
+  --out faiss_data_TS1/TS1_Embeddings.pkl
 ```
+logs/pipeline.log will print the main info, error, warn logs.
 
 ---
-
-### 2. Detect TPL in a Single APK
-
-```bash
-python main.py detect-apk \
-  --apk path/to/target.apk \
-  --embeddings faiss_data/Embedding.pkl
-```
-
----
-
-### 3. Detect TPLs in Multiple APKs
+### 2. Detect TPLs in Multiple APKs (in a Directory)
 
 ```bash
-python main.py detect-apks \
-  --apk-folder path/to/apk_folder \
-  --embeddings faiss_data/Embedding.pkl \
-  --th1 <threshold_1> \
-  --th2 <threshold_2> \
-  --apk-embedding-save-path <path> \
-  --out-dir output/ \
-  --workers 4
+python main.py detect-apks 
+  --apk path/to/target_apk_folder 
+  --lib-embeddings faiss_data/Embedding.pkl 
+  --lib-index-dir Libscan_Faiss_Data
+  --th1 0.1 
+  --th2 0.4 
+  --apk-embedding-save-path LibScan_APK_Embeddings 
+  --groundtruth path/to/groundtruth.json 
+  --out-dir Validation_Output 
+  --workers 6
 ```
 
 #### Parameters
-
-- `--th1` : Threshold at package/TPL level  
-- `--th2` : Threshold for system API-based validation  
-- `--workers` : Number of parallel processes  
+- `--apk` : APK folder that need to analyse
+- `--lib-embeddings` : Generated Library Embedding pickle File
+- `--lib-index-dir`: Directory to save Faiss Library Indexes
+- `--th1` : Threshold at package/TPL level  (tau_class)
+- `--th2` : Threshold for system API-based validation  (tau_API)
+- `--apk-embedding-save-path` : We can save the APK embeddings and use it again (If we need to perfrom tuning)
+- `--workers` : Number of parallel processes  (Depending on the system GPU and CPU availabilty you can increase the number of workers, We used 6 workers in a Linux machine that had 13th Gen Intel(R) Core(TM) i7-13700K, 16 Cores, 128GB RAM, NVIDIA GeForce RTX 4090 (24GB))
 
 Optional:
 
-- `--groundtruth` : Path to ground truth JSON for evaluation  
+- `--groundtruth` : Path to ground truth JSON for evaluation  (For DS1 and DS2 datasets we have provided the grountruth.json and for DS3 since it is in-the-wild apps no groundtruths available)
 
 ---
 
@@ -242,15 +268,6 @@ logs/pipeline.log
 - Ensure library datasets are properly decompiled before building embeddings
 - Detection performance depends on threshold selection
 - Results may vary depending on obfuscation and compilation settings
-
----
-
-## Future Work
-
-- Add dependency list and installation guide  
-- Provide benchmark datasets  
-- Include evaluation scripts and metrics  
-- Improve configuration and tuning documentation  
 
 ---
 

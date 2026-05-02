@@ -1,0 +1,36 @@
+.class final Lfreemarker/core/FMParser$JJCalls;
+.super Ljava/lang/Object;
+.source "FMParser.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lfreemarker/core/FMParser;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x18
+    name = "JJCalls"
+.end annotation
+
+
+# instance fields
+.field arg:I
+
+.field first:Lfreemarker/core/Token;
+
+.field gen:I
+
+.field next:Lfreemarker/core/FMParser$JJCalls;
+
+
+# direct methods
+.method constructor <init>()V
+    .registers 1
+
+    .prologue
+    .line 4723
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method

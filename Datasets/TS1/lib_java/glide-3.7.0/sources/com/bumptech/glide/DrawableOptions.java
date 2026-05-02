@@ -1,0 +1,15 @@
+package com.bumptech.glide;
+
+import android.view.animation.Animation;
+
+/* loaded from: glide-3.7.0.jar:com/bumptech/glide/DrawableOptions.class */
+interface DrawableOptions {
+    GenericRequestBuilder<?, ?, ?, ?> crossFade();
+
+    GenericRequestBuilder<?, ?, ?, ?> crossFade(int i);
+
+    @Deprecated
+    GenericRequestBuilder<?, ?, ?, ?> crossFade(Animation animation, int i);
+
+    GenericRequestBuilder<?, ?, ?, ?> crossFade(int i, int i2);
+}

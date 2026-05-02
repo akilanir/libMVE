@@ -1,0 +1,21 @@
+package butterknife.internal;
+
+/* loaded from: butterknife-6.0.0.jar:butterknife/internal/Parameter.class */
+final class Parameter {
+    static final Parameter[] NONE = new Parameter[0];
+    private final int listenerPosition;
+    private final String type;
+
+    Parameter(int listenerPosition, String type) {
+        this.listenerPosition = listenerPosition;
+        this.type = type;
+    }
+
+    int getListenerPosition() {
+        return this.listenerPosition;
+    }
+
+    String getType() {
+        return this.type;
+    }
+}

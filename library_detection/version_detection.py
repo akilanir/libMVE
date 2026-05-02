@@ -9,9 +9,10 @@ import csv
 import numpy as np
 
 from utils import normalize_vec
+from config import LOG_FILE, LIB_MAP_CSV
 
 from logger import get_file_logger
-log_path = Path("logs/pipeline.log")
+log_path = Path(LOG_FILE)
 logger = get_file_logger(log_path)
 
 
@@ -23,7 +24,7 @@ def load_library_map(csv_path: str) -> Dict[str, Dict[str, str]]:
             library_map[jar.strip()] = {"library": library.strip(), "version": version.strip()}
     return library_map
 
-lib_map = load_library_map("LibMap.csv") 
+lib_map = load_library_map(LIB_MAP_CSV) 
 
 
 def detect_library_with_versions(lib_name: str, 

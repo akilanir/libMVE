@@ -1,0 +1,20 @@
+package org.apache.http.pool;
+
+/* loaded from: httpcore-4.4.3.jar:org/apache/http/pool/ConnPoolControl.class */
+public interface ConnPoolControl<T> {
+    void setMaxTotal(int i);
+
+    int getMaxTotal();
+
+    void setDefaultMaxPerRoute(int i);
+
+    int getDefaultMaxPerRoute();
+
+    void setMaxPerRoute(T t, int i);
+
+    int getMaxPerRoute(T t);
+
+    PoolStats getTotalStats();
+
+    PoolStats getStats(T t);
+}

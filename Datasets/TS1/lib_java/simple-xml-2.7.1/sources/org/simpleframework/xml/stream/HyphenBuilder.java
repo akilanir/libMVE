@@ -1,0 +1,43 @@
+package org.simpleframework.xml.stream;
+
+/* loaded from: simple-xml-2.7.1.jar:org/simpleframework/xml/stream/HyphenBuilder.class */
+class HyphenBuilder implements Style {
+    HyphenBuilder() {
+    }
+
+    @Override // org.simpleframework.xml.stream.Style
+    public String getAttribute(String name) {
+        if (name != null) {
+            return new Parser(name).process();
+        }
+        return null;
+    }
+
+    @Override // org.simpleframework.xml.stream.Style
+    public String getElement(String name) {
+        if (name != null) {
+            return new Parser(name).process();
+        }
+        return null;
+    }
+
+    /* loaded from: simple-xml-2.7.1.jar:org/simpleframework/xml/stream/HyphenBuilder$Parser.class */
+    private class Parser extends Splitter {
+        private Parser(String source) {
+            super(source);
+        }
+
+        @Override // org.simpleframework.xml.stream.Splitter
+        protected void parse(char[] text, int off, int len) {
+            text[off] = toLower(text[off]);
+        }
+
+        @Override // org.simpleframework.xml.stream.Splitter
+        protected void commit(char[] text, int off, int len) {
+            this.builder.append(text, off, len);
+            if (off + len < this.count) {
+                this.builder.append('-');
+            }
+        }
+    }
+}

@@ -1,0 +1,318 @@
+package com.fasterxml.jackson.databind.ser.std;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitable;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+import com.fasterxml.jackson.databind.jsonschema.JsonSchema;
+import com.fasterxml.jackson.databind.jsonschema.SchemaAware;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.ser.ContainerSerializer;
+import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+import com.fasterxml.jackson.databind.ser.impl.PropertySerializerMap;
+import com.fasterxml.jackson.databind.type.ArrayType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
+
+@JacksonStdImpl
+/* loaded from: jackson-databind-2.5.1.jar:com/fasterxml/jackson/databind/ser/std/ObjectArraySerializer.class */
+public class ObjectArraySerializer extends ArraySerializerBase<Object[]> implements ContextualSerializer {
+    protected final boolean _staticTyping;
+    protected final JavaType _elementType;
+    protected final TypeSerializer _valueTypeSerializer;
+    protected JsonSerializer<Object> _elementSerializer;
+    protected PropertySerializerMap _dynamicSerializers;
+
+    public ObjectArraySerializer(JavaType elemType, boolean staticTyping, TypeSerializer vts, JsonSerializer<Object> elementSerializer) {
+        super(Object[].class, (BeanProperty) null);
+        this._elementType = elemType;
+        this._staticTyping = staticTyping;
+        this._valueTypeSerializer = vts;
+        this._dynamicSerializers = PropertySerializerMap.emptyForProperties();
+        this._elementSerializer = elementSerializer;
+    }
+
+    public ObjectArraySerializer(ObjectArraySerializer src, TypeSerializer vts) {
+        super(src);
+        this._elementType = src._elementType;
+        this._valueTypeSerializer = vts;
+        this._staticTyping = src._staticTyping;
+        this._dynamicSerializers = src._dynamicSerializers;
+        this._elementSerializer = src._elementSerializer;
+    }
+
+    public ObjectArraySerializer(ObjectArraySerializer src, BeanProperty property, TypeSerializer vts, JsonSerializer<?> elementSerializer) {
+        super(src, property);
+        this._elementType = src._elementType;
+        this._valueTypeSerializer = vts;
+        this._staticTyping = src._staticTyping;
+        this._dynamicSerializers = src._dynamicSerializers;
+        this._elementSerializer = elementSerializer;
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.ContainerSerializer
+    public ContainerSerializer<?> _withValueTypeSerializer(TypeSerializer vts) {
+        return new ObjectArraySerializer(this._elementType, this._staticTyping, vts, this._elementSerializer);
+    }
+
+    public ObjectArraySerializer withResolved(BeanProperty prop, TypeSerializer vts, JsonSerializer<?> ser) {
+        if (this._property == prop && ser == this._elementSerializer && this._valueTypeSerializer == vts) {
+            return this;
+        }
+        return new ObjectArraySerializer(this, prop, vts, ser);
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.ContextualSerializer
+    public JsonSerializer<?> createContextual(SerializerProvider provider, BeanProperty property) throws JsonMappingException {
+        AnnotatedMember m;
+        Object serDef;
+        TypeSerializer vts = this._valueTypeSerializer;
+        if (vts != null) {
+            vts = vts.forProperty(property);
+        }
+        JsonSerializer<?> ser = null;
+        if (property != null && (m = property.getMember()) != null && (serDef = provider.getAnnotationIntrospector().findContentSerializer(m)) != null) {
+            ser = provider.serializerInstance(m, serDef);
+        }
+        if (ser == null) {
+            ser = this._elementSerializer;
+        }
+        JsonSerializer<?> ser2 = findConvertingContentSerializer(provider, property, ser);
+        if (ser2 == null) {
+            if (this._elementType != null && (this._staticTyping || hasContentTypeAnnotation(provider, property))) {
+                ser2 = provider.findValueSerializer(this._elementType, property);
+            }
+        } else {
+            ser2 = provider.handleSecondaryContextualization(ser2, property);
+        }
+        return withResolved(property, vts, ser2);
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.ContainerSerializer
+    public JavaType getContentType() {
+        return this._elementType;
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.ContainerSerializer
+    public JsonSerializer<?> getContentSerializer() {
+        return this._elementSerializer;
+    }
+
+    @Override // com.fasterxml.jackson.databind.JsonSerializer
+    public boolean isEmpty(SerializerProvider prov, Object[] value) {
+        return value == null || value.length == 0;
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.ContainerSerializer
+    public boolean hasSingleElement(Object[] value) {
+        return value.length == 1;
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.std.ArraySerializerBase, com.fasterxml.jackson.databind.ser.std.StdSerializer, com.fasterxml.jackson.databind.JsonSerializer
+    public final void serialize(Object[] value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+        int len = value.length;
+        if (len == 1 && provider.isEnabled(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)) {
+            serializeContents(value, jgen, provider);
+            return;
+        }
+        jgen.writeStartArray(len);
+        serializeContents(value, jgen, provider);
+        jgen.writeEndArray();
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.std.ArraySerializerBase
+    public void serializeContents(Object[] value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+        Throwable t;
+        int len = value.length;
+        if (len == 0) {
+            return;
+        }
+        if (this._elementSerializer != null) {
+            serializeContentsUsing(value, jgen, provider, this._elementSerializer);
+            return;
+        }
+        if (this._valueTypeSerializer != null) {
+            serializeTypedContents(value, jgen, provider);
+            return;
+        }
+        int i = 0;
+        Object elem = null;
+        try {
+            PropertySerializerMap serializers = this._dynamicSerializers;
+            while (i < len) {
+                elem = value[i];
+                if (elem == null) {
+                    provider.defaultSerializeNull(jgen);
+                } else {
+                    Class<?> cc = elem.getClass();
+                    JsonSerializer<Object> serializer = serializers.serializerFor(cc);
+                    if (serializer == null) {
+                        if (this._elementType.hasGenericTypes()) {
+                            serializer = _findAndAddDynamic(serializers, provider.constructSpecializedType(this._elementType, cc), provider);
+                        } else {
+                            serializer = _findAndAddDynamic(serializers, cc, provider);
+                        }
+                    }
+                    serializer.serialize(elem, jgen, provider);
+                }
+                i++;
+            }
+        } catch (IOException ioe) {
+            throw ioe;
+        } catch (Exception e) {
+            Throwable th = e;
+            while (true) {
+                t = th;
+                if (!(t instanceof InvocationTargetException) || t.getCause() == null) {
+                    break;
+                } else {
+                    th = t.getCause();
+                }
+            }
+            if (t instanceof Error) {
+                throw ((Error) t);
+            }
+            throw JsonMappingException.wrapWithPath(t, elem, i);
+        }
+    }
+
+    public void serializeContentsUsing(Object[] value, JsonGenerator jgen, SerializerProvider provider, JsonSerializer<Object> ser) throws IOException {
+        Throwable t;
+        int len = value.length;
+        TypeSerializer typeSer = this._valueTypeSerializer;
+        Object elem = null;
+        for (int i = 0; i < len; i++) {
+            try {
+                elem = value[i];
+                if (elem == null) {
+                    provider.defaultSerializeNull(jgen);
+                } else if (typeSer == null) {
+                    ser.serialize(elem, jgen, provider);
+                } else {
+                    ser.serializeWithType(elem, jgen, provider, typeSer);
+                }
+            } catch (IOException ioe) {
+                throw ioe;
+            } catch (Exception e) {
+                Throwable th = e;
+                while (true) {
+                    t = th;
+                    if (!(t instanceof InvocationTargetException) || t.getCause() == null) {
+                        break;
+                    } else {
+                        th = t.getCause();
+                    }
+                }
+                if (t instanceof Error) {
+                    throw ((Error) t);
+                }
+                throw JsonMappingException.wrapWithPath(t, elem, i);
+            }
+        }
+    }
+
+    public void serializeTypedContents(Object[] value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+        Throwable t;
+        int len = value.length;
+        TypeSerializer typeSer = this._valueTypeSerializer;
+        int i = 0;
+        Object elem = null;
+        try {
+            PropertySerializerMap serializers = this._dynamicSerializers;
+            while (i < len) {
+                elem = value[i];
+                if (elem == null) {
+                    provider.defaultSerializeNull(jgen);
+                } else {
+                    Class<?> cc = elem.getClass();
+                    JsonSerializer<Object> serializer = serializers.serializerFor(cc);
+                    if (serializer == null) {
+                        serializer = _findAndAddDynamic(serializers, cc, provider);
+                    }
+                    serializer.serializeWithType(elem, jgen, provider, typeSer);
+                }
+                i++;
+            }
+        } catch (IOException ioe) {
+            throw ioe;
+        } catch (Exception e) {
+            Throwable th = e;
+            while (true) {
+                t = th;
+                if (!(t instanceof InvocationTargetException) || t.getCause() == null) {
+                    break;
+                } else {
+                    th = t.getCause();
+                }
+            }
+            if (t instanceof Error) {
+                throw ((Error) t);
+            }
+            throw JsonMappingException.wrapWithPath(t, elem, i);
+        }
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.std.StdSerializer, com.fasterxml.jackson.databind.jsonschema.SchemaAware
+    public JsonNode getSchema(SerializerProvider provider, Type typeHint) throws JsonMappingException {
+        ObjectNode o = createSchemaNode("array", true);
+        if (typeHint != null) {
+            JavaType javaType = provider.constructType(typeHint);
+            if (javaType.isArrayType()) {
+                Class<?> componentType = ((ArrayType) javaType).mo3getContentType().getRawClass();
+                if (componentType == Object.class) {
+                    o.put("items", JsonSchema.getDefaultSchemaNode());
+                } else {
+                    JsonFormatVisitable findValueSerializer = provider.findValueSerializer(componentType, this._property);
+                    JsonNode schemaNode = findValueSerializer instanceof SchemaAware ? ((SchemaAware) findValueSerializer).getSchema(provider, null) : JsonSchema.getDefaultSchemaNode();
+                    o.put("items", schemaNode);
+                }
+            }
+        }
+        return o;
+    }
+
+    @Override // com.fasterxml.jackson.databind.ser.std.StdSerializer, com.fasterxml.jackson.databind.JsonSerializer, com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitable
+    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {
+        JsonArrayFormatVisitor arrayVisitor = visitor.expectArrayFormat(typeHint);
+        if (arrayVisitor != null) {
+            TypeFactory tf = visitor.getProvider().getTypeFactory();
+            JavaType contentType = tf.moreSpecificType(this._elementType, typeHint.mo3getContentType());
+            if (contentType == null) {
+                throw new JsonMappingException("Could not resolve type");
+            }
+            JsonSerializer<?> valueSer = this._elementSerializer;
+            if (valueSer == null) {
+                valueSer = visitor.getProvider().findValueSerializer(contentType, this._property);
+            }
+            arrayVisitor.itemsFormat(valueSer, contentType);
+        }
+    }
+
+    protected final JsonSerializer<Object> _findAndAddDynamic(PropertySerializerMap map, Class<?> type, SerializerProvider provider) throws JsonMappingException {
+        PropertySerializerMap.SerializerAndMapResult result = map.findAndAddSecondarySerializer(type, provider, this._property);
+        if (map != result.map) {
+            this._dynamicSerializers = result.map;
+        }
+        return result.serializer;
+    }
+
+    protected final JsonSerializer<Object> _findAndAddDynamic(PropertySerializerMap map, JavaType type, SerializerProvider provider) throws JsonMappingException {
+        PropertySerializerMap.SerializerAndMapResult result = map.findAndAddSecondarySerializer(type, provider, this._property);
+        if (map != result.map) {
+            this._dynamicSerializers = result.map;
+        }
+        return result.serializer;
+    }
+}

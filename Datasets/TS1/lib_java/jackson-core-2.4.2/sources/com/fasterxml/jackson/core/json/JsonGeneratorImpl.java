@@ -1,0 +1,78 @@
+package com.fasterxml.jackson.core.json;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.SerializableString;
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.core.base.GeneratorBase;
+import com.fasterxml.jackson.core.io.CharTypes;
+import com.fasterxml.jackson.core.io.CharacterEscapes;
+import com.fasterxml.jackson.core.io.IOContext;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.core.util.VersionUtil;
+import java.io.IOException;
+
+/* loaded from: jackson-core-2.4.2.jar:com/fasterxml/jackson/core/json/JsonGeneratorImpl.class */
+public abstract class JsonGeneratorImpl extends GeneratorBase {
+    protected static final int[] sOutputEscapes = CharTypes.get7BitOutputEscapes();
+    protected final IOContext _ioContext;
+    protected int[] _outputEscapes;
+    protected int _maximumNonEscapedChar;
+    protected CharacterEscapes _characterEscapes;
+    protected SerializableString _rootValueSeparator;
+
+    public JsonGeneratorImpl(IOContext ctxt, int features, ObjectCodec codec) {
+        super(features, codec);
+        this._outputEscapes = sOutputEscapes;
+        this._rootValueSeparator = DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
+        this._ioContext = ctxt;
+        if (isEnabled(JsonGenerator.Feature.ESCAPE_NON_ASCII)) {
+            setHighestNonEscapedChar(127);
+        }
+    }
+
+    @Override // com.fasterxml.jackson.core.JsonGenerator
+    public JsonGenerator setHighestNonEscapedChar(int charCode) {
+        this._maximumNonEscapedChar = charCode < 0 ? 0 : charCode;
+        return this;
+    }
+
+    @Override // com.fasterxml.jackson.core.JsonGenerator
+    public int getHighestEscapedChar() {
+        return this._maximumNonEscapedChar;
+    }
+
+    @Override // com.fasterxml.jackson.core.JsonGenerator
+    public JsonGenerator setCharacterEscapes(CharacterEscapes esc) {
+        this._characterEscapes = esc;
+        if (esc == null) {
+            this._outputEscapes = sOutputEscapes;
+        } else {
+            this._outputEscapes = esc.getEscapeCodesForAscii();
+        }
+        return this;
+    }
+
+    @Override // com.fasterxml.jackson.core.JsonGenerator
+    public CharacterEscapes getCharacterEscapes() {
+        return this._characterEscapes;
+    }
+
+    @Override // com.fasterxml.jackson.core.JsonGenerator
+    public JsonGenerator setRootValueSeparator(SerializableString sep) {
+        this._rootValueSeparator = sep;
+        return this;
+    }
+
+    @Override // com.fasterxml.jackson.core.base.GeneratorBase, com.fasterxml.jackson.core.JsonGenerator, com.fasterxml.jackson.core.Versioned
+    public Version version() {
+        return VersionUtil.versionFor(getClass());
+    }
+
+    @Override // com.fasterxml.jackson.core.JsonGenerator
+    public final void writeStringField(String fieldName, String value) throws IOException, JsonGenerationException {
+        writeFieldName(fieldName);
+        writeString(value);
+    }
+}

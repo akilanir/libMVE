@@ -1,0 +1,22 @@
+.class public interface abstract Lorg/alexd/jsonrpc/JSONRPCThreadedClient$OnIntResultListener;
+.super Ljava/lang/Object;
+.source "JSONRPCThreadedClient.java"
+
+# interfaces
+.implements Lorg/alexd/jsonrpc/JSONRPCThreadedClient$OnObjectResultListener;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lorg/alexd/jsonrpc/JSONRPCThreadedClient;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x609
+    name = "OnIntResultListener"
+.end annotation
+
+
+# virtual methods
+.method public abstract manageResult(I)V
+.end method

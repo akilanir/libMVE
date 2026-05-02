@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Created-By: 1.5.0_05-b05 (Sun Microsystems Inc.)
+Built-By: tatu
+Specification-Title: StAX
+Specification-Version: 1.0.1
+Specification-Vendor: JCP-173
+Implementation-Title: StAX reference implementation
+Implementation-Version: 1.2.0
+Implementation-Vendor: BEA
+

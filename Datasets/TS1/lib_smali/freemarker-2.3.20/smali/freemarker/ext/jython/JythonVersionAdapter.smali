@@ -1,0 +1,26 @@
+.class public abstract Lfreemarker/ext/jython/JythonVersionAdapter;
+.super Ljava/lang/Object;
+.source "JythonVersionAdapter.java"
+
+
+# direct methods
+.method public constructor <init>()V
+    .registers 1
+
+    .prologue
+    .line 10
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public abstract getPythonClassName(Lorg/python/core/PyObject;)Ljava/lang/String;
+.end method
+
+.method public abstract isPyInstance(Ljava/lang/Object;)Z
+.end method
+
+.method public abstract pyInstanceToJava(Ljava/lang/Object;)Ljava/lang/Object;
+.end method

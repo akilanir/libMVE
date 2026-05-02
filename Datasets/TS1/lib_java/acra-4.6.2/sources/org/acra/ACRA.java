@@ -1,0 +1,190 @@
+package org.acra;
+
+import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
+import org.acra.annotation.ReportsCrashes;
+import org.acra.log.ACRALog;
+import org.acra.log.AndroidLogDelegate;
+
+/* loaded from: acra-4.6.2.jar:org/acra/ACRA.class */
+public class ACRA {
+    public static final boolean DEV_LOGGING = false;
+    public static final String LOG_TAG = ACRA.class.getSimpleName();
+    public static ACRALog log = new AndroidLogDelegate();
+    public static final String PREF_DISABLE_ACRA = "acra.disable";
+    public static final String PREF_ENABLE_ACRA = "acra.enable";
+    public static final String PREF_ENABLE_SYSTEM_LOGS = "acra.syslog.enable";
+    public static final String PREF_ENABLE_DEVICE_ID = "acra.deviceid.enable";
+    public static final String PREF_USER_EMAIL_ADDRESS = "acra.user.email";
+    public static final String PREF_ALWAYS_ACCEPT = "acra.alwaysaccept";
+    public static final String PREF_LAST_VERSION_NR = "acra.lastVersionNr";
+    private static Application mApplication;
+    private static ErrorReporter errorReporterSingleton;
+    private static SharedPreferences.OnSharedPreferenceChangeListener mPrefListener;
+    private static ACRAConfiguration configProxy;
+
+    public static void init(Application app) {
+        ReportsCrashes reportsCrashes = (ReportsCrashes) app.getClass().getAnnotation(ReportsCrashes.class);
+        if (reportsCrashes == null) {
+            log.e(LOG_TAG, "ACRA#init called but no ReportsCrashes annotation on Application " + app.getPackageName());
+        } else {
+            init(app, new ACRAConfiguration(reportsCrashes));
+        }
+    }
+
+    public static void init(Application app, ACRAConfiguration config) {
+        init(app, config, true);
+    }
+
+    public static void init(Application app, ACRAConfiguration config, boolean checkReportsOnApplicationStart) {
+        if (mApplication != null) {
+            log.w(LOG_TAG, "ACRA#init called more than once. Won't do anything more.");
+            return;
+        }
+        mApplication = app;
+        if (config == null) {
+            log.e(LOG_TAG, "ACRA#init called but no ACRAConfiguration provided");
+            return;
+        }
+        setConfig(config);
+        SharedPreferences prefs = getACRASharedPreferences();
+        try {
+            checkCrashResources(config);
+            log.d(LOG_TAG, "ACRA is enabled for " + mApplication.getPackageName() + ", initializing...");
+            boolean enableAcra = !shouldDisableACRA(prefs);
+            ErrorReporter errorReporter = new ErrorReporter(mApplication, prefs, enableAcra);
+            errorReporter.setDefaultReportSenders();
+            errorReporterSingleton = errorReporter;
+            if (checkReportsOnApplicationStart) {
+                errorReporter.checkReportsOnApplicationStart();
+            }
+        } catch (ACRAConfigurationException e) {
+            log.w(LOG_TAG, "Error : ", e);
+        }
+        mPrefListener = new SharedPreferences.OnSharedPreferenceChangeListener() { // from class: org.acra.ACRA.1
+            @Override // android.content.SharedPreferences.OnSharedPreferenceChangeListener
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if (ACRA.PREF_DISABLE_ACRA.equals(key) || ACRA.PREF_ENABLE_ACRA.equals(key)) {
+                    boolean enableAcra2 = !ACRA.shouldDisableACRA(sharedPreferences);
+                    ACRA.getErrorReporter().setEnabled(enableAcra2);
+                }
+            }
+        };
+        prefs.registerOnSharedPreferenceChangeListener(mPrefListener);
+    }
+
+    public static ErrorReporter getErrorReporter() {
+        if (errorReporterSingleton == null) {
+            throw new IllegalStateException("Cannot access ErrorReporter before ACRA#init");
+        }
+        return errorReporterSingleton;
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public static boolean shouldDisableACRA(SharedPreferences prefs) {
+        boolean disableAcra = false;
+        try {
+            boolean enableAcra = prefs.getBoolean(PREF_ENABLE_ACRA, true);
+            disableAcra = prefs.getBoolean(PREF_DISABLE_ACRA, !enableAcra);
+        } catch (Exception e) {
+        }
+        return disableAcra;
+    }
+
+    /* renamed from: org.acra.ACRA$2, reason: invalid class name */
+    /* loaded from: acra-4.6.2.jar:org/acra/ACRA$2.class */
+    static /* synthetic */ class AnonymousClass2 {
+        static final /* synthetic */ int[] $SwitchMap$org$acra$ReportingInteractionMode = new int[ReportingInteractionMode.values().length];
+
+        static {
+            try {
+                $SwitchMap$org$acra$ReportingInteractionMode[ReportingInteractionMode.TOAST.ordinal()] = 1;
+            } catch (NoSuchFieldError e) {
+            }
+            try {
+                $SwitchMap$org$acra$ReportingInteractionMode[ReportingInteractionMode.NOTIFICATION.ordinal()] = 2;
+            } catch (NoSuchFieldError e2) {
+            }
+            try {
+                $SwitchMap$org$acra$ReportingInteractionMode[ReportingInteractionMode.DIALOG.ordinal()] = 3;
+            } catch (NoSuchFieldError e3) {
+            }
+        }
+    }
+
+    static void checkCrashResources(ReportsCrashes conf) throws ACRAConfigurationException {
+        switch (AnonymousClass2.$SwitchMap$org$acra$ReportingInteractionMode[conf.mode().ordinal()]) {
+            case 1:
+                if (conf.resToastText() == 0) {
+                    throw new ACRAConfigurationException("TOAST mode: you have to define the resToastText parameter in your application @ReportsCrashes() annotation.");
+                }
+                return;
+            case 2:
+                if (conf.resNotifTickerText() == 0 || conf.resNotifTitle() == 0 || conf.resNotifText() == 0) {
+                    throw new ACRAConfigurationException("NOTIFICATION mode: you have to define at least the resNotifTickerText, resNotifTitle, resNotifText parameters in your application @ReportsCrashes() annotation.");
+                }
+                if (CrashReportDialog.class.equals(conf.reportDialogClass()) && conf.resDialogText() == 0) {
+                    throw new ACRAConfigurationException("NOTIFICATION mode: using the (default) CrashReportDialog requires you have to define the resDialogText parameter in your application @ReportsCrashes() annotation.");
+                }
+                return;
+            case ACRAConstants.DEFAULT_MAX_NUMBER_OF_REQUEST_RETRIES /* 3 */:
+                if (CrashReportDialog.class.equals(conf.reportDialogClass()) && conf.resDialogText() == 0) {
+                    throw new ACRAConfigurationException("DIALOG mode: using the (default) CrashReportDialog requires you to define the resDialogText parameter in your application @ReportsCrashes() annotation.");
+                }
+                return;
+            default:
+                return;
+        }
+    }
+
+    public static SharedPreferences getACRASharedPreferences() {
+        ReportsCrashes conf = getConfig();
+        if (!"".equals(conf.sharedPreferencesName())) {
+            return mApplication.getSharedPreferences(conf.sharedPreferencesName(), conf.sharedPreferencesMode());
+        }
+        return PreferenceManager.getDefaultSharedPreferences(mApplication);
+    }
+
+    public static ACRAConfiguration getConfig() {
+        if (configProxy == null) {
+            if (mApplication == null) {
+                log.w(LOG_TAG, "Calling ACRA.getConfig() before ACRA.init() gives you an empty configuration instance. You might prefer calling ACRA.getNewDefaultConfig(Application) to get an instance with default values taken from a @ReportsCrashes annotation.");
+            }
+            configProxy = getNewDefaultConfig(mApplication);
+        }
+        return configProxy;
+    }
+
+    public static void setConfig(ACRAConfiguration conf) {
+        configProxy = conf;
+    }
+
+    public static ACRAConfiguration getNewDefaultConfig(Application app) {
+        if (app != null) {
+            return new ACRAConfiguration((ReportsCrashes) app.getClass().getAnnotation(ReportsCrashes.class));
+        }
+        return new ACRAConfiguration(null);
+    }
+
+    static boolean isDebuggable() {
+        PackageManager pm = mApplication.getPackageManager();
+        try {
+            return (pm.getApplicationInfo(mApplication.getPackageName(), 0).flags & 2) > 0;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    static Application getApplication() {
+        return mApplication;
+    }
+
+    public static void setLog(ACRALog log2) {
+        if (log2 == null) {
+            throw new NullPointerException("ACRALog cannot be null");
+        }
+        log = log2;
+    }
+}

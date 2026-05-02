@@ -1,0 +1,8 @@
+package com.mikepenz.fastadapter;
+
+/* loaded from: com.mikepenz.fastadapter.1.0.0.jar:com/mikepenz/fastadapter/IIdentifyable.class */
+public interface IIdentifyable<T> {
+    T withIdentifier(long j);
+
+    long getIdentifier();
+}

@@ -1,0 +1,295 @@
+package com.fasterxml.jackson.core.util;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.PrettyPrinter;
+import com.fasterxml.jackson.core.SerializableString;
+import com.fasterxml.jackson.core.io.SerializedString;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Arrays;
+
+/* loaded from: jackson-core-2.4.2.jar:com/fasterxml/jackson/core/util/DefaultPrettyPrinter.class */
+public class DefaultPrettyPrinter implements PrettyPrinter, Instantiatable<DefaultPrettyPrinter>, Serializable {
+    private static final long serialVersionUID = -5512586643324525213L;
+    public static final SerializedString DEFAULT_ROOT_VALUE_SEPARATOR = new SerializedString(MinimalPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR);
+    protected Indenter _arrayIndenter;
+    protected Indenter _objectIndenter;
+    protected final SerializableString _rootSeparator;
+    protected boolean _spacesInObjectEntries;
+    protected transient int _nesting;
+
+    /* loaded from: jackson-core-2.4.2.jar:com/fasterxml/jackson/core/util/DefaultPrettyPrinter$Indenter.class */
+    public interface Indenter {
+        void writeIndentation(JsonGenerator jsonGenerator, int i) throws IOException, JsonGenerationException;
+
+        boolean isInline();
+    }
+
+    public DefaultPrettyPrinter() {
+        this(DEFAULT_ROOT_VALUE_SEPARATOR);
+    }
+
+    public DefaultPrettyPrinter(String rootSeparator) {
+        this(rootSeparator == null ? null : new SerializedString(rootSeparator));
+    }
+
+    public DefaultPrettyPrinter(SerializableString rootSeparator) {
+        this._arrayIndenter = FixedSpaceIndenter.instance;
+        this._objectIndenter = Lf2SpacesIndenter.instance;
+        this._spacesInObjectEntries = true;
+        this._nesting = 0;
+        this._rootSeparator = rootSeparator;
+    }
+
+    public DefaultPrettyPrinter(DefaultPrettyPrinter base) {
+        this(base, base._rootSeparator);
+    }
+
+    public DefaultPrettyPrinter(DefaultPrettyPrinter base, SerializableString rootSeparator) {
+        this._arrayIndenter = FixedSpaceIndenter.instance;
+        this._objectIndenter = Lf2SpacesIndenter.instance;
+        this._spacesInObjectEntries = true;
+        this._nesting = 0;
+        this._arrayIndenter = base._arrayIndenter;
+        this._objectIndenter = base._objectIndenter;
+        this._spacesInObjectEntries = base._spacesInObjectEntries;
+        this._nesting = base._nesting;
+        this._rootSeparator = rootSeparator;
+    }
+
+    public DefaultPrettyPrinter withRootSeparator(SerializableString rootSeparator) {
+        if (this._rootSeparator == rootSeparator || (rootSeparator != null && rootSeparator.equals(this._rootSeparator))) {
+            return this;
+        }
+        return new DefaultPrettyPrinter(this, rootSeparator);
+    }
+
+    public void indentArraysWith(Indenter i) {
+        this._arrayIndenter = i == null ? NopIndenter.instance : i;
+    }
+
+    public void indentObjectsWith(Indenter i) {
+        this._objectIndenter = i == null ? NopIndenter.instance : i;
+    }
+
+    @Deprecated
+    public void spacesInObjectEntries(boolean b) {
+        this._spacesInObjectEntries = b;
+    }
+
+    public DefaultPrettyPrinter withArrayIndenter(Indenter i) {
+        if (i == null) {
+            i = NopIndenter.instance;
+        }
+        if (this._arrayIndenter == i) {
+            return this;
+        }
+        DefaultPrettyPrinter pp = new DefaultPrettyPrinter(this);
+        pp._arrayIndenter = i;
+        return pp;
+    }
+
+    public DefaultPrettyPrinter withObjectIndenter(Indenter i) {
+        if (i == null) {
+            i = NopIndenter.instance;
+        }
+        if (this._objectIndenter == i) {
+            return this;
+        }
+        DefaultPrettyPrinter pp = new DefaultPrettyPrinter(this);
+        pp._objectIndenter = i;
+        return pp;
+    }
+
+    public DefaultPrettyPrinter withSpacesInObjectEntries() {
+        return _withSpaces(true);
+    }
+
+    public DefaultPrettyPrinter withoutSpacesInObjectEntries() {
+        return _withSpaces(false);
+    }
+
+    protected DefaultPrettyPrinter _withSpaces(boolean state) {
+        if (this._spacesInObjectEntries == state) {
+            return this;
+        }
+        DefaultPrettyPrinter pp = new DefaultPrettyPrinter(this);
+        pp._spacesInObjectEntries = state;
+        return pp;
+    }
+
+    /* JADX WARN: Can't rename method to resolve collision */
+    @Override // com.fasterxml.jackson.core.util.Instantiatable
+    public DefaultPrettyPrinter createInstance() {
+        return new DefaultPrettyPrinter(this);
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeRootValueSeparator(JsonGenerator jg) throws IOException, JsonGenerationException {
+        if (this._rootSeparator != null) {
+            jg.writeRaw(this._rootSeparator);
+        }
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeStartObject(JsonGenerator jg) throws IOException, JsonGenerationException {
+        jg.writeRaw('{');
+        if (!this._objectIndenter.isInline()) {
+            this._nesting++;
+        }
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void beforeObjectEntries(JsonGenerator jg) throws IOException, JsonGenerationException {
+        this._objectIndenter.writeIndentation(jg, this._nesting);
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeObjectFieldValueSeparator(JsonGenerator jg) throws IOException, JsonGenerationException {
+        if (this._spacesInObjectEntries) {
+            jg.writeRaw(" : ");
+        } else {
+            jg.writeRaw(':');
+        }
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeObjectEntrySeparator(JsonGenerator jg) throws IOException, JsonGenerationException {
+        jg.writeRaw(',');
+        this._objectIndenter.writeIndentation(jg, this._nesting);
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeEndObject(JsonGenerator jg, int nrOfEntries) throws IOException, JsonGenerationException {
+        if (!this._objectIndenter.isInline()) {
+            this._nesting--;
+        }
+        if (nrOfEntries > 0) {
+            this._objectIndenter.writeIndentation(jg, this._nesting);
+        } else {
+            jg.writeRaw(' ');
+        }
+        jg.writeRaw('}');
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeStartArray(JsonGenerator jg) throws IOException, JsonGenerationException {
+        if (!this._arrayIndenter.isInline()) {
+            this._nesting++;
+        }
+        jg.writeRaw('[');
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void beforeArrayValues(JsonGenerator jg) throws IOException, JsonGenerationException {
+        this._arrayIndenter.writeIndentation(jg, this._nesting);
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeArrayValueSeparator(JsonGenerator jg) throws IOException, JsonGenerationException {
+        jg.writeRaw(',');
+        this._arrayIndenter.writeIndentation(jg, this._nesting);
+    }
+
+    @Override // com.fasterxml.jackson.core.PrettyPrinter
+    public void writeEndArray(JsonGenerator jg, int nrOfValues) throws IOException, JsonGenerationException {
+        if (!this._arrayIndenter.isInline()) {
+            this._nesting--;
+        }
+        if (nrOfValues > 0) {
+            this._arrayIndenter.writeIndentation(jg, this._nesting);
+        } else {
+            jg.writeRaw(' ');
+        }
+        jg.writeRaw(']');
+    }
+
+    /* loaded from: jackson-core-2.4.2.jar:com/fasterxml/jackson/core/util/DefaultPrettyPrinter$NopIndenter.class */
+    public static class NopIndenter implements Indenter, Serializable {
+        public static final NopIndenter instance = new NopIndenter();
+
+        @Override // com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter
+        public void writeIndentation(JsonGenerator jg, int level) throws IOException, JsonGenerationException {
+        }
+
+        @Override // com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter
+        public boolean isInline() {
+            return true;
+        }
+    }
+
+    /* loaded from: jackson-core-2.4.2.jar:com/fasterxml/jackson/core/util/DefaultPrettyPrinter$FixedSpaceIndenter.class */
+    public static class FixedSpaceIndenter extends NopIndenter {
+        public static final FixedSpaceIndenter instance = new FixedSpaceIndenter();
+
+        @Override // com.fasterxml.jackson.core.util.DefaultPrettyPrinter.NopIndenter, com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter
+        public void writeIndentation(JsonGenerator jg, int level) throws IOException, JsonGenerationException {
+            jg.writeRaw(' ');
+        }
+
+        @Override // com.fasterxml.jackson.core.util.DefaultPrettyPrinter.NopIndenter, com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter
+        public boolean isInline() {
+            return true;
+        }
+    }
+
+    /* loaded from: jackson-core-2.4.2.jar:com/fasterxml/jackson/core/util/DefaultPrettyPrinter$Lf2SpacesIndenter.class */
+    public static class Lf2SpacesIndenter extends NopIndenter {
+        private static final String SYS_LF;
+        static final int SPACE_COUNT = 64;
+        static final char[] SPACES;
+        public static final Lf2SpacesIndenter instance;
+        protected final String _lf;
+
+        static {
+            String lf = null;
+            try {
+                lf = System.getProperty("line.separator");
+            } catch (Throwable th) {
+            }
+            SYS_LF = lf == null ? "\n" : lf;
+            SPACES = new char[64];
+            Arrays.fill(SPACES, ' ');
+            instance = new Lf2SpacesIndenter();
+        }
+
+        public Lf2SpacesIndenter() {
+            this(SYS_LF);
+        }
+
+        public Lf2SpacesIndenter(String lf) {
+            this._lf = lf;
+        }
+
+        public Lf2SpacesIndenter withLinefeed(String lf) {
+            if (lf.equals(this._lf)) {
+                return this;
+            }
+            return new Lf2SpacesIndenter(lf);
+        }
+
+        @Override // com.fasterxml.jackson.core.util.DefaultPrettyPrinter.NopIndenter, com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter
+        public boolean isInline() {
+            return false;
+        }
+
+        @Override // com.fasterxml.jackson.core.util.DefaultPrettyPrinter.NopIndenter, com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Indenter
+        public void writeIndentation(JsonGenerator jg, int level) throws IOException, JsonGenerationException {
+            jg.writeRaw(this._lf);
+            if (level > 0) {
+                int i = level + level;
+                while (true) {
+                    int level2 = i;
+                    if (level2 > 64) {
+                        jg.writeRaw(SPACES, 0, 64);
+                        i = level2 - SPACES.length;
+                    } else {
+                        jg.writeRaw(SPACES, 0, level2);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}

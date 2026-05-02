@@ -1,0 +1,269 @@
+.class public Lorg/spongycastle/pqc/asn1/McEliecePublicKey;
+.super Lorg/spongycastle/asn1/ASN1Object;
+.source "McEliecePublicKey.java"
+
+
+# instance fields
+.field private matrixG:[B
+
+.field private n:I
+
+.field private oid:Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+
+.field private t:I
+
+
+# direct methods
+.method public constructor <init>(Lorg/spongycastle/asn1/ASN1ObjectIdentifier;IILorg/spongycastle/pqc/math/linearalgebra/GF2Matrix;)V
+    .registers 6
+    .param p1, "oid"    # Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+    .param p2, "n"    # I
+    .param p3, "t"    # I
+    .param p4, "g"    # Lorg/spongycastle/pqc/math/linearalgebra/GF2Matrix;
+
+    .prologue
+    .line 27
+    invoke-direct {p0}, Lorg/spongycastle/asn1/ASN1Object;-><init>()V
+
+    .line 28
+    iput-object p1, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->oid:Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+
+    .line 29
+    iput p2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->n:I
+
+    .line 30
+    iput p3, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->t:I
+
+    .line 31
+    invoke-virtual {p4}, Lorg/spongycastle/pqc/math/linearalgebra/GF2Matrix;->getEncoded()[B
+
+    move-result-object v0
+
+    iput-object v0, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->matrixG:[B
+
+    .line 32
+    return-void
+.end method
+
+.method private constructor <init>(Lorg/spongycastle/asn1/ASN1Sequence;)V
+    .registers 5
+    .param p1, "seq"    # Lorg/spongycastle/asn1/ASN1Sequence;
+
+    .prologue
+    .line 35
+    invoke-direct {p0}, Lorg/spongycastle/asn1/ASN1Object;-><init>()V
+
+    .line 36
+    const/4 v2, 0x0
+
+    invoke-virtual {p1, v2}, Lorg/spongycastle/asn1/ASN1Sequence;->getObjectAt(I)Lorg/spongycastle/asn1/ASN1Encodable;
+
+    move-result-object v2
+
+    check-cast v2, Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+
+    iput-object v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->oid:Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+
+    .line 37
+    const/4 v2, 0x1
+
+    invoke-virtual {p1, v2}, Lorg/spongycastle/asn1/ASN1Sequence;->getObjectAt(I)Lorg/spongycastle/asn1/ASN1Encodable;
+
+    move-result-object v2
+
+    check-cast v2, Lorg/spongycastle/asn1/ASN1Integer;
+
+    invoke-virtual {v2}, Lorg/spongycastle/asn1/ASN1Integer;->getValue()Ljava/math/BigInteger;
+
+    move-result-object v0
+
+    .line 38
+    .local v0, "bigN":Ljava/math/BigInteger;
+    invoke-virtual {v0}, Ljava/math/BigInteger;->intValue()I
+
+    move-result v2
+
+    iput v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->n:I
+
+    .line 40
+    const/4 v2, 0x2
+
+    invoke-virtual {p1, v2}, Lorg/spongycastle/asn1/ASN1Sequence;->getObjectAt(I)Lorg/spongycastle/asn1/ASN1Encodable;
+
+    move-result-object v2
+
+    check-cast v2, Lorg/spongycastle/asn1/ASN1Integer;
+
+    invoke-virtual {v2}, Lorg/spongycastle/asn1/ASN1Integer;->getValue()Ljava/math/BigInteger;
+
+    move-result-object v1
+
+    .line 41
+    .local v1, "bigT":Ljava/math/BigInteger;
+    invoke-virtual {v1}, Ljava/math/BigInteger;->intValue()I
+
+    move-result v2
+
+    iput v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->t:I
+
+    .line 43
+    const/4 v2, 0x3
+
+    invoke-virtual {p1, v2}, Lorg/spongycastle/asn1/ASN1Sequence;->getObjectAt(I)Lorg/spongycastle/asn1/ASN1Encodable;
+
+    move-result-object v2
+
+    check-cast v2, Lorg/spongycastle/asn1/ASN1OctetString;
+
+    invoke-virtual {v2}, Lorg/spongycastle/asn1/ASN1OctetString;->getOctets()[B
+
+    move-result-object v2
+
+    iput-object v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->matrixG:[B
+
+    .line 44
+    return-void
+.end method
+
+.method public static getInstance(Ljava/lang/Object;)Lorg/spongycastle/pqc/asn1/McEliecePublicKey;
+    .registers 3
+    .param p0, "o"    # Ljava/lang/Object;
+
+    .prologue
+    .line 86
+    instance-of v0, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;
+
+    if-eqz v0, :cond_7
+
+    .line 88
+    check-cast p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;
+
+    .line 95
+    .end local p0    # "o":Ljava/lang/Object;
+    :goto_6
+    return-object p0
+
+    .line 90
+    .restart local p0    # "o":Ljava/lang/Object;
+    :cond_7
+    if-eqz p0, :cond_14
+
+    .line 92
+    new-instance v0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;
+
+    invoke-static {p0}, Lorg/spongycastle/asn1/ASN1Sequence;->getInstance(Ljava/lang/Object;)Lorg/spongycastle/asn1/ASN1Sequence;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;-><init>(Lorg/spongycastle/asn1/ASN1Sequence;)V
+
+    move-object p0, v0
+
+    goto :goto_6
+
+    .line 95
+    :cond_14
+    const/4 p0, 0x0
+
+    goto :goto_6
+.end method
+
+
+# virtual methods
+.method public getG()Lorg/spongycastle/pqc/math/linearalgebra/GF2Matrix;
+    .registers 3
+
+    .prologue
+    .line 63
+    new-instance v0, Lorg/spongycastle/pqc/math/linearalgebra/GF2Matrix;
+
+    iget-object v1, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->matrixG:[B
+
+    invoke-direct {v0, v1}, Lorg/spongycastle/pqc/math/linearalgebra/GF2Matrix;-><init>([B)V
+
+    return-object v0
+.end method
+
+.method public getN()I
+    .registers 2
+
+    .prologue
+    .line 53
+    iget v0, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->n:I
+
+    return v0
+.end method
+
+.method public getOID()Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+    .registers 2
+
+    .prologue
+    .line 48
+    iget-object v0, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->oid:Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+
+    return-object v0
+.end method
+
+.method public getT()I
+    .registers 2
+
+    .prologue
+    .line 58
+    iget v0, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->t:I
+
+    return v0
+.end method
+
+.method public toASN1Primitive()Lorg/spongycastle/asn1/ASN1Primitive;
+    .registers 5
+
+    .prologue
+    .line 68
+    new-instance v0, Lorg/spongycastle/asn1/ASN1EncodableVector;
+
+    invoke-direct {v0}, Lorg/spongycastle/asn1/ASN1EncodableVector;-><init>()V
+
+    .line 70
+    .local v0, "v":Lorg/spongycastle/asn1/ASN1EncodableVector;
+    iget-object v1, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->oid:Lorg/spongycastle/asn1/ASN1ObjectIdentifier;
+
+    invoke-virtual {v0, v1}, Lorg/spongycastle/asn1/ASN1EncodableVector;->add(Lorg/spongycastle/asn1/ASN1Encodable;)V
+
+    .line 73
+    new-instance v1, Lorg/spongycastle/asn1/ASN1Integer;
+
+    iget v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->n:I
+
+    int-to-long v2, v2
+
+    invoke-direct {v1, v2, v3}, Lorg/spongycastle/asn1/ASN1Integer;-><init>(J)V
+
+    invoke-virtual {v0, v1}, Lorg/spongycastle/asn1/ASN1EncodableVector;->add(Lorg/spongycastle/asn1/ASN1Encodable;)V
+
+    .line 76
+    new-instance v1, Lorg/spongycastle/asn1/ASN1Integer;
+
+    iget v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->t:I
+
+    int-to-long v2, v2
+
+    invoke-direct {v1, v2, v3}, Lorg/spongycastle/asn1/ASN1Integer;-><init>(J)V
+
+    invoke-virtual {v0, v1}, Lorg/spongycastle/asn1/ASN1EncodableVector;->add(Lorg/spongycastle/asn1/ASN1Encodable;)V
+
+    .line 79
+    new-instance v1, Lorg/spongycastle/asn1/DEROctetString;
+
+    iget-object v2, p0, Lorg/spongycastle/pqc/asn1/McEliecePublicKey;->matrixG:[B
+
+    invoke-direct {v1, v2}, Lorg/spongycastle/asn1/DEROctetString;-><init>([B)V
+
+    invoke-virtual {v0, v1}, Lorg/spongycastle/asn1/ASN1EncodableVector;->add(Lorg/spongycastle/asn1/ASN1Encodable;)V
+
+    .line 81
+    new-instance v1, Lorg/spongycastle/asn1/DERSequence;
+
+    invoke-direct {v1, v0}, Lorg/spongycastle/asn1/DERSequence;-><init>(Lorg/spongycastle/asn1/ASN1EncodableVector;)V
+
+    return-object v1
+.end method

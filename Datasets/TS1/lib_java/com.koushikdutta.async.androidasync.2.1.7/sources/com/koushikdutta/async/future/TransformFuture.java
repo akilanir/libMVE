@@ -1,0 +1,26 @@
+package com.koushikdutta.async.future;
+
+/* loaded from: com.koushikdutta.async.androidasync.2.1.7.jar:com/koushikdutta/async/future/TransformFuture.class */
+public abstract class TransformFuture<T, F> extends SimpleFuture<T> implements FutureCallback<F> {
+    protected abstract void transform(F f) throws Exception;
+
+    @Override // com.koushikdutta.async.future.FutureCallback
+    public void onCompleted(Exception e, F result) {
+        if (isCancelled()) {
+            return;
+        }
+        if (e != null) {
+            error(e);
+            return;
+        }
+        try {
+            transform(result);
+        } catch (Exception ex) {
+            error(ex);
+        }
+    }
+
+    protected void error(Exception e) {
+        setComplete(e);
+    }
+}

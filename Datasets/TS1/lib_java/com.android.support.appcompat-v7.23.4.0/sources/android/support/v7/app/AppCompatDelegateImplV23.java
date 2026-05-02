@@ -1,0 +1,53 @@
+package android.support.v7.app;
+
+import android.app.UiModeManager;
+import android.content.Context;
+import android.support.v7.app.AppCompatDelegateImplV14;
+import android.view.ActionMode;
+import android.view.Window;
+
+/* loaded from: com.android.support.appcompat-v7.23.4.0.jar:android/support/v7/app/AppCompatDelegateImplV23.class */
+class AppCompatDelegateImplV23 extends AppCompatDelegateImplV14 {
+    private final UiModeManager mUiModeManager;
+
+    AppCompatDelegateImplV23(Context context, Window window, AppCompatCallback callback) {
+        super(context, window, callback);
+        this.mUiModeManager = (UiModeManager) context.getSystemService("uimode");
+    }
+
+    @Override // android.support.v7.app.AppCompatDelegateImplV14, android.support.v7.app.AppCompatDelegateImplBase
+    Window.Callback wrapWindowCallback(Window.Callback callback) {
+        return new AppCompatWindowCallbackV23(callback);
+    }
+
+    @Override // android.support.v7.app.AppCompatDelegateImplV14
+    int mapNightMode(int mode) {
+        if (mode == 0 && this.mUiModeManager.getNightMode() == 0) {
+            return -1;
+        }
+        return super.mapNightMode(mode);
+    }
+
+    /* loaded from: com.android.support.appcompat-v7.23.4.0.jar:android/support/v7/app/AppCompatDelegateImplV23$AppCompatWindowCallbackV23.class */
+    class AppCompatWindowCallbackV23 extends AppCompatDelegateImplV14.AppCompatWindowCallbackV14 {
+        AppCompatWindowCallbackV23(Window.Callback callback) {
+            super(callback);
+        }
+
+        @Override // android.support.v7.view.WindowCallbackWrapper, android.view.Window.Callback
+        public ActionMode onWindowStartingActionMode(ActionMode.Callback callback, int type) {
+            if (AppCompatDelegateImplV23.this.isHandleNativeActionModesEnabled()) {
+                switch (type) {
+                    case 0:
+                        return startAsSupportActionMode(callback);
+                }
+            }
+            return super.onWindowStartingActionMode(callback, type);
+        }
+
+        @Override // android.support.v7.app.AppCompatDelegateImplV14.AppCompatWindowCallbackV14, android.support.v7.view.WindowCallbackWrapper, android.view.Window.Callback
+        public ActionMode onWindowStartingActionMode(ActionMode.Callback callback) {
+            return null;
+        }
+    }
+}

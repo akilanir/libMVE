@@ -1,0 +1,548 @@
+package android.support.v7.view.menu;
+
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v4.internal.view.SupportMenuItem;
+import android.support.v4.view.ActionProvider;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.AppCompatDrawableManager;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewDebug;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+/* loaded from: com.android.support.appcompat-v7.24.0.0.jar:android/support/v7/view/menu/MenuItemImpl.class */
+public final class MenuItemImpl implements SupportMenuItem {
+    private static final String TAG = "MenuItemImpl";
+    private static final int SHOW_AS_ACTION_MASK = 3;
+    private final int mId;
+    private final int mGroup;
+    private final int mCategoryOrder;
+    private final int mOrdering;
+    private CharSequence mTitle;
+    private CharSequence mTitleCondensed;
+    private Intent mIntent;
+    private char mShortcutNumericChar;
+    private char mShortcutAlphabeticChar;
+    private Drawable mIconDrawable;
+    private MenuBuilder mMenu;
+    private SubMenuBuilder mSubMenu;
+    private Runnable mItemCallback;
+    private MenuItem.OnMenuItemClickListener mClickListener;
+    private static final int CHECKABLE = 1;
+    private static final int CHECKED = 2;
+    private static final int EXCLUSIVE = 4;
+    private static final int HIDDEN = 8;
+    private static final int ENABLED = 16;
+    private static final int IS_ACTION = 32;
+    private int mShowAsAction;
+    private View mActionView;
+    private ActionProvider mActionProvider;
+    private MenuItemCompat.OnActionExpandListener mOnActionExpandListener;
+    static final int NO_ICON = 0;
+    private ContextMenu.ContextMenuInfo mMenuInfo;
+    private static String sPrependShortcutLabel;
+    private static String sEnterShortcutLabel;
+    private static String sDeleteShortcutLabel;
+    private static String sSpaceShortcutLabel;
+    private int mIconResId = 0;
+    private int mFlags = 16;
+    private boolean mIsActionViewExpanded = false;
+
+    MenuItemImpl(MenuBuilder menu, int group, int id, int categoryOrder, int ordering, CharSequence title, int showAsAction) {
+        this.mShowAsAction = 0;
+        this.mMenu = menu;
+        this.mId = id;
+        this.mGroup = group;
+        this.mCategoryOrder = categoryOrder;
+        this.mOrdering = ordering;
+        this.mTitle = title;
+        this.mShowAsAction = showAsAction;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public boolean invoke() {
+        if ((this.mClickListener != null && this.mClickListener.onMenuItemClick(this)) || this.mMenu.dispatchMenuItemSelected(this.mMenu.getRootMenu(), this)) {
+            return true;
+        }
+        if (this.mItemCallback != null) {
+            this.mItemCallback.run();
+            return true;
+        }
+        if (this.mIntent != null) {
+            try {
+                this.mMenu.getContext().startActivity(this.mIntent);
+                return true;
+            } catch (ActivityNotFoundException e) {
+                Log.e(TAG, "Can't find activity to handle intent; ignoring", e);
+            }
+        }
+        if (this.mActionProvider != null && this.mActionProvider.onPerformDefaultAction()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEnabled() {
+        return (this.mFlags & 16) != 0;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setEnabled(boolean enabled) {
+        if (enabled) {
+            this.mFlags |= 16;
+        } else {
+            this.mFlags &= -17;
+        }
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    public int getGroupId() {
+        return this.mGroup;
+    }
+
+    @ViewDebug.CapturedViewProperty
+    public int getItemId() {
+        return this.mId;
+    }
+
+    public int getOrder() {
+        return this.mCategoryOrder;
+    }
+
+    public int getOrdering() {
+        return this.mOrdering;
+    }
+
+    public Intent getIntent() {
+        return this.mIntent;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setIntent(Intent intent) {
+        this.mIntent = intent;
+        return this;
+    }
+
+    Runnable getCallback() {
+        return this.mItemCallback;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setCallback(Runnable callback) {
+        this.mItemCallback = callback;
+        return this;
+    }
+
+    public char getAlphabeticShortcut() {
+        return this.mShortcutAlphabeticChar;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setAlphabeticShortcut(char alphaChar) {
+        if (this.mShortcutAlphabeticChar == alphaChar) {
+            return this;
+        }
+        this.mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    public char getNumericShortcut() {
+        return this.mShortcutNumericChar;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setNumericShortcut(char numericChar) {
+        if (this.mShortcutNumericChar == numericChar) {
+            return this;
+        }
+        this.mShortcutNumericChar = numericChar;
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setShortcut(char numericChar, char alphaChar) {
+        this.mShortcutNumericChar = numericChar;
+        this.mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    char getShortcut() {
+        return this.mMenu.isQwertyMode() ? this.mShortcutAlphabeticChar : this.mShortcutNumericChar;
+    }
+
+    String getShortcutLabel() {
+        char shortcut = getShortcut();
+        if (shortcut == 0) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder(sPrependShortcutLabel);
+        switch (shortcut) {
+            case '\b':
+                sb.append(sDeleteShortcutLabel);
+                break;
+            case AppCompatDelegate.FEATURE_ACTION_MODE_OVERLAY /* 10 */:
+                sb.append(sEnterShortcutLabel);
+                break;
+            case IS_ACTION /* 32 */:
+                sb.append(sSpaceShortcutLabel);
+                break;
+            default:
+                sb.append(shortcut);
+                break;
+        }
+        return sb.toString();
+    }
+
+    boolean shouldShowShortcut() {
+        return this.mMenu.isShortcutsVisible() && getShortcut() != 0;
+    }
+
+    public SubMenu getSubMenu() {
+        return this.mSubMenu;
+    }
+
+    public boolean hasSubMenu() {
+        return this.mSubMenu != null;
+    }
+
+    public void setSubMenu(SubMenuBuilder subMenu) {
+        this.mSubMenu = subMenu;
+        subMenu.setHeaderTitle(getTitle());
+    }
+
+    @ViewDebug.CapturedViewProperty
+    public CharSequence getTitle() {
+        return this.mTitle;
+    }
+
+    CharSequence getTitleForItemView(MenuView.ItemView itemView) {
+        if (itemView != null && itemView.prefersCondensedTitle()) {
+            return getTitleCondensed();
+        }
+        return getTitle();
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setTitle(CharSequence title) {
+        this.mTitle = title;
+        this.mMenu.onItemsChanged(false);
+        if (this.mSubMenu != null) {
+            this.mSubMenu.setHeaderTitle(title);
+        }
+        return this;
+    }
+
+    public MenuItem setTitle(int title) {
+        return setTitle(this.mMenu.getContext().getString(title));
+    }
+
+    public CharSequence getTitleCondensed() {
+        CharSequence ctitle = this.mTitleCondensed != null ? this.mTitleCondensed : this.mTitle;
+        if (Build.VERSION.SDK_INT < 18 && ctitle != null && !(ctitle instanceof String)) {
+            return ctitle.toString();
+        }
+        return ctitle;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setTitleCondensed(CharSequence title) {
+        this.mTitleCondensed = title;
+        if (title == null) {
+            CharSequence charSequence = this.mTitle;
+        }
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    public Drawable getIcon() {
+        if (this.mIconDrawable != null) {
+            return this.mIconDrawable;
+        }
+        if (this.mIconResId != 0) {
+            Drawable icon = AppCompatDrawableManager.get().getDrawable(this.mMenu.getContext(), this.mIconResId);
+            this.mIconResId = 0;
+            this.mIconDrawable = icon;
+            return icon;
+        }
+        return null;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setIcon(Drawable icon) {
+        this.mIconResId = 0;
+        this.mIconDrawable = icon;
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setIcon(int iconResId) {
+        this.mIconDrawable = null;
+        this.mIconResId = iconResId;
+        this.mMenu.onItemsChanged(false);
+        return this;
+    }
+
+    public boolean isCheckable() {
+        return (this.mFlags & 1) == 1;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setCheckable(boolean checkable) {
+        int oldFlags = this.mFlags;
+        this.mFlags = (this.mFlags & (-2)) | (checkable ? 1 : 0);
+        if (oldFlags != this.mFlags) {
+            this.mMenu.onItemsChanged(false);
+        }
+        return this;
+    }
+
+    public void setExclusiveCheckable(boolean exclusive) {
+        this.mFlags = (this.mFlags & (-5)) | (exclusive ? 4 : 0);
+    }
+
+    public boolean isExclusiveCheckable() {
+        return (this.mFlags & 4) != 0;
+    }
+
+    public boolean isChecked() {
+        return (this.mFlags & 2) == 2;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setChecked(boolean checked) {
+        if ((this.mFlags & 4) != 0) {
+            this.mMenu.setExclusiveItemChecked(this);
+        } else {
+            setCheckedInt(checked);
+        }
+        return this;
+    }
+
+    void setCheckedInt(boolean checked) {
+        int oldFlags = this.mFlags;
+        this.mFlags = (this.mFlags & (-3)) | (checked ? 2 : 0);
+        if (oldFlags != this.mFlags) {
+            this.mMenu.onItemsChanged(false);
+        }
+    }
+
+    public boolean isVisible() {
+        return (this.mActionProvider == null || !this.mActionProvider.overridesItemVisibility()) ? (this.mFlags & 8) == 0 : (this.mFlags & 8) == 0 && this.mActionProvider.isVisible();
+    }
+
+    boolean setVisibleInt(boolean shown) {
+        int oldFlags = this.mFlags;
+        this.mFlags = (this.mFlags & (-9)) | (shown ? 0 : 8);
+        return oldFlags != this.mFlags;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setVisible(boolean shown) {
+        if (setVisibleInt(shown)) {
+            this.mMenu.onItemVisibleChanged(this);
+        }
+        return this;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public MenuItem setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener clickListener) {
+        this.mClickListener = clickListener;
+        return this;
+    }
+
+    public String toString() {
+        if (this.mTitle != null) {
+            return this.mTitle.toString();
+        }
+        return null;
+    }
+
+    void setMenuInfo(ContextMenu.ContextMenuInfo menuInfo) {
+        this.mMenuInfo = menuInfo;
+    }
+
+    public ContextMenu.ContextMenuInfo getMenuInfo() {
+        return this.mMenuInfo;
+    }
+
+    public void actionFormatChanged() {
+        this.mMenu.onItemActionRequestChanged(this);
+    }
+
+    public boolean shouldShowIcon() {
+        return this.mMenu.getOptionalIconsVisible();
+    }
+
+    public boolean isActionButton() {
+        return (this.mFlags & IS_ACTION) == IS_ACTION;
+    }
+
+    public boolean requestsActionButton() {
+        return (this.mShowAsAction & 1) == 1;
+    }
+
+    public boolean requiresActionButton() {
+        return (this.mShowAsAction & 2) == 2;
+    }
+
+    public void setIsActionButton(boolean isActionButton) {
+        if (isActionButton) {
+            this.mFlags |= IS_ACTION;
+        } else {
+            this.mFlags &= -33;
+        }
+    }
+
+    public boolean showsTextAsAction() {
+        return (this.mShowAsAction & 4) == 4;
+    }
+
+    public void setShowAsAction(int actionEnum) {
+        switch (actionEnum & 3) {
+            case 0:
+            case 1:
+            case 2:
+                this.mShowAsAction = actionEnum;
+                this.mMenu.onItemActionRequestChanged(this);
+                return;
+            default:
+                throw new IllegalArgumentException("SHOW_AS_ACTION_ALWAYS, SHOW_AS_ACTION_IF_ROOM, and SHOW_AS_ACTION_NEVER are mutually exclusive.");
+        }
+    }
+
+    /* renamed from: setActionView, reason: merged with bridge method [inline-methods] */
+    public SupportMenuItem m21setActionView(View view) {
+        this.mActionView = view;
+        this.mActionProvider = null;
+        if (view != null && view.getId() == -1 && this.mId > 0) {
+            view.setId(this.mId);
+        }
+        this.mMenu.onItemActionRequestChanged(this);
+        return this;
+    }
+
+    /* renamed from: setActionView, reason: merged with bridge method [inline-methods] */
+    public SupportMenuItem m20setActionView(int resId) {
+        Context context = this.mMenu.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        m21setActionView(inflater.inflate(resId, (ViewGroup) new LinearLayout(context), false));
+        return this;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public View getActionView() {
+        if (this.mActionView != null) {
+            return this.mActionView;
+        }
+        if (this.mActionProvider != null) {
+            this.mActionView = this.mActionProvider.onCreateActionView(this);
+            return this.mActionView;
+        }
+        return null;
+    }
+
+    public MenuItem setActionProvider(android.view.ActionProvider actionProvider) {
+        throw new UnsupportedOperationException("This is not supported, use MenuItemCompat.setActionProvider()");
+    }
+
+    public android.view.ActionProvider getActionProvider() {
+        throw new UnsupportedOperationException("This is not supported, use MenuItemCompat.getActionProvider()");
+    }
+
+    public ActionProvider getSupportActionProvider() {
+        return this.mActionProvider;
+    }
+
+    public SupportMenuItem setSupportActionProvider(ActionProvider actionProvider) {
+        if (this.mActionProvider != null) {
+            this.mActionProvider.reset();
+        }
+        this.mActionView = null;
+        this.mActionProvider = actionProvider;
+        this.mMenu.onItemsChanged(true);
+        if (this.mActionProvider != null) {
+            this.mActionProvider.setVisibilityListener(new ActionProvider.VisibilityListener() { // from class: android.support.v7.view.menu.MenuItemImpl.1
+                public void onActionProviderVisibilityChanged(boolean isVisible) {
+                    MenuItemImpl.this.mMenu.onItemVisibleChanged(MenuItemImpl.this);
+                }
+            });
+        }
+        return this;
+    }
+
+    /* renamed from: setShowAsActionFlags, reason: merged with bridge method [inline-methods] */
+    public SupportMenuItem m22setShowAsActionFlags(int actionEnum) {
+        setShowAsAction(actionEnum);
+        return this;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public boolean expandActionView() {
+        if (!hasCollapsibleActionView()) {
+            return false;
+        }
+        if (this.mOnActionExpandListener == null || this.mOnActionExpandListener.onMenuItemActionExpand(this)) {
+            return this.mMenu.expandItemActionView(this);
+        }
+        return false;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public boolean collapseActionView() {
+        if ((this.mShowAsAction & 8) == 0) {
+            return false;
+        }
+        if (this.mActionView == null) {
+            return true;
+        }
+        if (this.mOnActionExpandListener == null || this.mOnActionExpandListener.onMenuItemActionCollapse(this)) {
+            return this.mMenu.collapseItemActionView(this);
+        }
+        return false;
+    }
+
+    public SupportMenuItem setSupportOnActionExpandListener(MenuItemCompat.OnActionExpandListener listener) {
+        this.mOnActionExpandListener = listener;
+        return this;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public boolean hasCollapsibleActionView() {
+        if ((this.mShowAsAction & 8) != 0) {
+            if (this.mActionView == null && this.mActionProvider != null) {
+                this.mActionView = this.mActionProvider.onCreateActionView(this);
+            }
+            return this.mActionView != null;
+        }
+        return false;
+    }
+
+    public void setActionViewExpanded(boolean isExpanded) {
+        this.mIsActionViewExpanded = isExpanded;
+        this.mMenu.onItemsChanged(false);
+    }
+
+    public boolean isActionViewExpanded() {
+        return this.mIsActionViewExpanded;
+    }
+
+    public MenuItem setOnActionExpandListener(MenuItem.OnActionExpandListener listener) {
+        throw new UnsupportedOperationException("This is not supported, use MenuItemCompat.setOnActionExpandListener()");
+    }
+}

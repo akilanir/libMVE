@@ -4,7 +4,7 @@ from typing import List
 # Internal Imports
 from utils import embed_java_blocks_batch, embed_smali_blocks_batch
 from embedding_fusion import averaged_fusion_all
-from config import ALPHA, BETA, GAMMA, DELTA
+from config import FUSED_WEIGHT, POS_DECAY_ALPHA
 from miniLM_embedder import MiniLMEmbedder
 
 
@@ -25,9 +25,9 @@ def embed_single_class(embedder, class_data):
     java_blocks = class_data["java_blocks"]
     smali_blocks = class_data["smali_blocks"]
 
-    java_raw_cls, java_filt_cls = embed_java_blocks_batch(java_blocks,embedder)
-    smali_raw_cls, smali_filt_cls = embed_smali_blocks_batch(smali_blocks,embedder)
-    fused_emb = averaged_fusion_all(java_raw_cls, java_filt_cls, smali_raw_cls, smali_filt_cls, ALPHA, BETA, GAMMA, DELTA)
+    java_raw_cls, java_filt_cls = embed_java_blocks_batch(java_blocks,embedder, POS_DECAY_ALPHA)
+    smali_raw_cls, smali_filt_cls = embed_smali_blocks_batch(smali_blocks,embedder, POS_DECAY_ALPHA)
+    fused_emb = averaged_fusion_all(java_raw_cls, java_filt_cls, smali_raw_cls, smali_filt_cls, FUSED_WEIGHT, FUSED_WEIGHT, FUSED_WEIGHT, FUSED_WEIGHT)
 
     # print("IMPORTANT: FUSED EMB for 0.8 pos decay alpha.....")
     data = {"class_name": cname,

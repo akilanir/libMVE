@@ -62,7 +62,7 @@ def class_name_from_path(file_path: Path, base_dir: Path):
     parts = rel.with_suffix("").parts
     # remove common noise directories and any smali subfolder variants like
     # smali, smali_classes2, smali_classes3, etc., and lib markers
-    parts = [p for p in parts if p not in ("sources", "src", "java", "smali", "smali_classes2", "smali_classes3", "smali_classes4", "smali_classes5", "smali_classes6", "smali_classes7", "smali_classes8", "smali_classes9", "smali_classes10")]
+    parts = [p for p in parts if p not in ("sources", "src", "java") and not (p == "smali" or p.startswith("smali_classes"))]
     # replace file system separators with dot
     return ".".join(parts), package_name
 
@@ -285,7 +285,7 @@ def weighted_average(vectors, weights):
     return norm_vector    
 
 
-def embed_java_blocks_batch(java_blocks, java_embedder):
+def embed_java_blocks_batch(java_blocks, java_embedder, pos_decay_alpha):
     java_weights = []
     raw_texts = []
     fil_texts = []
@@ -298,7 +298,7 @@ def embed_java_blocks_batch(java_blocks, java_embedder):
         raw_texts.append(processed)
         fil_texts.append(semantic)
         
-        positional_decay_8 = calculate_positional_decay(0.8, block_id)
+        positional_decay_8 = calculate_positional_decay(pos_decay_alpha, block_id)
         java_weights.append(len(semantic) * positional_decay_8)
         block_id += 1
 
@@ -316,7 +316,7 @@ def calculate_positional_decay(alpha, i):
     return weight_i
     
 
-def embed_smali_blocks_batch(smali_blocks, smali_embedder):
+def embed_smali_blocks_batch(smali_blocks, smali_embedder, pos_decay_alpha):
     smali_weights = []
     raw_texts = []
     fil_texts = []
@@ -329,7 +329,7 @@ def embed_smali_blocks_batch(smali_blocks, smali_embedder):
         raw_texts.append(processed)
         fil_texts.append(semantic)
         
-        positional_decay_8 = calculate_positional_decay(0.8, block_id)
+        positional_decay_8 = calculate_positional_decay(pos_decay_alpha, block_id)
         smali_weights.append(len(semantic) * positional_decay_8)
         block_id += 1
         
@@ -384,7 +384,7 @@ def compute_api_match_percentage(tpl_apis, apk_apis):
     num_matches = len(matches)
     total_tpl = len(tpl_apis)
     
-    percentage = (num_matches / total_tpl * 100) if total_tpl > 0 else 0
+    percentage = (num_matches / total_tpl) if total_tpl > 0 else 0
     return num_matches, total_tpl, percentage
 
 

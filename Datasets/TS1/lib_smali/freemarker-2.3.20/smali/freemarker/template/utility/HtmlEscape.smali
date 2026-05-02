@@ -1,0 +1,127 @@
+.class public Lfreemarker/template/utility/HtmlEscape;
+.super Ljava/lang/Object;
+.source "HtmlEscape.java"
+
+# interfaces
+.implements Lfreemarker/template/TemplateTransformModel;
+
+
+# static fields
+.field private static final AMP:[C
+
+.field private static final GT:[C
+
+.field private static final LT:[C
+
+.field private static final QUOT:[C
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 1
+
+    .prologue
+    .line 90
+    const-string v0, "&lt;"
+
+    invoke-virtual {v0}, Ljava/lang/String;->toCharArray()[C
+
+    move-result-object v0
+
+    sput-object v0, Lfreemarker/template/utility/HtmlEscape;->LT:[C
+
+    .line 91
+    const-string v0, "&gt;"
+
+    invoke-virtual {v0}, Ljava/lang/String;->toCharArray()[C
+
+    move-result-object v0
+
+    sput-object v0, Lfreemarker/template/utility/HtmlEscape;->GT:[C
+
+    .line 92
+    const-string v0, "&amp;"
+
+    invoke-virtual {v0}, Ljava/lang/String;->toCharArray()[C
+
+    move-result-object v0
+
+    sput-object v0, Lfreemarker/template/utility/HtmlEscape;->AMP:[C
+
+    .line 93
+    const-string v0, "&quot;"
+
+    invoke-virtual {v0}, Ljava/lang/String;->toCharArray()[C
+
+    move-result-object v0
+
+    sput-object v0, Lfreemarker/template/utility/HtmlEscape;->QUOT:[C
+
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .registers 1
+
+    .prologue
+    .line 88
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method static access$000()[C
+    .registers 1
+
+    .prologue
+    .line 88
+    sget-object v0, Lfreemarker/template/utility/HtmlEscape;->LT:[C
+
+    return-object v0
+.end method
+
+.method static access$100()[C
+    .registers 1
+
+    .prologue
+    .line 88
+    sget-object v0, Lfreemarker/template/utility/HtmlEscape;->GT:[C
+
+    return-object v0
+.end method
+
+.method static access$200()[C
+    .registers 1
+
+    .prologue
+    .line 88
+    sget-object v0, Lfreemarker/template/utility/HtmlEscape;->AMP:[C
+
+    return-object v0
+.end method
+
+.method static access$300()[C
+    .registers 1
+
+    .prologue
+    .line 88
+    sget-object v0, Lfreemarker/template/utility/HtmlEscape;->QUOT:[C
+
+    return-object v0
+.end method
+
+
+# virtual methods
+.method public getWriter(Ljava/io/Writer;Ljava/util/Map;)Ljava/io/Writer;
+    .registers 4
+    .param p1, "out"    # Ljava/io/Writer;
+    .param p2, "args"    # Ljava/util/Map;
+
+    .prologue
+    .line 97
+    new-instance v0, Lfreemarker/template/utility/HtmlEscape$1;
+
+    invoke-direct {v0, p0, p1}, Lfreemarker/template/utility/HtmlEscape$1;-><init>(Lfreemarker/template/utility/HtmlEscape;Ljava/io/Writer;)V
+
+    return-object v0
+.end method

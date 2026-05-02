@@ -1,0 +1,151 @@
+.class public Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;
+.super Lorg/dmfs/android/xmlmagic/builder/BaseAndroidObjectBuilder;
+
+
+# annotations
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Lorg/dmfs/android/xmlmagic/builder/BaseAndroidObjectBuilder",
+        "<",
+        "Ljava/lang/CharSequence;",
+        ">;"
+    }
+.end annotation
+
+
+# static fields
+.field public static final INSTANCE:Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 1
+
+    new-instance v0, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;
+
+    invoke-direct {v0}, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;-><init>()V
+
+    sput-object v0, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;->INSTANCE:Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;
+
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .registers 1
+
+    invoke-direct {p0}, Lorg/dmfs/android/xmlmagic/builder/BaseAndroidObjectBuilder;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public update(Lorg/dmfs/xmlobjects/ElementDescriptor;Ljava/lang/CharSequence;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/CharSequence;
+    .registers 5
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lorg/dmfs/xmlobjects/ElementDescriptor",
+            "<",
+            "Ljava/lang/CharSequence;",
+            ">;",
+            "Ljava/lang/CharSequence;",
+            "Ljava/lang/String;",
+            "Lorg/dmfs/xmlobjects/pull/ParserContext;",
+            ")",
+            "Ljava/lang/CharSequence;"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lorg/dmfs/xmlobjects/pull/XmlObjectPullParserException;
+        }
+    .end annotation
+
+    if-nez p2, :cond_6
+
+    invoke-virtual {p0, p3, p4}, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;->format(Ljava/lang/CharSequence;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/CharSequence;
+
+    move-result-object p2
+
+    :cond_6
+    return-object p2
+.end method
+
+.method public update(Lorg/dmfs/xmlobjects/ElementDescriptor;Ljava/lang/CharSequence;Lorg/dmfs/xmlobjects/QualifiedName;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/CharSequence;
+    .registers 7
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lorg/dmfs/xmlobjects/ElementDescriptor",
+            "<",
+            "Ljava/lang/CharSequence;",
+            ">;",
+            "Ljava/lang/CharSequence;",
+            "Lorg/dmfs/xmlobjects/QualifiedName;",
+            "Ljava/lang/String;",
+            "Lorg/dmfs/xmlobjects/pull/ParserContext;",
+            ")",
+            "Ljava/lang/CharSequence;"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lorg/dmfs/xmlobjects/pull/XmlObjectPullParserException;
+        }
+    .end annotation
+
+    invoke-virtual {p0, p3, p4, p5}, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;->getCharSequenceAttr(Lorg/dmfs/xmlobjects/QualifiedName;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public bridge synthetic update(Lorg/dmfs/xmlobjects/ElementDescriptor;Ljava/lang/Object;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/Object;
+    .registers 6
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lorg/dmfs/xmlobjects/pull/XmlObjectPullParserException;
+        }
+    .end annotation
+
+    check-cast p2, Ljava/lang/CharSequence;
+
+    invoke-virtual {p0, p1, p2, p3, p4}, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;->update(Lorg/dmfs/xmlobjects/ElementDescriptor;Ljava/lang/CharSequence;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public bridge synthetic update(Lorg/dmfs/xmlobjects/ElementDescriptor;Ljava/lang/Object;Lorg/dmfs/xmlobjects/QualifiedName;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/Object;
+    .registers 12
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lorg/dmfs/xmlobjects/pull/XmlObjectPullParserException;
+        }
+    .end annotation
+
+    move-object v2, p2
+
+    check-cast v2, Ljava/lang/CharSequence;
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    move-object v3, p3
+
+    move-object v4, p4
+
+    move-object v5, p5
+
+    invoke-virtual/range {v0 .. v5}, Lorg/dmfs/android/xmlmagic/builder/AndroidCharSequenceObjectBuilder;->update(Lorg/dmfs/xmlobjects/ElementDescriptor;Ljava/lang/CharSequence;Lorg/dmfs/xmlobjects/QualifiedName;Ljava/lang/String;Lorg/dmfs/xmlobjects/pull/ParserContext;)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    return-object v0
+.end method

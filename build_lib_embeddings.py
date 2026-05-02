@@ -10,9 +10,16 @@ from java_processing import parse_java_blocks
 from smali_processing import parse_smali_blocks
 from utils import collect_files, get_smali_index, read_and_merge_smali_for_class, class_name_from_path, read_file_text, extract_original_class_name, embed_java_blocks_batch, embed_smali_blocks_batch
 from embedding_fusion import averaged_fusion_all
+from config import LOG_FILE
+
+# Enables the logger
+from logger import get_file_logger
+log_path = Path(LOG_FILE)
+logger = get_file_logger(log_path)
 
 
-def build_lib_embeddings(faiss_dir, tpl_lib_java_dir, tpl_lib_smali_dir, w1, w2, w3, w4, out_file: Path = None):
+def build_lib_embeddings(faiss_dir, tpl_lib_java_dir, tpl_lib_smali_dir, pos_decay_alpha, w1, w2, w3, w4, out_file: Path = None):
+    logger.info("[*] Building library embeddings from Java and Smali sources...")
     faiss_dir.mkdir(parents=True, exist_ok=True)
 
     if out_file is None:
@@ -22,6 +29,7 @@ def build_lib_embeddings(faiss_dir, tpl_lib_java_dir, tpl_lib_smali_dir, w1, w2,
     java_files = collect_files(tpl_lib_java_dir, ".java")
     
     # Initialize Embedders
+    # IMPORTANT: Change the model here if you want to use a different Embedder (eg: codesageembedder.py)
     from miniLM_embedder import MiniLMEmbedder
     embedder = MiniLMEmbedder()
 
@@ -37,23 +45,24 @@ def build_lib_embeddings(faiss_dir, tpl_lib_java_dir, tpl_lib_smali_dir, w1, w2,
             try:
                 new_cname = package_name + "." + renamed_cname
             except Exception as e:
-                print(f"[!FAIL!] Failed to extract original class name from java comments for class: {cname} in package: {package_name} with error: {e}")
+                logger.error(f"Failed to extract original class name from java comments for class: {cname} in package: {package_name} with error: {e}")
                 new_cname = renamed_cname
-            print(f"[i] Extracted original class name from java comments: {new_cname}")
+            logger.info(f"Extracted original class name from java comments: {new_cname}")
             smali_text = read_and_merge_smali_for_class(new_cname, tpl_lib_smali_dir, smali_index)
 
         if not smali_text:
-            print(f"[!FAIL!] No smali found for class: {cname} and New class name: {new_cname}")
+            logger.warning(f"No smali found for class: {cname} and New class name: {new_cname}")
 
         # Block Segmentation and Preprocessing with Semantic Filtering
         java_blocks = parse_java_blocks(java_text)
         smali_blocks = parse_smali_blocks(smali_text)
 
         # Embedding Segmented Blocks and Block Fusion (Positional Decay Mean Pooling)
-        java_raw_emb, java_fil_emb = embed_java_blocks_batch(java_blocks, embedder)
-        smali_raw_emb, smali_fil_emb = embed_smali_blocks_batch(smali_blocks, embedder)
+        java_raw_emb, java_fil_emb = embed_java_blocks_batch(java_blocks, embedder, pos_decay_alpha)
+        smali_raw_emb, smali_fil_emb = embed_smali_blocks_batch(smali_blocks, embedder, pos_decay_alpha)
      
         # Simple Mean Pooling with (0.25, 0.25, 0.25, 0.25) weights for all 4 views (java_raw, java_fil, smali_raw, smali_fil)
+        print(f"w1: {w1}, w2: {w2}, w3: {w3}, w4: {w4} | Pos Decay Alpha: {pos_decay_alpha}")
         fused_emb = averaged_fusion_all(java_raw_emb, java_fil_emb, smali_raw_emb, smali_fil_emb, w1, w2, w3, w4)
 
         lib_embeddings.append({
@@ -64,11 +73,11 @@ def build_lib_embeddings(faiss_dir, tpl_lib_java_dir, tpl_lib_smali_dir, w1, w2,
             "java_filtered": java_fil_emb,
             "smali_raw": smali_raw_emb,
             "smali_filtered": smali_fil_emb,
-            # ---- optional ----
+            # ---- fused mebedding ----
             "fused_emb": fused_emb
         })
 
     with open(out_file, "wb") as fh:
         pickle.dump(lib_embeddings, fh)
-        print(f"[+] Saved embeddings -> {out_file}")
+        logger.info(f"Saved {len(lib_embeddings)} library class embeddings to {out_file}")
         

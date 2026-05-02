@@ -1,0 +1,62 @@
+package com.google.gson;
+
+import com.google.gson.ModifyFirstLetterNamingPolicy;
+
+/* JADX WARN: Enum visitor error
+jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'UPPER_CAMEL_CASE_WITH_SPACES' uses external variables
+	at jadx.core.dex.visitors.EnumVisitor.createEnumFieldByConstructor(EnumVisitor.java:451)
+	at jadx.core.dex.visitors.EnumVisitor.processEnumFieldByField(EnumVisitor.java:372)
+	at jadx.core.dex.visitors.EnumVisitor.processEnumFieldByWrappedInsn(EnumVisitor.java:337)
+	at jadx.core.dex.visitors.EnumVisitor.extractEnumFieldsFromFilledArray(EnumVisitor.java:322)
+	at jadx.core.dex.visitors.EnumVisitor.extractEnumFieldsFromInsn(EnumVisitor.java:262)
+	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:151)
+	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
+ */
+/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
+/* loaded from: gson-1.7.2.jar:com/google/gson/FieldNamingPolicy.class */
+public final class FieldNamingPolicy {
+    public static final FieldNamingPolicy UPPER_CAMEL_CASE = new FieldNamingPolicy("UPPER_CAMEL_CASE", 0, new ModifyFirstLetterNamingPolicy(ModifyFirstLetterNamingPolicy.LetterModifier.UPPER));
+    public static final FieldNamingPolicy UPPER_CAMEL_CASE_WITH_SPACES;
+    public static final FieldNamingPolicy LOWER_CASE_WITH_UNDERSCORES;
+    public static final FieldNamingPolicy LOWER_CASE_WITH_DASHES;
+    private final FieldNamingStrategy2 namingPolicy;
+    private static final /* synthetic */ FieldNamingPolicy[] $VALUES;
+
+    public static FieldNamingPolicy[] values() {
+        return (FieldNamingPolicy[]) $VALUES.clone();
+    }
+
+    public static FieldNamingPolicy valueOf(String name) {
+        return (FieldNamingPolicy) Enum.valueOf(FieldNamingPolicy.class, name);
+    }
+
+    static {
+        final String str = " ";
+        UPPER_CAMEL_CASE_WITH_SPACES = new FieldNamingPolicy("UPPER_CAMEL_CASE_WITH_SPACES", 1, new CompositionFieldNamingPolicy(str) { // from class: com.google.gson.UpperCamelCaseSeparatorNamingPolicy
+            {
+                super(new CamelCaseSeparatorNamingPolicy(str), new ModifyFirstLetterNamingPolicy(ModifyFirstLetterNamingPolicy.LetterModifier.UPPER));
+            }
+        });
+        final String str2 = "_";
+        LOWER_CASE_WITH_UNDERSCORES = new FieldNamingPolicy("LOWER_CASE_WITH_UNDERSCORES", 2, new CompositionFieldNamingPolicy(str2) { // from class: com.google.gson.LowerCamelCaseSeparatorNamingPolicy
+            {
+                super(new CamelCaseSeparatorNamingPolicy(str2), new LowerCaseNamingPolicy());
+            }
+        });
+        final String str3 = "-";
+        LOWER_CASE_WITH_DASHES = new FieldNamingPolicy("LOWER_CASE_WITH_DASHES", 3, new CompositionFieldNamingPolicy(str3) { // from class: com.google.gson.LowerCamelCaseSeparatorNamingPolicy
+            {
+                super(new CamelCaseSeparatorNamingPolicy(str3), new LowerCaseNamingPolicy());
+            }
+        });
+        $VALUES = new FieldNamingPolicy[]{UPPER_CAMEL_CASE, UPPER_CAMEL_CASE_WITH_SPACES, LOWER_CASE_WITH_UNDERSCORES, LOWER_CASE_WITH_DASHES};
+    }
+
+    private FieldNamingPolicy(String str, int i, FieldNamingStrategy2 namingPolicy) {
+        this.namingPolicy = namingPolicy;
+    }
+
+    FieldNamingStrategy2 getFieldNamingPolicy() {
+        return this.namingPolicy;
+    }
+}

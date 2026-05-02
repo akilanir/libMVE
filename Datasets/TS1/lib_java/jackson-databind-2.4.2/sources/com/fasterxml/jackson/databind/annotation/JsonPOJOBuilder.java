@@ -1,0 +1,28 @@
+package com.fasterxml.jackson.databind.annotation;
+
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE})
+@JacksonAnnotation
+@Retention(RetentionPolicy.RUNTIME)
+/* loaded from: jackson-databind-2.4.2.jar:com/fasterxml/jackson/databind/annotation/JsonPOJOBuilder.class */
+public @interface JsonPOJOBuilder {
+    String buildMethodName() default "build";
+
+    String withPrefix() default "with";
+
+    /* loaded from: jackson-databind-2.4.2.jar:com/fasterxml/jackson/databind/annotation/JsonPOJOBuilder$Value.class */
+    public static class Value {
+        public final String buildMethodName;
+        public final String withPrefix;
+
+        public Value(JsonPOJOBuilder ann) {
+            this.buildMethodName = ann.buildMethodName();
+            this.withPrefix = ann.withPrefix();
+        }
+    }
+}

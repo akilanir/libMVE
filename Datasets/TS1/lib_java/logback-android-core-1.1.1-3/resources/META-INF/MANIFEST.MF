@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: tony
+Build-Jdk: 1.8.0_05
+Implementation-Title: Logback Android Core Module
+Implementation-Version: 1.1.1-3
+Implementation-Vendor-Id: com.github.tony19
+Implementation-Vendor: QOS.ch
+Implementation-Build: b29adb0daa78ac379a86fdc45fcad3710a25b06a
+Implementation-Timestamp: 12-Jul-2014 14:30:16 -0500
+

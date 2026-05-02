@@ -1,0 +1,10 @@
+package android.support.v7.app;
+
+import android.support.v7.view.ActionMode;
+
+/* loaded from: com.android.support.appcompat-v7.22.1.1.jar:android/support/v7/app/AppCompatCallback.class */
+public interface AppCompatCallback {
+    void onSupportActionModeStarted(ActionMode actionMode);
+
+    void onSupportActionModeFinished(ActionMode actionMode);
+}

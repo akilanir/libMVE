@@ -6,9 +6,9 @@ import time
 from utils import decompile_apk
 from apk_parsing import build_apk_classes
 from apk_embedding_worker import embed_classes_gpu
-from config import LOG_LEVEL
+from config import LOG_LEVEL, LOG_FILE
 from logger import get_file_logger
-log_path = Path("logs/pipeline.log")
+log_path = Path(LOG_FILE)
 logger = get_file_logger(log_path)
 
 def build_apk_embeddings(

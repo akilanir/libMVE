@@ -1,0 +1,205 @@
+package android.support.v7.app;
+
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.appcompat.R;
+import android.support.v7.internal.view.SupportMenuInflater;
+import android.support.v7.view.ActionMode;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
+/* loaded from: com.android.support.appcompat-v7.20.0.0.jar:android/support/v7/app/ActionBarActivityDelegate.class */
+abstract class ActionBarActivityDelegate {
+    static final String METADATA_UI_OPTIONS = "android.support.UI_OPTIONS";
+    static final String UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW = "splitActionBarWhenNarrow";
+    private static final String TAG = "ActionBarActivityDelegate";
+    final ActionBarActivity mActivity;
+    private ActionBar mActionBar;
+    private MenuInflater mMenuInflater;
+    boolean mHasActionBar;
+    boolean mOverlayActionBar;
+    private boolean mEnableDefaultActionBarUp;
+
+    abstract ActionBar createSupportActionBar();
+
+    abstract void onConfigurationChanged(Configuration configuration);
+
+    abstract void onStop();
+
+    abstract void onPostResume();
+
+    abstract void setContentView(View view);
+
+    abstract void setContentView(int i);
+
+    abstract void setContentView(View view, ViewGroup.LayoutParams layoutParams);
+
+    abstract void addContentView(View view, ViewGroup.LayoutParams layoutParams);
+
+    abstract void onTitleChanged(CharSequence charSequence);
+
+    abstract void supportInvalidateOptionsMenu();
+
+    abstract boolean supportRequestWindowFeature(int i);
+
+    abstract View onCreatePanelView(int i);
+
+    abstract boolean onPreparePanel(int i, View view, Menu menu);
+
+    abstract boolean onCreatePanelMenu(int i, Menu menu);
+
+    abstract boolean onMenuItemSelected(int i, MenuItem menuItem);
+
+    abstract boolean onBackPressed();
+
+    abstract ActionMode startSupportActionMode(ActionMode.Callback callback);
+
+    abstract void setSupportProgressBarVisibility(boolean z);
+
+    abstract void setSupportProgressBarIndeterminateVisibility(boolean z);
+
+    abstract void setSupportProgressBarIndeterminate(boolean z);
+
+    abstract void setSupportProgress(int i);
+
+    abstract int getHomeAsUpIndicatorAttrId();
+
+    abstract void onContentChanged();
+
+    static ActionBarActivityDelegate createDelegate(ActionBarActivity activity) {
+        if (Build.VERSION.SDK_INT >= 20) {
+            return new ActionBarActivityDelegateApi20(activity);
+        }
+        if (Build.VERSION.SDK_INT >= 18) {
+            return new ActionBarActivityDelegateJBMR2(activity);
+        }
+        if (Build.VERSION.SDK_INT >= 16) {
+            return new ActionBarActivityDelegateJB(activity);
+        }
+        if (Build.VERSION.SDK_INT >= 14) {
+            return new ActionBarActivityDelegateICS(activity);
+        }
+        if (Build.VERSION.SDK_INT >= 11) {
+            return new ActionBarActivityDelegateHC(activity);
+        }
+        return new ActionBarActivityDelegateBase(activity);
+    }
+
+    ActionBarActivityDelegate(ActionBarActivity activity) {
+        this.mActivity = activity;
+    }
+
+    final ActionBar getSupportActionBar() {
+        if (this.mHasActionBar || this.mOverlayActionBar) {
+            if (this.mActionBar == null) {
+                this.mActionBar = createSupportActionBar();
+                if (this.mEnableDefaultActionBarUp) {
+                    this.mActionBar.setDisplayHomeAsUpEnabled(true);
+                }
+            }
+        } else {
+            this.mActionBar = null;
+        }
+        return this.mActionBar;
+    }
+
+    MenuInflater getMenuInflater() {
+        if (this.mMenuInflater == null) {
+            this.mMenuInflater = new SupportMenuInflater(getActionBarThemedContext());
+        }
+        return this.mMenuInflater;
+    }
+
+    void onCreate(Bundle savedInstanceState) {
+        TypedArray a = this.mActivity.obtainStyledAttributes(R.styleable.ActionBarWindow);
+        if (!a.hasValue(0)) {
+            a.recycle();
+            throw new IllegalStateException("You need to use a Theme.AppCompat theme (or descendant) with this activity.");
+        }
+        this.mHasActionBar = a.getBoolean(0, false);
+        this.mOverlayActionBar = a.getBoolean(1, false);
+        a.recycle();
+        if (NavUtils.getParentActivityName(this.mActivity) != null) {
+            if (this.mActionBar == null) {
+                this.mEnableDefaultActionBarUp = true;
+            } else {
+                this.mActionBar.setDisplayHomeAsUpEnabled(true);
+            }
+        }
+    }
+
+    boolean onPrepareOptionsPanel(View view, Menu menu) {
+        if (Build.VERSION.SDK_INT < 16) {
+            return this.mActivity.onPrepareOptionsMenu(menu);
+        }
+        return this.mActivity.superOnPrepareOptionsPanel(view, menu);
+    }
+
+    final ActionBarDrawerToggle.Delegate getDrawerToggleDelegate() {
+        return new ActionBarDrawableToggleImpl();
+    }
+
+    protected final String getUiOptionsFromMetadata() {
+        try {
+            PackageManager pm = this.mActivity.getPackageManager();
+            ActivityInfo info = pm.getActivityInfo(this.mActivity.getComponentName(), 128);
+            String uiOptions = null;
+            if (info.metaData != null) {
+                uiOptions = info.metaData.getString(METADATA_UI_OPTIONS);
+            }
+            return uiOptions;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "getUiOptionsFromMetadata: Activity '" + this.mActivity.getClass().getSimpleName() + "' not in manifest");
+            return null;
+        }
+    }
+
+    protected final Context getActionBarThemedContext() {
+        ActionBarDrawerToggle.DelegateProvider context = this.mActivity;
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            context = ab.getThemedContext();
+        }
+        return context;
+    }
+
+    /* loaded from: com.android.support.appcompat-v7.20.0.0.jar:android/support/v7/app/ActionBarActivityDelegate$ActionBarDrawableToggleImpl.class */
+    private class ActionBarDrawableToggleImpl implements ActionBarDrawerToggle.Delegate {
+        private ActionBarDrawableToggleImpl() {
+        }
+
+        public Drawable getThemeUpIndicator() {
+            TypedArray a = ActionBarActivityDelegate.this.mActivity.obtainStyledAttributes(new int[]{ActionBarActivityDelegate.this.getHomeAsUpIndicatorAttrId()});
+            Drawable result = a.getDrawable(0);
+            a.recycle();
+            return result;
+        }
+
+        public void setActionBarUpIndicator(Drawable upDrawable, int contentDescRes) {
+            ActionBar ab = ActionBarActivityDelegate.this.getSupportActionBar();
+            if (ab != null) {
+                ab.setHomeAsUpIndicator(upDrawable);
+                ab.setHomeActionContentDescription(contentDescRes);
+            }
+        }
+
+        public void setActionBarDescription(int contentDescRes) {
+            ActionBar ab = ActionBarActivityDelegate.this.getSupportActionBar();
+            if (ab != null) {
+                ab.setHomeActionContentDescription(contentDescRes);
+            }
+        }
+    }
+}

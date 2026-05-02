@@ -1,0 +1,136 @@
+package org.apache.commons.io.output;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+/* loaded from: commons-io-2.4.jar:org/apache/commons/io/output/FileWriterWithEncoding.class */
+public class FileWriterWithEncoding extends Writer {
+    private final Writer out;
+
+    public FileWriterWithEncoding(String filename, String encoding) throws IOException {
+        this(new File(filename), encoding, false);
+    }
+
+    public FileWriterWithEncoding(String filename, String encoding, boolean append) throws IOException {
+        this(new File(filename), encoding, append);
+    }
+
+    public FileWriterWithEncoding(String filename, Charset encoding) throws IOException {
+        this(new File(filename), encoding, false);
+    }
+
+    public FileWriterWithEncoding(String filename, Charset encoding, boolean append) throws IOException {
+        this(new File(filename), encoding, append);
+    }
+
+    public FileWriterWithEncoding(String filename, CharsetEncoder encoding) throws IOException {
+        this(new File(filename), encoding, false);
+    }
+
+    public FileWriterWithEncoding(String filename, CharsetEncoder encoding, boolean append) throws IOException {
+        this(new File(filename), encoding, append);
+    }
+
+    public FileWriterWithEncoding(File file, String encoding) throws IOException {
+        this(file, encoding, false);
+    }
+
+    public FileWriterWithEncoding(File file, String encoding, boolean append) throws IOException {
+        this.out = initWriter(file, encoding, append);
+    }
+
+    public FileWriterWithEncoding(File file, Charset encoding) throws IOException {
+        this(file, encoding, false);
+    }
+
+    public FileWriterWithEncoding(File file, Charset encoding, boolean append) throws IOException {
+        this.out = initWriter(file, encoding, append);
+    }
+
+    public FileWriterWithEncoding(File file, CharsetEncoder encoding) throws IOException {
+        this(file, encoding, false);
+    }
+
+    public FileWriterWithEncoding(File file, CharsetEncoder encoding, boolean append) throws IOException {
+        this.out = initWriter(file, encoding, append);
+    }
+
+    private static Writer initWriter(File file, Object encoding, boolean append) throws IOException {
+        Writer writer;
+        if (file == null) {
+            throw new NullPointerException("File is missing");
+        }
+        if (encoding == null) {
+            throw new NullPointerException("Encoding is missing");
+        }
+        boolean fileExistedAlready = file.exists();
+        try {
+            OutputStream stream = new FileOutputStream(file, append);
+            if (encoding instanceof Charset) {
+                writer = new OutputStreamWriter(stream, (Charset) encoding);
+            } else if (encoding instanceof CharsetEncoder) {
+                writer = new OutputStreamWriter(stream, (CharsetEncoder) encoding);
+            } else {
+                writer = new OutputStreamWriter(stream, (String) encoding);
+            }
+            return writer;
+        } catch (IOException ex) {
+            IOUtils.closeQuietly((Writer) null);
+            IOUtils.closeQuietly((OutputStream) null);
+            if (!fileExistedAlready) {
+                FileUtils.deleteQuietly(file);
+            }
+            throw ex;
+        } catch (RuntimeException ex2) {
+            IOUtils.closeQuietly((Writer) null);
+            IOUtils.closeQuietly((OutputStream) null);
+            if (!fileExistedAlready) {
+                FileUtils.deleteQuietly(file);
+            }
+            throw ex2;
+        }
+    }
+
+    @Override // java.io.Writer
+    public void write(int idx) throws IOException {
+        this.out.write(idx);
+    }
+
+    @Override // java.io.Writer
+    public void write(char[] chr) throws IOException {
+        this.out.write(chr);
+    }
+
+    @Override // java.io.Writer
+    public void write(char[] chr, int st, int end) throws IOException {
+        this.out.write(chr, st, end);
+    }
+
+    @Override // java.io.Writer
+    public void write(String str) throws IOException {
+        this.out.write(str);
+    }
+
+    @Override // java.io.Writer
+    public void write(String str, int st, int end) throws IOException {
+        this.out.write(str, st, end);
+    }
+
+    @Override // java.io.Writer, java.io.Flushable
+    public void flush() throws IOException {
+        this.out.flush();
+    }
+
+    @Override // java.io.Writer, java.io.Closeable, java.lang.AutoCloseable
+    public void close() throws IOException {
+        this.out.close();
+    }
+}

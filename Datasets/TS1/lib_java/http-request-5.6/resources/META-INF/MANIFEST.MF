@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: kevin
+Build-Jdk: 1.7.0_13
+Bnd-LastModified: 1391983892017
+Bundle-Description: Library for making HTTP requests
+Bundle-License: http://www.opensource.org/licenses/mit-license.php
+Bundle-ManifestVersion: 2
+Bundle-Name: http-request
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-SymbolicName: com.github.kevinsawicki.http-request
+Bundle-Version: 5.6.0
+Export-Package: com.github.kevinsawicki.http;uses:="javax.net.ssl";ver
+ sion="5.6.0"
+Import-Package: javax.net.ssl
+Tool: Bnd-1.50.0
+

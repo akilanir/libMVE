@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: pierre
+Build-Jdk: 1.6.0_26
+Specification-Title: JmDNS
+Specification-Version: 3.4.1
+Specification-Vendor: JmDNS
+Implementation-Title: JmDNS
+Implementation-Version: 3.4.1
+Implementation-Vendor-Id: javax.jmdns
+Implementation-Vendor: JmDNS
+Main-Class: javax.jmdns.impl.JmDNSImpl
+Implementation-Build: ${buildNumber}
+Implementation-Date: 2011-08-25 12:40
+Export-Package: javax.jmdns;version="3.4.1"
+Tool: Bnd-1.43.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: javax.jmdns
+Bundle-Name: JmDNS
+Bundle-Vendor: jmdns.sourceforge.net
+Bundle-Version: 3.4.1
+Bnd-LastModified: 1314268840378
+Bundle-ManifestVersion: 2
+Bundle-Description: JmDNS is a Java implementation of multi-cast DNS a
+ nd can be used for service registration and discovery in local area n
+ etworks. JmDNS is fully compatible with Apple's Bonjour.The project w
+ as originally started in December 2002 by Arthur van Hoff at Strangeb
+ erry. In November 2003 the project was moved to SourceForge, and the 
+ name was changed from JRendezvous to JmDNS for legal reasons.Many tha
+ nks to Stuart Cheshire for help and moral support.
+Bundle-DocURL: http://jmdns.sourceforge.net/
+

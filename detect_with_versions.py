@@ -36,10 +36,10 @@ from utils import (
 
 from apk_embedding_builder import build_apk_embeddings
 
-from config import FAISS_DIR, OUTPUT_DIR, LIB_MAP_CSV, WORK_DIR
+from config import OUTPUT_DIR, LIB_MAP_CSV, WORK_DIR, MODE, TPL_SYSTEM_APIS_FILE, LOG_FILE
 
 from logger import get_file_logger
-log_path = Path("logs/pipeline.log")
+log_path = Path(LOG_FILE)
 logger = get_file_logger(log_path)
 
 
@@ -49,14 +49,12 @@ lib_map_fast = load_library_map_fast(LIB_MAP_CSV)
 
 def process_single_apk(
     apk_path: Path,
-    embeddings_pkl: Path,
     TH_1: float,
     TH_2: float,
     apk_embedding_save_path: Path,
     groundtruth_file: Optional[Path],
     out_dir: Path,
-    lib_indexes,
-    n: int
+    lib_indexes
 ):
     """
     Worker function to process a single APK.
@@ -64,7 +62,6 @@ def process_single_apk(
     is_from_saved_apk = False
     apk_e_read = "fused"
     smali_codes = {}
-    MODE = f"POSITIONAL_DECAY-LIBSCAN_TEST-ALPHA-{n}"
     work_dir = WORK_DIR / apk_path.stem
     work_dir.mkdir(parents=True, exist_ok=True)
 
@@ -123,7 +120,7 @@ def process_single_apk(
                     best_score = D[0][0]
                     best_lib = lib_map.get(f"{lib_name}.jar", {}).get("library", "unknown_lib")
                     if best_lib == "unknown_lib":
-                        logger.info("[!WARN] ----------------- Unknown Library detected: %s.jar", lib_name)
+                        logger.error("[!WARN] Unknown Library detected: %s.jar", lib_name)
                     best_version = match_meta.get("version", "unknown")
                     best_lib_class = match_meta.get("class_name", "unknown")
             if best_lib is not None and best_score >= 0:
@@ -177,9 +174,9 @@ def process_single_apk(
     # logger.info("[5] Running second-stage API validation with threshold %.2f...", TH_2)
     second_stage_validated_results = []
     
-    logger.info("[xxxx]Is it from saved APK? %s", is_from_saved_apk)
+    logger.info("Is it from saved APK? %s", is_from_saved_apk)
     if is_from_saved_apk:
-        logger.info("[6] Loading smali classes from cache for API validation...")  
+        logger.info("[Info] Loading smali classes from cache for API validation...")  
         jadx_out = work_dir / "jadx"
         apktool_out = work_dir / "apktool"
         smali_codes = get_smali_classes(jadx_out, apktool_out)
@@ -189,7 +186,7 @@ def process_single_apk(
         detected_library = r['library']
         detected_lib_best_version = r['best_version']
         jar_name = lib_map_fast.get((detected_library, detected_lib_best_version))
-        TPL_API_list = load_tpl_apis("tpl_system_apis.json", jar_name)
+        TPL_API_list = load_tpl_apis(TPL_SYSTEM_APIS_FILE, jar_name)
 
         detected_class_names = [cl['apk_class'] for cl in r['matched_classes']]
         api_call_list = set()
@@ -222,6 +219,7 @@ def process_single_apk(
 def run_version_detection_pipeline_cached_parallel(
     apk_folder: Path,
     embeddings_pkl: Path,
+    lib_index_dir: Path,
     TH_1: float,
     TH_2: float,
     apk_embedding_save_path: Path,
@@ -238,15 +236,11 @@ def run_version_detection_pipeline_cached_parallel(
     apk_files = list(apk_folder.glob("*.apk"))
     logger.info("[*] Found %d APK files.", len(apk_files))
 
-    n = 8
-    faiss_dir = Path(f"libscan_faiss_data_vulnTrack_alpha_{n}")
-    #Libscan
-    # faiss_dir = Path(f"libscan_faiss_data_correct_alpha_{n}")
-    index_map = faiss_dir / "library_indexes.pkl"
+    index_map = lib_index_dir / "library_indexes.pkl"
 
     if not index_map.exists():
-        logger.info("[*] Building FAISS library indexes in %s", faiss_dir)
-        build_faiss_indexes_new(faiss_dir, embeddings_pkl)
+        logger.info("[*] Building FAISS library indexes in %s", lib_index_dir)
+        build_faiss_indexes_new(lib_index_dir, embeddings_pkl)
     lib_indexes = load_library_indexes(index_map)
 
     results_all = []
@@ -257,14 +251,12 @@ def run_version_detection_pipeline_cached_parallel(
             executor.submit(
                 process_single_apk,
                 apk_path,
-                embeddings_pkl,
                 TH_1,
                 TH_2,
                 apk_embedding_save_path,
                 groundtruth_file,
                 out_dir,
-                lib_indexes,
-                n
+                lib_indexes
             ): apk_path for apk_path in apk_files
         }
 

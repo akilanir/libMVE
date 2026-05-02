@@ -1,0 +1,70 @@
+package com.squareup.picasso;
+
+import android.graphics.Bitmap;
+import android.net.Uri;
+import java.io.IOException;
+import java.io.InputStream;
+
+/* loaded from: picasso-2.4.0.jar:com/squareup/picasso/Downloader.class */
+public interface Downloader {
+    Response load(Uri uri, boolean z) throws IOException;
+
+    void shutdown();
+
+    /* loaded from: picasso-2.4.0.jar:com/squareup/picasso/Downloader$ResponseException.class */
+    public static class ResponseException extends IOException {
+        public ResponseException(String message) {
+            super(message);
+        }
+    }
+
+    /* loaded from: picasso-2.4.0.jar:com/squareup/picasso/Downloader$Response.class */
+    public static class Response {
+        final InputStream stream;
+        final Bitmap bitmap;
+        final boolean cached;
+        final long contentLength;
+
+        public Response(Bitmap bitmap, boolean loadedFromCache) {
+            if (bitmap == null) {
+                throw new IllegalArgumentException("Bitmap may not be null.");
+            }
+            this.stream = null;
+            this.bitmap = bitmap;
+            this.cached = loadedFromCache;
+            this.contentLength = -1L;
+        }
+
+        @Deprecated
+        public Response(InputStream stream, boolean loadedFromCache) {
+            this(stream, loadedFromCache, -1L);
+        }
+
+        @Deprecated
+        public Response(Bitmap bitmap, boolean loadedFromCache, long contentLength) {
+            this(bitmap, loadedFromCache);
+        }
+
+        public Response(InputStream stream, boolean loadedFromCache, long contentLength) {
+            if (stream == null) {
+                throw new IllegalArgumentException("Stream may not be null.");
+            }
+            this.stream = stream;
+            this.bitmap = null;
+            this.cached = loadedFromCache;
+            this.contentLength = contentLength;
+        }
+
+        public InputStream getInputStream() {
+            return this.stream;
+        }
+
+        public Bitmap getBitmap() {
+            return this.bitmap;
+        }
+
+        public long getContentLength() {
+            return this.contentLength;
+        }
+    }
+}

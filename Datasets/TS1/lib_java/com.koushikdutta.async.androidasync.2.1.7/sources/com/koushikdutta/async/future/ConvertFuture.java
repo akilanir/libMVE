@@ -1,0 +1,11 @@
+package com.koushikdutta.async.future;
+
+/* loaded from: com.koushikdutta.async.androidasync.2.1.7.jar:com/koushikdutta/async/future/ConvertFuture.class */
+public abstract class ConvertFuture<T, F> extends TransformFuture<T, F> {
+    protected abstract Future<T> convert(F f) throws Exception;
+
+    @Override // com.koushikdutta.async.future.TransformFuture
+    protected final void transform(F result) throws Exception {
+        setComplete((Future) convert(result));
+    }
+}

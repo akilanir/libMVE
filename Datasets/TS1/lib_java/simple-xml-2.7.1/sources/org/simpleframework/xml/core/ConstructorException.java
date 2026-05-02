@@ -1,0 +1,12 @@
+package org.simpleframework.xml.core;
+
+/* loaded from: simple-xml-2.7.1.jar:org/simpleframework/xml/core/ConstructorException.class */
+public class ConstructorException extends PersistenceException {
+    public ConstructorException(String text, Object... list) {
+        super(text, list);
+    }
+
+    public ConstructorException(Throwable cause, String text, Object... list) {
+        super(cause, text, list);
+    }
+}

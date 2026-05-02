@@ -1,0 +1,14 @@
+package android.support.v4.content.res;
+
+import android.content.res.Resources;
+import android.support.annotation.NonNull;
+
+/* loaded from: internal_impl-24.0.0-beta1.jar:android/support/v4/content/res/ConfigurationHelperJellybeanMr1.class */
+class ConfigurationHelperJellybeanMr1 {
+    ConfigurationHelperJellybeanMr1() {
+    }
+
+    static int getDensityDpi(@NonNull Resources resources) {
+        return resources.getConfiguration().densityDpi;
+    }
+}

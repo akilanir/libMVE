@@ -1,0 +1,50 @@
+.class final enum Lorg/dmfs/android/xmlmagic/builder/IntentObjectBuilder$Flags$2;
+.super Lorg/dmfs/android/xmlmagic/builder/IntentObjectBuilder$Flags;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lorg/dmfs/android/xmlmagic/builder/IntentObjectBuilder$Flags;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x4008
+    name = null
+.end annotation
+
+
+# direct methods
+.method constructor <init>(Ljava/lang/String;I)V
+    .registers 4
+
+    const/4 v0, 0x0
+
+    invoke-direct {p0, p1, p2, v0}, Lorg/dmfs/android/xmlmagic/builder/IntentObjectBuilder$Flags;-><init>(Ljava/lang/String;ILorg/dmfs/android/xmlmagic/builder/IntentObjectBuilder$1;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public get()I
+    .registers 3
+    .annotation build Landroid/annotation/TargetApi;
+        value = 0xb
+    .end annotation
+
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v1, 0xb
+
+    if-ge v0, v1, :cond_8
+
+    const/4 v0, 0x0
+
+    :goto_7
+    return v0
+
+    :cond_8
+    const v0, 0x8000
+
+    goto :goto_7
+.end method

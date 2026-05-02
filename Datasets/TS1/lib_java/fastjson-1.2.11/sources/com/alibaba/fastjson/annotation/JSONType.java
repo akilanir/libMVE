@@ -1,0 +1,35 @@
+package com.alibaba.fastjson.annotation;
+
+import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+/* loaded from: fastjson-1.2.11.jar:com/alibaba/fastjson/annotation/JSONType.class */
+public @interface JSONType {
+    boolean asm() default true;
+
+    String[] orders() default {};
+
+    String[] includes() default {};
+
+    String[] ignores() default {};
+
+    SerializerFeature[] serialzeFeatures() default {};
+
+    Feature[] parseFeatures() default {};
+
+    boolean alphabetic() default true;
+
+    Class<?> mappingTo() default Void.class;
+
+    Class<?> builder() default Void.class;
+
+    String typeName() default "";
+
+    Class<?>[] seeAlso() default {};
+}
