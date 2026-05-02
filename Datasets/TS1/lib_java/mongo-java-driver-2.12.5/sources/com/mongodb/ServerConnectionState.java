@@ -1,7 +1,0 @@
-package com.mongodb;
-
-/* loaded from: mongo-java-driver-2.12.5.jar:com/mongodb/ServerConnectionState.class */
-enum ServerConnectionState {
-    Connecting,
-    Connected
-}

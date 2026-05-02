@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.9.4
-Created-By: 1.8.0_65-b17 (Oracle Corporation)
-Git-Release-Hash: bbd959b55054790a5a83444a211f0d4c2ba782b8
-Git-Release-Tag: 1.1.8.1
-Built-By: marten@dmfs.org
-Implementation-Version: 1.1.8.1-0
-

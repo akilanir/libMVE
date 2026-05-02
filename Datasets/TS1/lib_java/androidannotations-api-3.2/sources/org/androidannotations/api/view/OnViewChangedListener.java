@@ -1,6 +1,0 @@
-package org.androidannotations.api.view;
-
-/* loaded from: androidannotations-api-3.2.jar:org/androidannotations/api/view/OnViewChangedListener.class */
-public interface OnViewChangedListener {
-    void onViewChanged(HasViews hasViews);
-}

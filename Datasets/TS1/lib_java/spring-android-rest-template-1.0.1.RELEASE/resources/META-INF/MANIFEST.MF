@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: spring-android-rest-template
-Implementation-Version: 1.0.1.RELEASE
-
