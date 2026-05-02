@@ -170,20 +170,26 @@ IF NOT: alter JADX_CMD, APKTOOL_CMD in config.py and direct it to the executable
 
 ### TPLs, APKs, and Other Dependencies neede to run libMVE
 
-- TPLs: the decompiled TPLs repos (TS1, TS2, and TS3 are available in Datasets Directory)
-        TS1: TPLs used with DS1 dataset (we have given the decompiled java and smali, if you need .jar and .dex please download from: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs and https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs_dex)
-        TS2: TPLs used with DS2 dataset (we have given the decompiled java and smali, .jar/.aar files)
-        TS3AndTS4: Vulenrable and Tracker TPLs (.jar/.aar, decompiled java and smali files provided)
+- TPLs: IN Datasets (TS1, TS2, TS3)
+        `TS1`: TPLs used with DS1 dataset (we have given the decompiled java and smali, if you need .jar and .dex please download from: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs and https://github.com/wyf295/LibScan/tree/master/data/ground_truth_libs_dex)
+
+        `TS2`: TPLs used with DS2 dataset (we have given the decompiled java and smali, .jar/.aar files)
+
+        `TS3AndTS4`: Vulenrable and Tracker TPLs (.jar/.aar, decompiled java and smali files provided)
     
 - APKs: 
-        DS1: you can download DS1 dataset from, Validation set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_threshold_apks Test set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_apks
-        DS2: R8 optimized APKs compiled from source code provided in Datasets/DS2 (Use APKs in validation directory to tune the hyperparameters and Use APKs in test folder to evaluate)
-        DS3: Sample APKs (few APKs from 8000 apps are given in the repo). Rest of the APKs sha values provided in APK-Sha.csv with their metadata you can donwload the APKs from AndroZoo: "https://androzoo.uni.lu/"
+        `DS1`: We have given the same APKs provided by LibScan (For further details refer to Validation set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_threshold_apks Test set: https://github.com/wyf295/LibScan/tree/master/data/ground_truth_apks)
+
+        `DS2`: R8 optimized APKs compiled from source code provided in Datasets/DS2 (Use APKs in validation directory to tune the hyperparameters and Use APKs in test folder to evaluate)
+        
+        `DS3`: APKs sha values provided in `{year}-APKs.csv` with their metadata, you can download the APKs directly from AndroZoo: "https://androzoo.uni.lu/"
 
 - Supporting Files:
-        supportFilesLibScan: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS1 dataset
-        supportFilesR8: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS2 dataset
-        supportFilesVulnLib: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS3 and TS4 datasets.
+        `supportFilesLibScan`: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS1 dataset
+
+        `supportFilesR8`: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS2 dataset
+
+        `supportFilesVulnLib`: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS3 and TS4 datasets.
 
 Makesure you have the correct dataset downloaded and ready to use!!!
 
@@ -210,10 +216,10 @@ logs/pipeline.log will print the main info, error, warn logs.
 python main.py detect-apks 
   --apk path/to/target_apk_folder 
   --lib-embeddings faiss_data/Embedding.pkl 
-  --lib-index-dir Libscan_Faiss_Data
+  --lib-index-dir TS1_Faiss_Data
   --th1 0.1 
   --th2 0.4 
-  --apk-embedding-save-path LibScan_APK_Embeddings 
+  --apk-embedding-save-path TS1_APK_Embeddings 
   --groundtruth path/to/groundtruth.json 
   --out-dir Validation_Output 
   --workers 6
