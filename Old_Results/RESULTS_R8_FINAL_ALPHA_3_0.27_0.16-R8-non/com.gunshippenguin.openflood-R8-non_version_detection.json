@@ -1,0 +1,81 @@
+{
+  "detection_results": [
+    {
+      "library": "internal_impl",
+      "is_present": true,
+      "aggregated_ratio": 1.2550272583167321,
+      "best_version": "21.0.3",
+      "version_matches": {
+        "23.2.1": 82,
+        "21.0.3": 103,
+        "23.1.1": 21
+      },
+      "version_totals": {
+        "21.0.3": 133,
+        "23.2.1": 216,
+        "23.1.1": 208
+      }
+    },
+    {
+      "library": "com.android.support.appcompat-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.002978377051791,
+      "best_version": "23.1.1",
+      "version_matches": {
+        "23.1.1": 109,
+        "21.0.3": 4,
+        "23.2.1": 7,
+        "26.1.0": 1
+      },
+      "version_totals": {
+        "23.1.1": 122,
+        "28.0.0": 131,
+        "23.2.1": 120,
+        "26.1.0": 138,
+        "21.0.3": 91
+      }
+    },
+    {
+      "library": "com.android.support.support-v4",
+      "is_present": true,
+      "aggregated_ratio": 0.9067212512143675,
+      "best_version": "23.1.1",
+      "version_matches": {
+        "23.1.1": 139,
+        "23.2.1": 11,
+        "21.0.3": 15
+      },
+      "version_totals": {
+        "23.1.1": 187,
+        "23.2.1": 188,
+        "26.1.0": 1,
+        "21.0.3": 143
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1_score": 0.8571428571428571
+    },
+    "counts": {
+      "true_positives": 3,
+      "false_positives": 0,
+      "false_negatives": 1
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "com.android.support.support-v4": "23.1.1",
+        "internal_impl": "23.1.1",
+        "support-annotations": "23.1.1",
+        "com.android.support.appcompat-v7": "23.1.1"
+      },
+      "detected": {
+        "internal_impl": "21.0.3",
+        "com.android.support.appcompat-v7": "23.1.1",
+        "com.android.support.support-v4": "23.1.1"
+      }
+    }
+  }
+}

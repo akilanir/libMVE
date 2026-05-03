@@ -1,0 +1,561 @@
+{
+  "detection_results": [
+    {
+      "library": "androidx.lifecycle.lifecycle-livedata-core",
+      "is_present": true,
+      "aggregated_ratio": 1.3333333333333333,
+      "best_version": "2.0.0",
+      "version_matches": {
+        "2.0.0": 3,
+        "2.2.0": 1
+      },
+      "version_totals": {
+        "2.0.0": 3,
+        "2.2.0": 3,
+        "2.5.1": 3,
+        "2.6.0": 3,
+        "2.3.1": 3,
+        "2.5.0": 3
+      }
+    },
+    {
+      "library": "com.android.support.support-core-ui",
+      "is_present": true,
+      "aggregated_ratio": 1.3125,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "26.1.0": 10,
+        "28.0.0": 2
+      },
+      "version_totals": {
+        "28.0.0": 2,
+        "26.1.0": 32
+      }
+    },
+    {
+      "library": "com.android.support.support-core-utils",
+      "is_present": true,
+      "aggregated_ratio": 1.28,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "26.1.0": 7,
+        "28.0.0": 1
+      },
+      "version_totals": {
+        "26.1.0": 25,
+        "28.0.0": 1
+      }
+    },
+    {
+      "library": "com.android.support.support-vector-drawable",
+      "is_present": true,
+      "aggregated_ratio": 1.25,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "26.1.0": 1,
+        "28.0.0": 3
+      },
+      "version_totals": {
+        "28.0.0": 3,
+        "26.1.0": 4,
+        "23.2.1": 6
+      }
+    },
+    {
+      "library": "android.arch.lifecycle.common",
+      "is_present": true,
+      "aggregated_ratio": 1.2142857142857144,
+      "best_version": "1.0.0",
+      "version_matches": {
+        "1.1.1": 7,
+        "1.0.0": 5
+      },
+      "version_totals": {
+        "1.0.0": 7,
+        "1.1.1": 14
+      }
+    },
+    {
+      "library": "support-annotations",
+      "is_present": true,
+      "aggregated_ratio": 1.0502450980392157,
+      "best_version": "26.1.0",
+      "version_matches": {
+        "26.1.0": 41,
+        "28.0.0": 10
+      },
+      "version_totals": {
+        "26.1.0": 48,
+        "23.2.1": 39,
+        "23.1.1": 39,
+        "28.0.0": 51,
+        "21.0.3": 25
+      }
+    },
+    {
+      "library": "com.android.support.appcompat-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.0403601507501004,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 66,
+        "26.1.0": 17,
+        "23.1.1": 41,
+        "21.0.3": 4,
+        "23.2.1": 4
+      },
+      "version_totals": {
+        "23.1.1": 122,
+        "28.0.0": 131,
+        "23.2.1": 120,
+        "26.1.0": 138,
+        "21.0.3": 91
+      }
+    },
+    {
+      "library": "jsoup",
+      "is_present": true,
+      "aggregated_ratio": 1.016370708308574,
+      "best_version": "1.12.1",
+      "version_matches": {
+        "1.8.3": 1,
+        "1.12.1": 31,
+        "1.14.1": 4,
+        "1.11.3": 22,
+        "1.13.1": 1
+      },
+      "version_totals": {
+        "1.12.1": 58,
+        "1.11.3": 57,
+        "1.14.1": 69,
+        "1.8.3": 49,
+        "1.13.1": 57
+      }
+    },
+    {
+      "library": "com.android.support.interpolator",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 4
+      },
+      "version_totals": {
+        "28.0.0": 4
+      }
+    },
+    {
+      "library": "fuzzywuzzy",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.3.1",
+      "version_matches": {
+        "1.3.1": 26
+      },
+      "version_totals": {
+        "1.3.1": 26
+      }
+    },
+    {
+      "library": "android.arch.lifecycle.livedata",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.1",
+      "version_matches": {
+        "1.1.1": 3
+      },
+      "version_totals": {
+        "1.1.1": 3
+      }
+    },
+    {
+      "library": "com.android.support.slidingpanelayout",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 1
+      },
+      "version_totals": {
+        "28.0.0": 1
+      }
+    },
+    {
+      "library": "jackson-databind",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "2.9.6",
+      "version_matches": {
+        "2.9.6": 402
+      },
+      "version_totals": {
+        "2.9.6": 402
+      }
+    },
+    {
+      "library": "common",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.1",
+      "version_matches": {
+        "1.1.1": 3
+      },
+      "version_totals": {
+        "1.1.1": 3,
+        "1.0.0": 2
+      }
+    },
+    {
+      "library": "jackson-annotations",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "2.9.0",
+      "version_matches": {
+        "2.9.0": 43
+      },
+      "version_totals": {
+        "2.9.0": 43
+      }
+    },
+    {
+      "library": "com.android.support.print",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 1
+      },
+      "version_totals": {
+        "28.0.0": 1
+      }
+    },
+    {
+      "library": "com.android.support.constraint.constraint-layout",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.3",
+      "version_matches": {
+        "1.1.3": 8
+      },
+      "version_totals": {
+        "1.1.3": 8
+      }
+    },
+    {
+      "library": "android.arch.lifecycle.viewmodel",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.1",
+      "version_matches": {
+        "1.1.1": 5
+      },
+      "version_totals": {
+        "1.1.1": 5
+      }
+    },
+    {
+      "library": "jjwt",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "0.9.1",
+      "version_matches": {
+        "0.9.1": 81
+      },
+      "version_totals": {
+        "0.9.1": 81
+      }
+    },
+    {
+      "library": "jackson-core",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "2.9.6",
+      "version_matches": {
+        "2.9.6": 93
+      },
+      "version_totals": {
+        "2.9.6": 93
+      }
+    },
+    {
+      "library": "com.android.support.drawerlayout",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 1
+      },
+      "version_totals": {
+        "28.0.0": 1
+      }
+    },
+    {
+      "library": "hamcrest-core",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.3",
+      "version_matches": {
+        "1.3": 38
+      },
+      "version_totals": {
+        "1.3": 38
+      }
+    },
+    {
+      "library": "android.arch.core.runtime",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.1",
+      "version_matches": {
+        "1.1.1": 3
+      },
+      "version_totals": {
+        "1.1.1": 3
+      }
+    },
+    {
+      "library": "com.android.support.localbroadcastmanager",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 1
+      },
+      "version_totals": {
+        "28.0.0": 1
+      }
+    },
+    {
+      "library": "junit",
+      "is_present": true,
+      "aggregated_ratio": 0.9903381642512077,
+      "best_version": "4.13.2",
+      "version_matches": {
+        "4.13.2": 205
+      },
+      "version_totals": {
+        "4.13.2": 207
+      }
+    },
+    {
+      "library": "constraint-layout-solver",
+      "is_present": true,
+      "aggregated_ratio": 0.9629629629629629,
+      "best_version": "1.1.3",
+      "version_matches": {
+        "1.1.3": 26
+      },
+      "version_totals": {
+        "1.1.3": 27
+      }
+    },
+    {
+      "library": "com.android.support.support-fragment",
+      "is_present": true,
+      "aggregated_ratio": 0.9001610305958132,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 19,
+        "26.1.0": 2
+      },
+      "version_totals": {
+        "28.0.0": 23,
+        "26.1.0": 27
+      }
+    },
+    {
+      "library": "com.android.support.support-compat",
+      "is_present": true,
+      "aggregated_ratio": 0.8572340425531915,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 101,
+        "26.1.0": 56
+      },
+      "version_totals": {
+        "26.1.0": 175,
+        "28.0.0": 188
+      }
+    },
+    {
+      "library": "android.arch.lifecycle.runtime",
+      "is_present": true,
+      "aggregated_ratio": 0.8333333333333333,
+      "best_version": "1.0.0",
+      "version_matches": {
+        "1.1.1": 1,
+        "1.0.0": 2
+      },
+      "version_totals": {
+        "1.0.0": 4,
+        "1.1.1": 3
+      }
+    },
+    {
+      "library": "com.android.support.animated-vector-drawable",
+      "is_present": true,
+      "aggregated_ratio": 0.738095238095238,
+      "best_version": "26.1.0",
+      "version_matches": {
+        "26.1.0": 4,
+        "28.0.0": 1
+      },
+      "version_totals": {
+        "26.1.0": 7,
+        "28.0.0": 6,
+        "23.2.1": 2
+      }
+    },
+    {
+      "library": "com.android.support.coordinatorlayout",
+      "is_present": true,
+      "aggregated_ratio": 0.6666666666666666,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 2
+      },
+      "version_totals": {
+        "28.0.0": 3
+      }
+    },
+    {
+      "library": "com.android.support.loader",
+      "is_present": true,
+      "aggregated_ratio": 0.5,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 3
+      },
+      "version_totals": {
+        "28.0.0": 6
+      }
+    },
+    {
+      "library": "com.android.support.customview",
+      "is_present": true,
+      "aggregated_ratio": 0.5,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 2
+      },
+      "version_totals": {
+        "28.0.0": 4
+      }
+    },
+    {
+      "library": "com.android.support.documentfile",
+      "is_present": true,
+      "aggregated_ratio": 0.4,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 2
+      },
+      "version_totals": {
+        "28.0.0": 5
+      }
+    },
+    {
+      "library": "com.android.support.versionedparcelable",
+      "is_present": true,
+      "aggregated_ratio": 0.3,
+      "best_version": "28.0.0",
+      "version_matches": {
+        "28.0.0": 3
+      },
+      "version_totals": {
+        "28.0.0": 10
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 0.9142857142857143,
+      "recall": 0.8421052631578947,
+      "f1_score": 0.8767123287671234
+    },
+    "counts": {
+      "true_positives": 32,
+      "false_positives": 3,
+      "false_negatives": 6
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "jsoup": "1.11.3",
+        "fuzzywuzzy": "1.3.1",
+        "jjwt": "0.9.1",
+        "jackson-databind": "2.9.6",
+        "jackson-core": "2.9.6",
+        "jackson-annotations": "2.9.0",
+        "com.android.support.viewpager": "28.0.0",
+        "com.android.support.versionedparcelable": "28.0.0",
+        "com.android.support.swiperefreshlayout": "28.0.0",
+        "com.android.support.support-vector-drawable": "28.0.0",
+        "com.android.support.support-fragment": "28.0.0",
+        "com.android.support.support-core-utils": "28.0.0",
+        "com.android.support.support-core-ui": "28.0.0",
+        "com.android.support.support-compat": "28.0.0",
+        "support-annotations": "28.0.0",
+        "com.android.support.slidingpanelayout": "28.0.0",
+        "com.android.support.print": "28.0.0",
+        "com.android.support.localbroadcastmanager": "28.0.0",
+        "com.android.support.loader": "28.0.0",
+        "com.android.support.interpolator": "28.0.0",
+        "com.android.support.drawerlayout": "28.0.0",
+        "com.android.support.documentfile": "28.0.0",
+        "com.android.support.customview": "28.0.0",
+        "com.android.support.cursoradapter": "28.0.0",
+        "com.android.support.coordinatorlayout": "28.0.0",
+        "collections": "28.0.0",
+        "com.android.support.asynclayoutinflater": "28.0.0",
+        "com.android.support.appcompat-v7": "28.0.0",
+        "com.android.support.animated-vector-drawable": "28.0.0",
+        "constraint-layout-solver": "1.1.3",
+        "com.android.support.constraint.constraint-layout": "1.1.3",
+        "android.arch.lifecycle.viewmodel": "1.1.1",
+        "android.arch.lifecycle.runtime": "1.1.1",
+        "android.arch.lifecycle.livedata": "1.1.1",
+        "common": "1.1.1",
+        "android.arch.core.runtime": "1.1.1",
+        "android.arch.lifecycle.livedata-core": "1.1.1",
+        "android.arch.lifecycle.common": "1.1.1"
+      },
+      "detected": {
+        "androidx.lifecycle.lifecycle-livedata-core": "2.0.0",
+        "com.android.support.support-core-ui": "28.0.0",
+        "com.android.support.support-core-utils": "28.0.0",
+        "com.android.support.support-vector-drawable": "28.0.0",
+        "android.arch.lifecycle.common": "1.0.0",
+        "support-annotations": "26.1.0",
+        "com.android.support.appcompat-v7": "28.0.0",
+        "jsoup": "1.12.1",
+        "com.android.support.interpolator": "28.0.0",
+        "fuzzywuzzy": "1.3.1",
+        "android.arch.lifecycle.livedata": "1.1.1",
+        "com.android.support.slidingpanelayout": "28.0.0",
+        "jackson-databind": "2.9.6",
+        "common": "1.1.1",
+        "jackson-annotations": "2.9.0",
+        "com.android.support.print": "28.0.0",
+        "com.android.support.constraint.constraint-layout": "1.1.3",
+        "android.arch.lifecycle.viewmodel": "1.1.1",
+        "jjwt": "0.9.1",
+        "jackson-core": "2.9.6",
+        "com.android.support.drawerlayout": "28.0.0",
+        "hamcrest-core": "1.3",
+        "android.arch.core.runtime": "1.1.1",
+        "com.android.support.localbroadcastmanager": "28.0.0",
+        "junit": "4.13.2",
+        "constraint-layout-solver": "1.1.3",
+        "com.android.support.support-fragment": "28.0.0",
+        "com.android.support.support-compat": "28.0.0",
+        "android.arch.lifecycle.runtime": "1.0.0",
+        "com.android.support.animated-vector-drawable": "26.1.0",
+        "com.android.support.coordinatorlayout": "28.0.0",
+        "com.android.support.loader": "28.0.0",
+        "com.android.support.customview": "28.0.0",
+        "com.android.support.documentfile": "28.0.0",
+        "com.android.support.versionedparcelable": "28.0.0"
+      }
+    }
+  }
+}
