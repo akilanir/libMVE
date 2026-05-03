@@ -1,0 +1,61 @@
+{
+  "detection_results": [
+    {
+      "library": "adcolony",
+      "is_present": true,
+      "aggregated_ratio": 0.6953234572230014,
+      "best_version": "4.1.4",
+      "version_matches": {
+        "4.1.4": 58,
+        "4.8.0": 12,
+        "4.5.0": 18
+      },
+      "version_totals": {
+        "4.1.4": 124,
+        "4.5.0": 128,
+        "4.8.0": 138
+      }
+    },
+    {
+      "library": "jackson-databind",
+      "is_present": true,
+      "aggregated_ratio": 0.43990804818168344,
+      "best_version": "2.11.0",
+      "version_matches": {
+        "2.15.2": 38,
+        "2.13.4.1": 11,
+        "2.11.0": 101,
+        "2.13.1": 6,
+        "2.10.0": 32
+      },
+      "version_totals": {
+        "2.11.0": 415,
+        "2.15.2": 473,
+        "2.13.4.1": 437,
+        "2.10.0": 414,
+        "2.13.1": 437
+      }
+    },
+    {
+      "library": "jackson-core",
+      "is_present": true,
+      "aggregated_ratio": 0.39801979421544637,
+      "best_version": "2.15.0-rc3",
+      "version_matches": {
+        "2.15.0-rc3": 26,
+        "2.17.2": 8,
+        "2.12.0": 15,
+        "2.14.2": 3,
+        "2.13.0": 3
+      },
+      "version_totals": {
+        "2.15.0-rc3": 160,
+        "2.12.0": 108,
+        "2.17.2": 168,
+        "2.14.2": 138,
+        "2.13.0": 110
+      }
+    }
+  ],
+  "validation": null
+}

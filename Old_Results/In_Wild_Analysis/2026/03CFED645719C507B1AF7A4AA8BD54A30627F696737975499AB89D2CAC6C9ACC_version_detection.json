@@ -1,0 +1,25 @@
+{
+  "detection_results": [
+    {
+      "library": "flurry",
+      "is_present": true,
+      "aggregated_ratio": 0.2829186666896186,
+      "best_version": "1",
+      "version_matches": {
+        "14.4.0": 6,
+        "12.1.0": 10,
+        "13.2.0": 5,
+        "1": 9,
+        "12.13.0": 4
+      },
+      "version_totals": {
+        "12.1.0": 284,
+        "13.2.0": 285,
+        "12.13.0": 294,
+        "1": 46,
+        "14.4.0": 287
+      }
+    }
+  ],
+  "validation": null
+}
