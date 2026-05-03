@@ -1,0 +1,41 @@
+{
+  "detection_results": [
+    {
+      "library": "google_analytics",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "18.1.1",
+      "version_matches": {
+        "18.1.1": 3
+      },
+      "version_totals": {
+        "0.16.0": 18,
+        "0.91.0": 18,
+        "0.50.0": 18,
+        "18.1.1": 3,
+        "18.0.3": 3,
+        "1.4.2": 19,
+        "18.0.2": 3,
+        "0.32.0": 18,
+        "0.1.0": 7
+      }
+    },
+    {
+      "library": "adcolony",
+      "is_present": true,
+      "aggregated_ratio": 0.3113056626928471,
+      "best_version": "4.1.4",
+      "version_matches": {
+        "4.5.0": 3,
+        "4.1.4": 33,
+        "4.8.0": 3
+      },
+      "version_totals": {
+        "4.1.4": 124,
+        "4.5.0": 128,
+        "4.8.0": 138
+      }
+    }
+  ],
+  "validation": null
+}

@@ -1,0 +1,40 @@
+{
+  "detection_results": [
+    {
+      "library": "retrofit",
+      "is_present": true,
+      "aggregated_ratio": 0.784441116340988,
+      "best_version": "2.4.0",
+      "version_matches": {
+        "2.2.0": 2,
+        "2.4.0": 21,
+        "2.1.0": 4,
+        "2.11.0": 5,
+        "2.3.0": 1
+      },
+      "version_totals": {
+        "2.4.0": 41,
+        "2.11.0": 54,
+        "2.3.0": 41,
+        "2.2.0": 40,
+        "2.1.0": 38
+      }
+    },
+    {
+      "library": "adcolony",
+      "is_present": true,
+      "aggregated_ratio": 0.24918186068256196,
+      "best_version": "4.1.4",
+      "version_matches": {
+        "4.1.4": 30,
+        "4.8.0": 1
+      },
+      "version_totals": {
+        "4.1.4": 124,
+        "4.5.0": 128,
+        "4.8.0": 138
+      }
+    }
+  ],
+  "validation": null
+}
