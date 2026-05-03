@@ -1,0 +1,27 @@
+{
+  "detection_results": [
+    {
+      "library": "google_tagmanager",
+      "is_present": true,
+      "aggregated_ratio": 1.1942787501579122,
+      "best_version": "18.3.0",
+      "version_matches": {
+        "17.0.0": 83,
+        "17.0.1": 69,
+        "18.1.0": 67,
+        "18.3.0": 115,
+        "18.0.3": 10,
+        "18.0.1": 1
+      },
+      "version_totals": {
+        "18.3.0": 309,
+        "17.0.1": 278,
+        "18.1.0": 279,
+        "18.0.3": 279,
+        "17.0.0": 282,
+        "18.0.1": 278
+      }
+    }
+  ],
+  "validation": null
+}

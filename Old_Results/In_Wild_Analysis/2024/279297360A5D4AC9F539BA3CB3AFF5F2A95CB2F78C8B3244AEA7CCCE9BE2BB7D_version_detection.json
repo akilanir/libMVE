@@ -1,0 +1,21 @@
+{
+  "detection_results": [
+    {
+      "library": "adcolony",
+      "is_present": true,
+      "aggregated_ratio": 0.4750577080411408,
+      "best_version": "4.1.4",
+      "version_matches": {
+        "4.8.0": 8,
+        "4.5.0": 9,
+        "4.1.4": 43
+      },
+      "version_totals": {
+        "4.1.4": 124,
+        "4.5.0": 128,
+        "4.8.0": 138
+      }
+    }
+  ],
+  "validation": null
+}

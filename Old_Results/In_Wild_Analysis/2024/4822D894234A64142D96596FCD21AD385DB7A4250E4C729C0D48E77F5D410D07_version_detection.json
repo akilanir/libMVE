@@ -1,0 +1,24 @@
+{
+  "detection_results": [
+    {
+      "library": "gson",
+      "is_present": true,
+      "aggregated_ratio": 1.0529848171152518,
+      "best_version": "2.10.1",
+      "version_matches": {
+        "2.8.5": 24,
+        "2.10.1": 54,
+        "2.8.6": 1,
+        "2.8.2": 1
+      },
+      "version_totals": {
+        "2.8.5": 69,
+        "2.10.1": 80,
+        "2.8.6": 70,
+        "2.8.2": 63,
+        "2.8.8": 70
+      }
+    }
+  ],
+  "validation": null
+}

@@ -1,0 +1,26 @@
+{
+  "detection_results": [
+    {
+      "library": "unity-ads",
+      "is_present": true,
+      "aggregated_ratio": 0.7100027311487664,
+      "best_version": "4.9.2",
+      "version_matches": {
+        "3.7.5": 82,
+        "4.9.2": 232,
+        "4.17.0": 19,
+        "4.1.0": 66,
+        "4.16.5": 1
+      },
+      "version_totals": {
+        "4.9.2": 889,
+        "4.17.0": 1324,
+        "3.7.5": 338,
+        "4.1.0": 345,
+        "4.16.5": 1287,
+        "4.12.2": 1110
+      }
+    }
+  ],
+  "validation": null
+}
