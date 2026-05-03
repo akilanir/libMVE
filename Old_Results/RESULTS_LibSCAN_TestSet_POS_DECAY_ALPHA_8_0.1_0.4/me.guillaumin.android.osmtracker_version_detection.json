@@ -1,0 +1,162 @@
+{
+  "detection_results": [
+    {
+      "library": "signpost-commonshttp4",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.2.1.2",
+      "version_matches": {
+        "1.2.1.2": 4
+      },
+      "version_totals": {
+        "1.2.1.2": 4
+      }
+    },
+    {
+      "library": "apache-mime4j-core",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "0.7.2",
+      "version_matches": {
+        "0.7.2": 54
+      },
+      "version_totals": {
+        "0.7.2": 54
+      }
+    },
+    {
+      "library": "signpost-core",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.2.1.2",
+      "version_matches": {
+        "1.2.1.2": 30
+      },
+      "version_totals": {
+        "1.2.1.2": 30
+      }
+    },
+    {
+      "library": "httpmime",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "4.2.1",
+      "version_matches": {
+        "4.2.1": 14
+      },
+      "version_totals": {
+        "4.2.1": 14
+      }
+    },
+    {
+      "library": "osmdroid-android",
+      "is_present": true,
+      "aggregated_ratio": 0.9764436105899521,
+      "best_version": "4.2",
+      "version_matches": {
+        "4.2": 118,
+        "4.3": 2
+      },
+      "version_totals": {
+        "4.2": 123,
+        "4.3": 117
+      }
+    },
+    {
+      "library": "commons-codec",
+      "is_present": true,
+      "aggregated_ratio": 0.922297560595433,
+      "best_version": "1.6",
+      "version_matches": {
+        "1.8": 24,
+        "1.6": 22,
+        "1.5": 1
+      },
+      "version_totals": {
+        "1.8": 56,
+        "1.6": 47,
+        "1.5": 39
+      }
+    },
+    {
+      "library": "httpcore",
+      "is_present": true,
+      "aggregated_ratio": 0.9149216000958519,
+      "best_version": "4.2.1",
+      "version_matches": {
+        "4.4.3": 72,
+        "4.2.1": 115,
+        "4.3.2": 1
+      },
+      "version_totals": {
+        "4.4.3": 241,
+        "4.3.2": 224,
+        "4.2.1": 188
+      }
+    },
+    {
+      "library": "slf4j-api",
+      "is_present": true,
+      "aggregated_ratio": 0.8043478260869565,
+      "best_version": "1.7.6",
+      "version_matches": {
+        "1.6.1": 7,
+        "1.7.6": 12
+      },
+      "version_totals": {
+        "1.7.6": 24,
+        "1.6.1": 23,
+        "1.7.7": 24
+      }
+    },
+    {
+      "library": "slf4j-android",
+      "is_present": true,
+      "aggregated_ratio": 0.4857142857142857,
+      "best_version": "1.6.1-RC1",
+      "version_matches": {
+        "1.6.1-RC1": 8,
+        "1.7.7": 1
+      },
+      "version_totals": {
+        "1.7.7": 5,
+        "1.6.1-RC1": 28
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 0.8888888888888888,
+      "recall": 1.0,
+      "f1_score": 0.9411764705882353
+    },
+    "counts": {
+      "true_positives": 8,
+      "false_positives": 1,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "httpcore": "4.2.1",
+        "httpmime": "4.2.1",
+        "apache-mime4j-core": "0.7.2",
+        "signpost-commonshttp4": "1.2.1.2",
+        "commons-codec": "1.6",
+        "signpost-core": "1.2.1.2",
+        "slf4j-android": "1.6.1-RC1",
+        "osmdroid-android": "4.2"
+      },
+      "detected": {
+        "signpost-commonshttp4": "1.2.1.2",
+        "apache-mime4j-core": "0.7.2",
+        "signpost-core": "1.2.1.2",
+        "httpmime": "4.2.1",
+        "osmdroid-android": "4.2",
+        "commons-codec": "1.6",
+        "httpcore": "4.2.1",
+        "slf4j-api": "1.7.6",
+        "slf4j-android": "1.6.1-RC1"
+      }
+    }
+  }
+}

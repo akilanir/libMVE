@@ -1,0 +1,46 @@
+{
+  "detection_results": [
+    {
+      "library": "gson",
+      "is_present": true,
+      "aggregated_ratio": 1.0028682513646974,
+      "best_version": "2.5",
+      "version_matches": {
+        "2.5": 54,
+        "2.4": 6,
+        "2.2.4": 1,
+        "2.3": 1,
+        "2.8.0": 1
+      },
+      "version_totals": {
+        "2.5": 63,
+        "2.4": 62,
+        "2.8.0": 63,
+        "1.7.2": 84,
+        "2.3": 62,
+        "2.2.4": 59,
+        "2.3.1": 62
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "gson": "2.5"
+      },
+      "detected": {
+        "gson": "2.5"
+      }
+    }
+  }
+}

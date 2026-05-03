@@ -1,0 +1,92 @@
+{
+  "detection_results": [
+    {
+      "library": "support-annotations",
+      "is_present": true,
+      "aggregated_ratio": 1.088252832438879,
+      "best_version": "23.4.0",
+      "version_matches": {
+        "24.0.0": 6,
+        "23.4.0": 37
+      },
+      "version_totals": {
+        "23.4.0": 39,
+        "23.2.1": 39,
+        "24.0.0": 43,
+        "23.0.1": 39,
+        "20.0.0": 25,
+        "22.2.0": 39,
+        "21.0.0": 25,
+        "23.3.0": 39,
+        "21.0.2": 25,
+        "21.0.3": 25,
+        "22.2.1": 39,
+        "23.0.0": 39,
+        "22.1.1": 25,
+        "23.1.1": 39,
+        "23.1.0": 39,
+        "24.0.0-beta1": 43,
+        "23.2.0": 39,
+        "22.0.0": 25
+      }
+    },
+    {
+      "library": "gson",
+      "is_present": true,
+      "aggregated_ratio": 1.0496671786994367,
+      "best_version": "2.5",
+      "version_matches": {
+        "2.5": 54,
+        "2.4": 7,
+        "2.8.0": 4,
+        "2.3": 1
+      },
+      "version_totals": {
+        "2.5": 63,
+        "2.4": 62,
+        "2.8.0": 63,
+        "1.7.2": 84,
+        "2.3": 62,
+        "2.2.4": 59,
+        "2.3.1": 62
+      }
+    },
+    {
+      "library": "picasso",
+      "is_present": true,
+      "aggregated_ratio": 1.0130718954248366,
+      "best_version": "2.5.2",
+      "version_matches": {
+        "2.5.2": 28,
+        "2.4.0": 8
+      },
+      "version_totals": {
+        "2.4.0": 34,
+        "2.5.2": 36
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1_score": 0.8
+    },
+    "counts": {
+      "true_positives": 2,
+      "false_positives": 1,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "gson": "2.5",
+        "picasso": "2.5.2"
+      },
+      "detected": {
+        "support-annotations": "23.4.0",
+        "gson": "2.5",
+        "picasso": "2.5.2"
+      }
+    }
+  }
+}

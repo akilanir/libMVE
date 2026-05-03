@@ -1,0 +1,36 @@
+{
+  "detection_results": [
+    {
+      "library": "junidecode",
+      "is_present": true,
+      "aggregated_ratio": 0.2857142857142857,
+      "best_version": "v0.2",
+      "version_matches": {
+        "v0.2": 52
+      },
+      "version_totals": {
+        "v0.2": 182
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "junidecode": "v0.2"
+      },
+      "detected": {
+        "junidecode": "v0.2"
+      }
+    }
+  }
+}

@@ -1,0 +1,681 @@
+{
+  "detection_results": [
+    {
+      "library": "com.android.support.appcompat-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.3948179218261185,
+      "best_version": "23.3.0",
+      "version_matches": {
+        "23.1.0": 35,
+        "24.0.0": 19,
+        "23.0.1": 5,
+        "21.0.0": 9,
+        "23.3.0": 37,
+        "20.0.0": 16,
+        "22.1.1": 6,
+        "22.2.0": 6,
+        "22.0.0": 3,
+        "23.1.1": 6,
+        "23.0.0": 1,
+        "23.2.0": 5,
+        "23.4.0": 2,
+        "23.2.1": 1
+      },
+      "version_totals": {
+        "23.1.0": 122,
+        "20.0.0": 63,
+        "23.3.0": 121,
+        "21.0.0": 92,
+        "24.0.0": 136,
+        "24.0.0-beta1": 136,
+        "22.0.0": 96,
+        "23.0.1": 115,
+        "22.2.0": 109,
+        "23.0.0": 115,
+        "23.2.0": 120,
+        "22.2.1": 109,
+        "23.4.0": 122,
+        "21.0.3": 91,
+        "23.1.1": 122,
+        "23.2.1": 120,
+        "22.1.1": 106,
+        "21.0.2": 91
+      }
+    },
+    {
+      "library": "com.android.support.support-v4",
+      "is_present": true,
+      "aggregated_ratio": 1.145648732270047,
+      "best_version": "24.0.0",
+      "version_matches": {
+        "22.0.0": 29,
+        "24.0.0": 93,
+        "22.2.1": 4,
+        "20.0.0": 12,
+        "23.2.0": 16,
+        "18.0.0": 13,
+        "22.1.1": 13,
+        "19.1.0": 3,
+        "23.0.1": 4,
+        "23.4.0": 2,
+        "23.1.1": 4,
+        "23.0.0": 1,
+        "21.0.2": 3,
+        "23.1.0": 1,
+        "24.0.0-beta1": 1
+      },
+      "version_totals": {
+        "24.0.0": 196,
+        "22.0.0": 147,
+        "23.2.0": 188,
+        "22.1.1": 164,
+        "21.0.2": 143,
+        "24.0.0-beta1": 196,
+        "23.0.1": 178,
+        "23.2.1": 188,
+        "22.2.1": 165,
+        "21.0.0": 143,
+        "23.4.0": 189,
+        "20.0.0": 122,
+        "21.0.3": 143,
+        "23.1.1": 187,
+        "23.1.0": 187,
+        "22.2.0": 165,
+        "18.0.0": 163,
+        "19.1.0": 192,
+        "23.0.0": 177,
+        "23.3.0": 189
+      }
+    },
+    {
+      "library": "picasso",
+      "is_present": true,
+      "aggregated_ratio": 1.1127450980392157,
+      "best_version": "2.5.2",
+      "version_matches": {
+        "2.5.2": 21,
+        "2.4.0": 18
+      },
+      "version_totals": {
+        "2.4.0": 34,
+        "2.5.2": 36
+      }
+    },
+    {
+      "library": "internal_impl",
+      "is_present": true,
+      "aggregated_ratio": 1.097053825666104,
+      "best_version": "23.3.0",
+      "version_matches": {
+        "24.0.0-beta1": 20,
+        "23.3.0": 159,
+        "22.2.0": 8,
+        "21.0.3": 16,
+        "24.0.0": 2,
+        "20.0.0": 3,
+        "23.2.1": 1,
+        "23.2.0": 1,
+        "23.0.0": 4,
+        "21.0.0": 2,
+        "22.0.0": 3,
+        "22.1.1": 1
+      },
+      "version_totals": {
+        "23.3.0": 216,
+        "21.0.3": 133,
+        "24.0.0-beta1": 241,
+        "22.2.0": 174,
+        "23.0.0": 201,
+        "23.2.1": 216,
+        "22.1.1": 166,
+        "23.4.0": 218,
+        "23.2.0": 216,
+        "23.0.1": 203,
+        "21.0.2": 133,
+        "22.2.1": 174,
+        "24.0.0": 242,
+        "23.1.1": 208,
+        "22.0.0": 141,
+        "21.0.0": 133,
+        "20.0.0": 94
+      }
+    },
+    {
+      "library": "com.android.support.recyclerview-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.0474358974358973,
+      "best_version": "21.0.2",
+      "version_matches": {
+        "22.2.1": 6,
+        "21.0.2": 5,
+        "23.1.0": 2,
+        "21.0.0": 2,
+        "22.2.0": 1,
+        "23.3.0": 2,
+        "24.0.0": 2
+      },
+      "version_totals": {
+        "22.2.1": 20,
+        "23.3.0": 26,
+        "22.1.1": 17,
+        "23.4.0": 26,
+        "21.0.2": 15,
+        "21.0.3": 15,
+        "23.1.0": 26,
+        "24.0.0": 26,
+        "21.0.0": 15,
+        "23.2.1": 26,
+        "22.2.0": 20,
+        "23.2.0": 26,
+        "23.0.1": 24,
+        "23.1.1": 26
+      }
+    },
+    {
+      "library": "com.github.mrengineer13.snackbar",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.2.0",
+      "version_matches": {
+        "1.2.0": 4
+      },
+      "version_totals": {
+        "1.2.0": 4
+      }
+    },
+    {
+      "library": "com.android.support.animated-vector-drawable",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "23.3.0",
+      "version_matches": {
+        "23.3.0": 1,
+        "23.2.1": 1
+      },
+      "version_totals": {
+        "23.3.0": 2,
+        "23.2.1": 2,
+        "24.0.0-beta1": 2,
+        "24.0.0": 2,
+        "23.2.0": 2,
+        "23.4.0": 2
+      }
+    },
+    {
+      "library": "com.mikepenz.octicons-typeface",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "3.0.0.1",
+      "version_matches": {
+        "3.0.0.1": 2
+      },
+      "version_totals": {
+        "3.0.0.1": 2
+      }
+    },
+    {
+      "library": "com.getbase.floatingactionbutton",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.9.0",
+      "version_matches": {
+        "1.9.1": 2,
+        "1.9.0": 3
+      },
+      "version_totals": {
+        "1.9.0": 5,
+        "1.9.1": 5,
+        "1.10.0": 5
+      }
+    },
+    {
+      "library": "com.github.yukuku.ambilwarna",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "2.0.1",
+      "version_matches": {
+        "2.0.1": 5
+      },
+      "version_totals": {
+        "2.0.1": 5
+      }
+    },
+    {
+      "library": "com.jpardogo.googleprogressbar.library",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.2.0",
+      "version_matches": {
+        "1.2.0": 6
+      },
+      "version_totals": {
+        "1.2.0": 6
+      }
+    },
+    {
+      "library": "com.balysv.material-ripple",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.0.2",
+      "version_matches": {
+        "1.0.2": 2
+      },
+      "version_totals": {
+        "1.0.2": 2
+      }
+    },
+    {
+      "library": "muzei-api",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "2.0",
+      "version_matches": {
+        "2.0": 7
+      },
+      "version_totals": {
+        "2.0": 7
+      }
+    },
+    {
+      "library": "cat.ereza.customactivityoncrash",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.4.0",
+      "version_matches": {
+        "1.4.0": 3
+      },
+      "version_totals": {
+        "1.4.0": 3
+      }
+    },
+    {
+      "library": "com.jenzz.materialpreference",
+      "is_present": true,
+      "aggregated_ratio": 0.8888888888888888,
+      "best_version": "1.3",
+      "version_matches": {
+        "1.3": 8
+      },
+      "version_totals": {
+        "1.3": 9
+      }
+    },
+    {
+      "library": "com.github.paolorotolo.appintro",
+      "is_present": true,
+      "aggregated_ratio": 0.8671328671328671,
+      "best_version": "3.2.0",
+      "version_matches": {
+        "3.2.0": 7,
+        "3.4.0": 3
+      },
+      "version_totals": {
+        "3.4.0": 13,
+        "3.2.0": 11
+      }
+    },
+    {
+      "library": "me.zhanghai.android.materialprogressbar.library",
+      "is_present": true,
+      "aggregated_ratio": 0.8333333333333334,
+      "best_version": "1.1.5",
+      "version_matches": {
+        "1.1.5": 11,
+        "1.1.4": 4
+      },
+      "version_totals": {
+        "1.1.5": 18,
+        "1.1.4": 18
+      }
+    },
+    {
+      "library": "com.android.support.support-vector-drawable",
+      "is_present": true,
+      "aggregated_ratio": 0.8333333333333333,
+      "best_version": "23.3.0",
+      "version_matches": {
+        "23.3.0": 4,
+        "23.2.1": 1
+      },
+      "version_totals": {
+        "23.3.0": 6,
+        "24.0.0": 6,
+        "23.4.0": 6,
+        "24.0.0-beta1": 6,
+        "23.2.1": 6,
+        "23.2.0": 6
+      }
+    },
+    {
+      "library": "com.mikepenz.materialdrawer",
+      "is_present": true,
+      "aggregated_ratio": 0.8,
+      "best_version": "4.3.7",
+      "version_matches": {
+        "4.3.7": 24,
+        "3.1.2": 13
+      },
+      "version_totals": {
+        "4.3.7": 56,
+        "3.1.2": 35
+      }
+    },
+    {
+      "library": "okhttp-urlconnection",
+      "is_present": true,
+      "aggregated_ratio": 0.75,
+      "best_version": "2.3.0",
+      "version_matches": {
+        "2.3.0": 3
+      },
+      "version_totals": {
+        "3.2.0": 9,
+        "2.3.0": 4,
+        "2.7.5": 4
+      }
+    },
+    {
+      "library": "com.mikepenz.materialize",
+      "is_present": true,
+      "aggregated_ratio": 0.7272727272727273,
+      "best_version": "0.2.6",
+      "version_matches": {
+        "0.2.6": 8
+      },
+      "version_totals": {
+        "0.2.6": 11
+      }
+    },
+    {
+      "library": "okhttp",
+      "is_present": true,
+      "aggregated_ratio": 0.7052119280855679,
+      "best_version": "2.2.0",
+      "version_matches": {
+        "2.2.0": 35,
+        "2.7.5": 4,
+        "2.5.0": 4,
+        "2.6.0": 8,
+        "2.3.0": 5
+      },
+      "version_totals": {
+        "3.2.0": 86,
+        "2.2.0": 79,
+        "2.6.0": 81,
+        "2.3.0": 76,
+        "2.5.0": 80,
+        "2.7.5": 84,
+        "3.1.2": 86
+      }
+    },
+    {
+      "library": "gson",
+      "is_present": true,
+      "aggregated_ratio": 0.6809276471660288,
+      "best_version": "1.7.2",
+      "version_matches": {
+        "2.5": 12,
+        "2.4": 4,
+        "1.7.2": 29,
+        "2.8.0": 3,
+        "2.3": 1,
+        "2.2.4": 1
+      },
+      "version_totals": {
+        "2.5": 63,
+        "2.4": 62,
+        "2.8.0": 63,
+        "1.7.2": 84,
+        "2.3": 62,
+        "2.2.4": 59,
+        "2.3.1": 62
+      }
+    },
+    {
+      "library": "com.android.support.cardview-v7",
+      "is_present": true,
+      "aggregated_ratio": 0.6666666666666667,
+      "best_version": "23.1.1",
+      "version_matches": {
+        "23.1.1": 3,
+        "23.3.0": 2,
+        "21.0.2": 1
+      },
+      "version_totals": {
+        "23.3.0": 9,
+        "23.1.1": 9,
+        "21.0.3": 9,
+        "23.2.0": 9,
+        "22.2.1": 9,
+        "23.4.0": 9,
+        "22.2.0": 9,
+        "21.0.2": 9,
+        "23.2.1": 9,
+        "24.0.0-alpha1": 9,
+        "23.1.0": 9
+      }
+    },
+    {
+      "library": "com.github.afollestad.material-dialogs.core",
+      "is_present": true,
+      "aggregated_ratio": 0.5882352941176471,
+      "best_version": "0.8.5.8",
+      "version_matches": {
+        "0.8.5.8": 9,
+        "0.8.5.2": 1
+      },
+      "version_totals": {
+        "0.8.5.8": 17,
+        "0.8.5.2": 17,
+        "0.8.5.3": 17,
+        "0.8.5.4": 17
+      }
+    },
+    {
+      "library": "com.commit451.PhotoView",
+      "is_present": true,
+      "aggregated_ratio": 0.5712074303405572,
+      "best_version": "1.2.4",
+      "version_matches": {
+        "1.2.4": 7,
+        "1.2.2": 3,
+        "1.2.5": 3,
+        "1.2.6": 1
+      },
+      "version_totals": {
+        "1.2.4": 38,
+        "1.2.2": 17,
+        "1.2.5": 19,
+        "1.2.3": 19,
+        "1.2.6": 19
+      }
+    },
+    {
+      "library": "de.psdev.licensesdialog.licensesdialog",
+      "is_present": true,
+      "aggregated_ratio": 0.5350877192982456,
+      "best_version": "1.8.0",
+      "version_matches": {
+        "1.7.0": 3,
+        "1.8.0": 7
+      },
+      "version_totals": {
+        "1.8.0": 19,
+        "1.7.0": 18
+      }
+    },
+    {
+      "library": "com.mikepenz.iconics-core",
+      "is_present": true,
+      "aggregated_ratio": 0.5150501672240803,
+      "best_version": "1.7.8",
+      "version_matches": {
+        "1.7.8": 5,
+        "2.5.11": 3
+      },
+      "version_totals": {
+        "1.7.8": 13,
+        "2.5.11": 23,
+        "2.5.5": 23
+      }
+    },
+    {
+      "library": "okio",
+      "is_present": true,
+      "aggregated_ratio": 0.4863542254846603,
+      "best_version": "1.6.0",
+      "version_matches": {
+        "1.6.0": 8,
+        "1.3.0": 2,
+        "1.2.0": 1
+      },
+      "version_totals": {
+        "1.6.0": 23,
+        "1.3.0": 22,
+        "1.2.0": 21
+      }
+    },
+    {
+      "library": "com.afollestad.material-dialogs",
+      "is_present": true,
+      "aggregated_ratio": 0.46547314578005117,
+      "best_version": "v0.7.7.0",
+      "version_matches": {
+        "v0.7.7.0": 8,
+        "0.8.5.1": 2
+      },
+      "version_totals": {
+        "v0.7.7.0": 23,
+        "0.8.5.1": 17
+      }
+    },
+    {
+      "library": "support-annotations",
+      "is_present": true,
+      "aggregated_ratio": 0.4253070960047704,
+      "best_version": "23.4.0",
+      "version_matches": {
+        "23.4.0": 8,
+        "23.0.1": 3,
+        "20.0.0": 3,
+        "24.0.0": 1
+      },
+      "version_totals": {
+        "23.4.0": 39,
+        "23.2.1": 39,
+        "24.0.0": 43,
+        "23.0.1": 39,
+        "20.0.0": 25,
+        "22.2.0": 39,
+        "21.0.0": 25,
+        "23.3.0": 39,
+        "21.0.2": 25,
+        "21.0.3": 25,
+        "22.2.1": 39,
+        "23.0.0": 39,
+        "22.1.1": 25,
+        "23.1.1": 39,
+        "23.1.0": 39,
+        "24.0.0-beta1": 43,
+        "23.2.0": 39,
+        "22.0.0": 25
+      }
+    },
+    {
+      "library": "jsr305",
+      "is_present": true,
+      "aggregated_ratio": 0.38924731182795697,
+      "best_version": "3.0.0",
+      "version_matches": {
+        "3.0.0": 10,
+        "2.0.1": 2
+      },
+      "version_totals": {
+        "3.0.0": 31,
+        "2.0.1": 30
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 0.90625,
+      "recall": 0.90625,
+      "f1_score": 0.90625
+    },
+    "counts": {
+      "true_positives": 29,
+      "false_positives": 3,
+      "false_negatives": 3
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "com.mikepenz.materialdrawer": "4.3.7",
+        "cat.ereza.customactivityoncrash": "1.4.0",
+        "com.android.support.support-vector-drawable": "23.2.0",
+        "picasso": "2.5.2",
+        "me.zhanghai.android.materialprogressbar.library": "1.1.4",
+        "com.github.paolorotolo.appintro": "3.2.0",
+        "gson": "1.7.2",
+        "com.mikepenz.octicons-typeface": "3.0.0.1",
+        "okhttp-urlconnection": "2.3.0",
+        "com.android.support.support-v4": "23.2.0",
+        "com.mikepenz.iconics-core": "1.7.8",
+        "com.jpardogo.googleprogressbar.library": "1.2.0",
+        "com.mikepenz.google-material-typeface": "1.2.0.1",
+        "com.mikepenz.fontawesome-typeface": "4.4.0.1",
+        "com.android.support.palette-v7": "23.0.0",
+        "com.github.mrengineer13.snackbar": "1.2.0",
+        "support-annotations": "23.2.0",
+        "com.github.afollestad.material-dialogs.core": "0.8.5.2",
+        "okhttp": "2.3.0",
+        "okio": "1.3.0",
+        "muzei-api": "2.0",
+        "com.android.support.animated-vector-drawable": "23.2.0",
+        "com.android.support.recyclerview-v7": "23.2.0",
+        "com.balysv.material-ripple": "1.0.2",
+        "com.jenzz.materialpreference": "1.3",
+        "jsr305": "3.0.0",
+        "com.github.yukuku.ambilwarna": "2.0.1",
+        "com.android.support.appcompat-v7": "23.2.0",
+        "com.commit451.PhotoView": "1.2.4",
+        "internal_impl": "23.2.0",
+        "com.mikepenz.materialize": "0.2.6",
+        "de.psdev.licensesdialog.licensesdialog": "1.7.0"
+      },
+      "detected": {
+        "com.android.support.appcompat-v7": "23.3.0",
+        "com.android.support.support-v4": "24.0.0",
+        "picasso": "2.5.2",
+        "internal_impl": "23.3.0",
+        "com.android.support.recyclerview-v7": "21.0.2",
+        "com.github.mrengineer13.snackbar": "1.2.0",
+        "com.android.support.animated-vector-drawable": "23.3.0",
+        "com.mikepenz.octicons-typeface": "3.0.0.1",
+        "com.getbase.floatingactionbutton": "1.9.0",
+        "com.github.yukuku.ambilwarna": "2.0.1",
+        "com.jpardogo.googleprogressbar.library": "1.2.0",
+        "com.balysv.material-ripple": "1.0.2",
+        "muzei-api": "2.0",
+        "cat.ereza.customactivityoncrash": "1.4.0",
+        "com.jenzz.materialpreference": "1.3",
+        "com.github.paolorotolo.appintro": "3.2.0",
+        "me.zhanghai.android.materialprogressbar.library": "1.1.5",
+        "com.android.support.support-vector-drawable": "23.3.0",
+        "com.mikepenz.materialdrawer": "4.3.7",
+        "okhttp-urlconnection": "2.3.0",
+        "com.mikepenz.materialize": "0.2.6",
+        "okhttp": "2.2.0",
+        "gson": "1.7.2",
+        "com.android.support.cardview-v7": "23.1.1",
+        "com.github.afollestad.material-dialogs.core": "0.8.5.8",
+        "com.commit451.PhotoView": "1.2.4",
+        "de.psdev.licensesdialog.licensesdialog": "1.8.0",
+        "com.mikepenz.iconics-core": "1.7.8",
+        "okio": "1.6.0",
+        "com.afollestad.material-dialogs": "v0.7.7.0",
+        "support-annotations": "23.4.0",
+        "jsr305": "3.0.0"
+      }
+    }
+  }
+}

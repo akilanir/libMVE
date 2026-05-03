@@ -1,0 +1,86 @@
+{
+  "detection_results": [
+    {
+      "library": "support-annotations",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "23.4.0",
+      "version_matches": {
+        "23.4.0": 28,
+        "23.0.1": 11
+      },
+      "version_totals": {
+        "23.4.0": 39,
+        "23.2.1": 39,
+        "24.0.0": 43,
+        "23.0.1": 39,
+        "20.0.0": 25,
+        "22.2.0": 39,
+        "21.0.0": 25,
+        "23.3.0": 39,
+        "21.0.2": 25,
+        "21.0.3": 25,
+        "22.2.1": 39,
+        "23.0.0": 39,
+        "22.1.1": 25,
+        "23.1.1": 39,
+        "23.1.0": 39,
+        "24.0.0-beta1": 43,
+        "23.2.0": 39,
+        "22.0.0": 25
+      }
+    },
+    {
+      "library": "commons-codec",
+      "is_present": true,
+      "aggregated_ratio": 0.9654157898838751,
+      "best_version": "1.8",
+      "version_matches": {
+        "1.8": 50,
+        "1.6": 1,
+        "1.5": 2
+      },
+      "version_totals": {
+        "1.8": 56,
+        "1.6": 47,
+        "1.5": 39
+      }
+    },
+    {
+      "library": "android-integration",
+      "is_present": true,
+      "aggregated_ratio": 0.5,
+      "best_version": "3.2.1",
+      "version_matches": {
+        "3.2.1": 1
+      },
+      "version_totals": {
+        "3.2.1": 2
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 3,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "support-annotations": "23.1.1",
+        "commons-codec": "1.8",
+        "android-integration": "3.2.1"
+      },
+      "detected": {
+        "support-annotations": "23.4.0",
+        "commons-codec": "1.8",
+        "android-integration": "3.2.1"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "detection_results": [
+    {
+      "library": "commons-lang3",
+      "is_present": true,
+      "aggregated_ratio": 0.9741735537190083,
+      "best_version": "3.3.2",
+      "version_matches": {
+        "3.4": 12,
+        "3.3.2": 105
+      },
+      "version_totals": {
+        "3.3.2": 120,
+        "3.4": 121
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "commons-lang3": "3.3.2"
+      },
+      "detected": {
+        "commons-lang3": "3.3.2"
+      }
+    }
+  }
+}

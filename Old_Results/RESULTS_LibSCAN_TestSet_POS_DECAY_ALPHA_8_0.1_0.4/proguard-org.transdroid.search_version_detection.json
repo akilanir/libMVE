@@ -1,0 +1,36 @@
+{
+  "detection_results": [
+    {
+      "library": "android-json-rpc",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "0.3.4",
+      "version_matches": {
+        "0.3.4": 7
+      },
+      "version_totals": {
+        "0.3.4": 7
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "android-json-rpc": "0.3.4"
+      },
+      "detected": {
+        "android-json-rpc": "0.3.4"
+      }
+    }
+  }
+}

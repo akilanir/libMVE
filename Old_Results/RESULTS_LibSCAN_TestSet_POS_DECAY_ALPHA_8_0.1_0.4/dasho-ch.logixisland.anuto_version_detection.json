@@ -1,0 +1,50 @@
+{
+  "detection_results": [
+    {
+      "library": "simple-xml",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "2.7.1",
+      "version_matches": {
+        "2.7.1": 319
+      },
+      "version_totals": {
+        "2.7.1": 319
+      }
+    },
+    {
+      "library": "stax",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.2.0",
+      "version_matches": {
+        "1.2.0": 85
+      },
+      "version_totals": {
+        "1.2.0": 85
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 2,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "stax": "1.2.0",
+        "simple-xml": "2.7.1"
+      },
+      "detected": {
+        "simple-xml": "2.7.1",
+        "stax": "1.2.0"
+      }
+    }
+  }
+}

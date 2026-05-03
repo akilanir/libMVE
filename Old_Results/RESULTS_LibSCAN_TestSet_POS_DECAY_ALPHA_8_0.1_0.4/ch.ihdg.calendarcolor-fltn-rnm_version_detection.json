@@ -1,0 +1,36 @@
+{
+  "detection_results": [
+    {
+      "library": "com.larswerkman.HoloColorPicker",
+      "is_present": true,
+      "aggregated_ratio": 0.6666666666666666,
+      "best_version": "1.5",
+      "version_matches": {
+        "1.5": 4
+      },
+      "version_totals": {
+        "1.5": 6
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "com.larswerkman.HoloColorPicker": "1.5"
+      },
+      "detected": {
+        "com.larswerkman.HoloColorPicker": "1.5"
+      }
+    }
+  }
+}

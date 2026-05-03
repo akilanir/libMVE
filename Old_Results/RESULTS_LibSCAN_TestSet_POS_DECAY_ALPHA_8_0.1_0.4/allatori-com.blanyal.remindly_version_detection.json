@@ -1,0 +1,281 @@
+{
+  "detection_results": [
+    {
+      "library": "com.android.support.appcompat-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.2277203633571752,
+      "best_version": "23.1.0",
+      "version_matches": {
+        "24.0.0": 11,
+        "20.0.0": 19,
+        "22.1.1": 9,
+        "23.3.0": 14,
+        "23.1.0": 38,
+        "21.0.0": 12,
+        "22.2.0": 6,
+        "22.0.0": 2,
+        "23.0.1": 6,
+        "23.2.1": 1,
+        "23.2.0": 2,
+        "23.1.1": 4,
+        "23.0.0": 1,
+        "23.4.0": 1
+      },
+      "version_totals": {
+        "23.1.0": 122,
+        "20.0.0": 63,
+        "23.3.0": 121,
+        "21.0.0": 92,
+        "24.0.0": 136,
+        "24.0.0-beta1": 136,
+        "22.0.0": 96,
+        "23.0.1": 115,
+        "22.2.0": 109,
+        "23.0.0": 115,
+        "23.2.0": 120,
+        "22.2.1": 109,
+        "23.4.0": 122,
+        "21.0.3": 91,
+        "23.1.1": 122,
+        "23.2.1": 120,
+        "22.1.1": 106,
+        "21.0.2": 91
+      }
+    },
+    {
+      "library": "com.getbase.floatingactionbutton",
+      "is_present": true,
+      "aggregated_ratio": 1.2,
+      "best_version": "1.9.0",
+      "version_matches": {
+        "1.9.0": 5,
+        "1.9.1": 1
+      },
+      "version_totals": {
+        "1.9.0": 5,
+        "1.9.1": 5,
+        "1.10.0": 5
+      }
+    },
+    {
+      "library": "com.wdullaer.materialdatetimepicker",
+      "is_present": true,
+      "aggregated_ratio": 1.1304347826086956,
+      "best_version": "1.2.1",
+      "version_matches": {
+        "1.2.1": 20,
+        "1.5.1": 6
+      },
+      "version_totals": {
+        "1.2.1": 23,
+        "1.5.1": 23
+      }
+    },
+    {
+      "library": "com.android.support.recyclerview-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.051131221719457,
+      "best_version": "22.2.1",
+      "version_matches": {
+        "22.2.1": 7,
+        "23.1.0": 2,
+        "21.0.0": 1,
+        "23.2.0": 1,
+        "21.0.2": 5,
+        "24.0.0": 1,
+        "22.1.1": 1,
+        "23.3.0": 1,
+        "22.2.0": 1
+      },
+      "version_totals": {
+        "22.2.1": 20,
+        "23.3.0": 26,
+        "22.1.1": 17,
+        "23.4.0": 26,
+        "21.0.2": 15,
+        "21.0.3": 15,
+        "23.1.0": 26,
+        "24.0.0": 26,
+        "21.0.0": 15,
+        "23.2.1": 26,
+        "22.2.0": 20,
+        "23.2.0": 26,
+        "23.0.1": 24,
+        "23.1.1": 26
+      }
+    },
+    {
+      "library": "com.bignerdranch.android.recyclerview-multiselect",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "0.2",
+      "version_matches": {
+        "0.2": 9
+      },
+      "version_totals": {
+        "0.2": 9
+      }
+    },
+    {
+      "library": "com.amulyakhare.com.amulyakhare.textdrawable",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.0.1",
+      "version_matches": {
+        "1.0.1": 3
+      },
+      "version_totals": {
+        "1.0.1": 3
+      }
+    },
+    {
+      "library": "internal_impl",
+      "is_present": true,
+      "aggregated_ratio": 0.978406554757589,
+      "best_version": "23.3.0",
+      "version_matches": {
+        "24.0.0-beta1": 16,
+        "23.3.0": 118,
+        "22.1.1": 3,
+        "20.0.0": 5,
+        "22.2.0": 14,
+        "21.0.3": 21,
+        "23.2.1": 1,
+        "23.2.0": 1,
+        "23.0.0": 1,
+        "24.0.0": 2,
+        "21.0.0": 1,
+        "22.0.0": 3,
+        "23.1.1": 1
+      },
+      "version_totals": {
+        "23.3.0": 216,
+        "21.0.3": 133,
+        "24.0.0-beta1": 241,
+        "22.2.0": 174,
+        "23.0.0": 201,
+        "23.2.1": 216,
+        "22.1.1": 166,
+        "23.4.0": 218,
+        "23.2.0": 216,
+        "23.0.1": 203,
+        "21.0.2": 133,
+        "22.2.1": 174,
+        "24.0.0": 242,
+        "23.1.1": 208,
+        "22.0.0": 141,
+        "21.0.0": 133,
+        "20.0.0": 94
+      }
+    },
+    {
+      "library": "com.android.support.support-v4",
+      "is_present": true,
+      "aggregated_ratio": 0.9614276670105911,
+      "best_version": "24.0.0",
+      "version_matches": {
+        "24.0.0": 70,
+        "19.1.0": 3,
+        "22.1.1": 14,
+        "22.0.0": 25,
+        "20.0.0": 9,
+        "23.2.0": 10,
+        "18.0.0": 14,
+        "23.0.1": 3,
+        "21.0.2": 6,
+        "22.2.1": 4,
+        "23.1.1": 5,
+        "23.4.0": 2
+      },
+      "version_totals": {
+        "24.0.0": 196,
+        "22.0.0": 147,
+        "23.2.0": 188,
+        "22.1.1": 164,
+        "21.0.2": 143,
+        "24.0.0-beta1": 196,
+        "23.0.1": 178,
+        "23.2.1": 188,
+        "22.2.1": 165,
+        "21.0.0": 143,
+        "23.4.0": 189,
+        "20.0.0": 122,
+        "21.0.3": 143,
+        "23.1.1": 187,
+        "23.1.0": 187,
+        "22.2.0": 165,
+        "18.0.0": 163,
+        "19.1.0": 192,
+        "23.0.0": 177,
+        "23.3.0": 189
+      }
+    },
+    {
+      "library": "support-annotations",
+      "is_present": true,
+      "aggregated_ratio": 0.2512820512820513,
+      "best_version": "20.0.0",
+      "version_matches": {
+        "23.0.1": 1,
+        "23.4.0": 1,
+        "20.0.0": 5
+      },
+      "version_totals": {
+        "23.4.0": 39,
+        "23.2.1": 39,
+        "24.0.0": 43,
+        "23.0.1": 39,
+        "20.0.0": 25,
+        "22.2.0": 39,
+        "21.0.0": 25,
+        "23.3.0": 39,
+        "21.0.2": 25,
+        "21.0.3": 25,
+        "22.2.1": 39,
+        "23.0.0": 39,
+        "22.1.1": 25,
+        "23.1.1": 39,
+        "23.1.0": 39,
+        "24.0.0-beta1": 43,
+        "23.2.0": 39,
+        "22.0.0": 25
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 9,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "internal_impl": "22.1.1",
+        "com.amulyakhare.com.amulyakhare.textdrawable": "1.0.1",
+        "com.getbase.floatingactionbutton": "1.9.0",
+        "com.android.support.recyclerview-v7": "22.1.1",
+        "com.bignerdranch.android.recyclerview-multiselect": "0.2",
+        "com.android.support.support-v4": "22.1.1",
+        "com.android.support.appcompat-v7": "22.1.1",
+        "support-annotations": "22.1.1",
+        "com.wdullaer.materialdatetimepicker": "1.2.1"
+      },
+      "detected": {
+        "com.android.support.appcompat-v7": "23.1.0",
+        "com.getbase.floatingactionbutton": "1.9.0",
+        "com.wdullaer.materialdatetimepicker": "1.2.1",
+        "com.android.support.recyclerview-v7": "22.2.1",
+        "com.bignerdranch.android.recyclerview-multiselect": "0.2",
+        "com.amulyakhare.com.amulyakhare.textdrawable": "1.0.1",
+        "internal_impl": "23.3.0",
+        "com.android.support.support-v4": "24.0.0",
+        "support-annotations": "20.0.0"
+      }
+    }
+  }
+}

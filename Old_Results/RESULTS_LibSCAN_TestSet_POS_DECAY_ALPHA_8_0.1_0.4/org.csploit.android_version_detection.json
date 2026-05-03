@@ -1,0 +1,417 @@
+{
+  "detection_results": [
+    {
+      "library": "com.android.support.recyclerview-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.1128205128205129,
+      "best_version": "22.2.1",
+      "version_matches": {
+        "22.2.1": 9,
+        "21.0.2": 1,
+        "23.1.0": 4,
+        "23.0.1": 6,
+        "24.0.0": 1,
+        "23.1.1": 1,
+        "23.3.0": 3
+      },
+      "version_totals": {
+        "22.2.1": 20,
+        "23.3.0": 26,
+        "22.1.1": 17,
+        "23.4.0": 26,
+        "21.0.2": 15,
+        "21.0.3": 15,
+        "23.1.0": 26,
+        "24.0.0": 26,
+        "21.0.0": 15,
+        "23.2.1": 26,
+        "22.2.0": 20,
+        "23.2.0": 26,
+        "23.0.1": 24,
+        "23.1.1": 26
+      }
+    },
+    {
+      "library": "com.android.support.support-v4",
+      "is_present": true,
+      "aggregated_ratio": 1.0844990632023435,
+      "best_version": "24.0.0",
+      "version_matches": {
+        "24.0.0": 74,
+        "18.0.0": 7,
+        "23.1.0": 2,
+        "20.0.0": 3,
+        "23.2.0": 16,
+        "22.2.1": 2,
+        "22.1.1": 12,
+        "22.0.0": 40,
+        "23.0.1": 26,
+        "24.0.0-beta1": 1,
+        "19.1.0": 2,
+        "23.1.1": 1,
+        "21.0.0": 1,
+        "23.4.0": 1,
+        "21.0.2": 1
+      },
+      "version_totals": {
+        "24.0.0": 196,
+        "22.0.0": 147,
+        "23.2.0": 188,
+        "22.1.1": 164,
+        "21.0.2": 143,
+        "24.0.0-beta1": 196,
+        "23.0.1": 178,
+        "23.2.1": 188,
+        "22.2.1": 165,
+        "21.0.0": 143,
+        "23.4.0": 189,
+        "20.0.0": 122,
+        "21.0.3": 143,
+        "23.1.1": 187,
+        "23.1.0": 187,
+        "22.2.0": 165,
+        "18.0.0": 163,
+        "19.1.0": 192,
+        "23.0.0": 177,
+        "23.3.0": 189
+      }
+    },
+    {
+      "library": "acra",
+      "is_present": true,
+      "aggregated_ratio": 1.0787032516355823,
+      "best_version": "4.6.2",
+      "version_matches": {
+        "4.6.2": 36,
+        "4.5.0": 20,
+        "4.9.0": 3
+      },
+      "version_totals": {
+        "4.5.0": 49,
+        "4.9.0": 77,
+        "4.6.2": 57
+      }
+    },
+    {
+      "library": "com.android.support.appcompat-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.0762672491851188,
+      "best_version": "23.1.0",
+      "version_matches": {
+        "24.0.0-beta1": 1,
+        "24.0.0": 6,
+        "23.3.0": 5,
+        "23.1.0": 81,
+        "23.4.0": 1,
+        "21.0.0": 4,
+        "22.2.1": 3,
+        "22.0.0": 3,
+        "20.0.0": 1,
+        "23.0.1": 18,
+        "22.2.0": 4
+      },
+      "version_totals": {
+        "23.1.0": 122,
+        "20.0.0": 63,
+        "23.3.0": 121,
+        "21.0.0": 92,
+        "24.0.0": 136,
+        "24.0.0-beta1": 136,
+        "22.0.0": 96,
+        "23.0.1": 115,
+        "22.2.0": 109,
+        "23.0.0": 115,
+        "23.2.0": 120,
+        "22.2.1": 109,
+        "23.4.0": 122,
+        "21.0.3": 91,
+        "23.1.1": 122,
+        "23.2.1": 120,
+        "22.1.1": 106,
+        "21.0.2": 91
+      }
+    },
+    {
+      "library": "com.android.support.preference-v7",
+      "is_present": true,
+      "aggregated_ratio": 1.05,
+      "best_version": "23.0.1",
+      "version_matches": {
+        "23.0.1": 18,
+        "23.1.0": 1,
+        "23.1.1": 1,
+        "23.2.1": 1
+      },
+      "version_totals": {
+        "23.0.1": 20,
+        "23.1.0": 20,
+        "23.2.1": 20,
+        "23.4.0": 20,
+        "23.1.1": 20
+      }
+    },
+    {
+      "library": "com.android.support.design",
+      "is_present": true,
+      "aggregated_ratio": 1.0290850567166356,
+      "best_version": "22.2.1",
+      "version_matches": {
+        "22.2.1": 23,
+        "23.0.1": 9,
+        "23.1.0": 6,
+        "24.0.0": 1,
+        "22.2.0": 1,
+        "23.2.0": 1
+      },
+      "version_totals": {
+        "22.2.1": 38,
+        "24.0.0": 52,
+        "23.1.0": 45,
+        "23.3.0": 52,
+        "23.4.0": 52,
+        "23.2.0": 52,
+        "22.2.0": 37,
+        "23.1.1": 46,
+        "23.2.1": 52,
+        "23.0.1": 40
+      }
+    },
+    {
+      "library": "internal_impl",
+      "is_present": true,
+      "aggregated_ratio": 1.0046334500000735,
+      "best_version": "23.3.0",
+      "version_matches": {
+        "24.0.0-beta1": 4,
+        "23.3.0": 164,
+        "22.2.0": 17,
+        "21.0.3": 12,
+        "23.0.0": 7,
+        "22.1.1": 1
+      },
+      "version_totals": {
+        "23.3.0": 216,
+        "21.0.3": 133,
+        "24.0.0-beta1": 241,
+        "22.2.0": 174,
+        "23.0.0": 201,
+        "23.2.1": 216,
+        "22.1.1": 166,
+        "23.4.0": 218,
+        "23.2.0": 216,
+        "23.0.1": 203,
+        "21.0.2": 133,
+        "22.2.1": 174,
+        "24.0.0": 242,
+        "23.1.1": 208,
+        "22.0.0": 141,
+        "21.0.0": 133,
+        "20.0.0": 94
+      }
+    },
+    {
+      "library": "support-annotations",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "23.4.0",
+      "version_matches": {
+        "23.4.0": 28,
+        "23.0.1": 11
+      },
+      "version_totals": {
+        "23.4.0": 39,
+        "23.2.1": 39,
+        "24.0.0": 43,
+        "23.0.1": 39,
+        "20.0.0": 25,
+        "22.2.0": 39,
+        "21.0.0": 25,
+        "23.3.0": 39,
+        "21.0.2": 25,
+        "21.0.3": 25,
+        "22.2.1": 39,
+        "23.0.0": 39,
+        "22.1.1": 25,
+        "23.1.1": 39,
+        "23.1.0": 39,
+        "24.0.0-beta1": 43,
+        "23.2.0": 39,
+        "22.0.0": 25
+      }
+    },
+    {
+      "library": "java-semver",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "0.9.0",
+      "version_matches": {
+        "0.9.0": 24
+      },
+      "version_totals": {
+        "0.9.0": 24
+      }
+    },
+    {
+      "library": "xz",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.5",
+      "version_matches": {
+        "1.5": 94
+      },
+      "version_totals": {
+        "1.5": 94
+      }
+    },
+    {
+      "library": "msgpack",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "0.6.12",
+      "version_matches": {
+        "0.6.12": 167
+      },
+      "version_totals": {
+        "0.6.12": 167
+      }
+    },
+    {
+      "library": "unbescape",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.1.RELEASE",
+      "version_matches": {
+        "1.1.1.RELEASE": 44
+      },
+      "version_totals": {
+        "1.1.1.RELEASE": 44
+      }
+    },
+    {
+      "library": "json-simple",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.1.1",
+      "version_matches": {
+        "1.1.1": 12
+      },
+      "version_totals": {
+        "1.1.1": 12
+      }
+    },
+    {
+      "library": "commons-net",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "3.3",
+      "version_matches": {
+        "3.3": 155
+      },
+      "version_totals": {
+        "3.3": 155
+      }
+    },
+    {
+      "library": "juniversalchardet",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.0.3",
+      "version_matches": {
+        "1.0.3": 58
+      },
+      "version_totals": {
+        "1.0.3": 58
+      }
+    },
+    {
+      "library": "javassist",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "3.18.1-GA",
+      "version_matches": {
+        "3.18.1-GA": 241
+      },
+      "version_totals": {
+        "3.18.1-GA": 241
+      }
+    },
+    {
+      "library": "com.android.support.multidex",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.0.1",
+      "version_matches": {
+        "1.0.1": 5
+      },
+      "version_totals": {
+        "1.0.1": 5
+      }
+    },
+    {
+      "library": "commons-compress",
+      "is_present": true,
+      "aggregated_ratio": 1.0,
+      "best_version": "1.10",
+      "version_matches": {
+        "1.10": 158
+      },
+      "version_totals": {
+        "1.10": 158
+      }
+    }
+  ],
+  "validation": {
+    "metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "counts": {
+      "true_positives": 18,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "detected_vs_truth": {
+      "groundtruth": {
+        "com.android.support.multidex": "1.0.1",
+        "json-simple": "1.1.1",
+        "com.android.support.recyclerview-v7": "23.0.1",
+        "com.android.support.appcompat-v7": "23.0.1",
+        "com.android.support.preference-v7": "23.0.1",
+        "commons-net": "3.3",
+        "unbescape": "1.1.1.RELEASE",
+        "acra": "4.6.2",
+        "xz": "1.5",
+        "commons-compress": "1.10",
+        "juniversalchardet": "1.0.3",
+        "internal_impl": "23.0.1",
+        "support-annotations": "23.0.1",
+        "java-semver": "0.9.0",
+        "com.android.support.support-v4": "23.0.1",
+        "msgpack": "0.6.12",
+        "com.android.support.design": "23.0.1",
+        "javassist": "3.18.1-GA"
+      },
+      "detected": {
+        "com.android.support.recyclerview-v7": "22.2.1",
+        "com.android.support.support-v4": "24.0.0",
+        "acra": "4.6.2",
+        "com.android.support.appcompat-v7": "23.1.0",
+        "com.android.support.preference-v7": "23.0.1",
+        "com.android.support.design": "22.2.1",
+        "internal_impl": "23.3.0",
+        "support-annotations": "23.4.0",
+        "java-semver": "0.9.0",
+        "xz": "1.5",
+        "msgpack": "0.6.12",
+        "unbescape": "1.1.1.RELEASE",
+        "json-simple": "1.1.1",
+        "commons-net": "3.3",
+        "juniversalchardet": "1.0.3",
+        "javassist": "3.18.1-GA",
+        "com.android.support.multidex": "1.0.1",
+        "commons-compress": "1.10"
+      }
+    }
+  }
+}
