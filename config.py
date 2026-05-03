@@ -12,7 +12,7 @@ LOG_FILE = "logs/pipeline.log"
 
 # ---------------- CONFIG ----------------
 # Tools
-JADX_CMD = "/mnt/SATA_3/akila/LLMTest/class-level/jadx_ins/jadx/build/jadx/bin/jadx"  # Ensure jadx is in your PATH or provide full path
+JADX_CMD = "jadx"  # Ensure jadx is in your PATH or provide full path
 APKTOOL_CMD = "apktool"  # Ensure apktool is in your PATH or provide full path
 
 
@@ -48,15 +48,15 @@ FUSION_MODE = "fused"
 FAISS_INDEX_FILE = FAISS_DIR / "tpl_classes.index"
 FAISS_META_FILE = FAISS_DIR / "tpl_classes_meta.pkl"
 EMBEDDINGS_FILE = Path(f"{FAISS_DIR}/Embedding.pkl")
-APK_EMBEDDINGS_DIR = Path("LibScan_APK_Embeddings")
-LIB_INDEX_DIR = Path("Libscan_Faiss_Data") #Use to map FAISS indexes to library names and versions
+APK_EMBEDDINGS_DIR = Path("DS1_APK_Embeddings")
+LIB_INDEX_DIR = Path("DS1_Faiss_Data") #Use to map FAISS indexes to library names and versions
                        
 # Detection thresholds
 # DS1 dataset thresholds
 POS_DECAY_ALPHA = 0.8
 TH_CLS = 0.1
 TH_API = 0.4
-MODE = f"LIBSCAN-{FUSION_MODE}-ALPHA-{POS_DECAY_ALPHA}"
+MODE = f"DS1-{FUSION_MODE}-ALPHA-{POS_DECAY_ALPHA}"
 
 # DS2 Optimized dataset thresholds
 # POS_DECAY_ALPHA = 0.4
