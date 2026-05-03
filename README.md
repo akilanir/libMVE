@@ -35,7 +35,7 @@ libMVE/
     ├── version_detection.py        # Helper script to perform version level detection
 ├── faiss_data/                     # Stores embeddings and FAISS-related data
 ├── logs/                           # Execution logs
-├── output/                         # Detection results
+├── Old_Results/                         # Detection results
 │
 ├── requirements.txt                # Python dependencies
 ├── setup.sh                        # Environment setup script
