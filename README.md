@@ -26,6 +26,13 @@ libMVE/
 ├── main.py                         # Entry point for the pipeline
 ├── build_lib_embeddings.py         # Generate embeddings from library code
 ├── detect_with_versions.py         # Detection pipeline with version analysis
+├── apk_embedding_builder.py        # APK embedding generator
+├── apk_embedding_worker.py         # Worker to parallelise the embedding generator
+├── apk_parsing.py                  # APK parser
+├── embedding_fusion.py             # Equal weight embedding fusion
+├── java_processing.py              # Java block segmentation and filtering module
+├── smali_processing.py             # Smali block segmentation and filtering module
+├── miniLM_embedder.py              # Code embedding module
 ├── config.py                       # Default paths and configuration
 ├── utils.py                        # All the helper methods
 ├── logger.py                       # Logging utilities
@@ -40,6 +47,7 @@ libMVE/
 │
 ├── requirements.txt                # Python dependencies
 ├── setup.sh                        # Environment setup script
+├── Appendix.pdf                    # Appendix section of the paper
 └── README.md
 ```
 
