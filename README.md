@@ -27,15 +27,16 @@ libMVE/
 ├── build_lib_embeddings.py         # Generate embeddings from library code
 ├── detect_with_versions.py         # Detection pipeline with version analysis
 ├── config.py                       # Default paths and configuration
+├── utils.py                        # All the helper methods
 ├── logger.py                       # Logging utilities
 │
 ├── library_detection/
     │
     ├── faiss_version_index.py      # Helper script to generate faiss indexes
-    ├── version_detection.py        # Helper script to perform version level detection
+    ├── version_detection.py        # Helper script to perform version-level detection
 ├── faiss_data/                     # Stores embeddings and FAISS-related data
 ├── logs/                           # Execution logs
-├── Old_Results/                         # Detection results
+├── Old_Results/                    # Detection results
 │
 ├── requirements.txt                # Python dependencies
 ├── setup.sh                        # Environment setup script
@@ -96,10 +97,10 @@ Run:
 ./setup.sh
 ```
 
-IMPORTANT: If the above setup.sh failed refer to the below manual installation steps
+IMPORTANT: If the above setup.sh failed refer to the manual installation steps below.
 
 
-### Manual Setup (If above automated process failed!!)
+### Manual Setup (If the above automated process failed!!)
 
 ### I. Create Virtual Environment
 
@@ -176,9 +177,9 @@ IF NOT: alter JADX_CMD, APKTOOL_CMD in config.py and direct it to the executable
 
         `TS2`: TPLs used with DS2 dataset (we have given the .jar/.aar files)
 
-        `TS3AndTS4`: Vulenrable and Tracker TPLs (.jar/.aar, decompiled java and smali files provided)
+        `TS3AndTS4`: Vulenrable and Tracker TPLs (we have given the .jar/.aar files)
 
-        IMPORTANT: Script to automatically decomplie the .jar/.aar files are given in MISC/decompileLibFiles.py and follow the steps given in the script. Java and smali should be decompiled into lib_java and lib_smali folders and the fodler structure should be lib_java/LIB_NAME/sources | lib_Smali/LIB_NAME/smali
+        IMPORTANT: Script to automatically decompile the .jar/.aar files are given in MISC/decompileLibFiles.py, and follow the steps given in the script. Java and smali should be decompiled into lib_java and lib_smali folders and the fodler structure should be lib_java/LIB_NAME/sources | lib_Smali/LIB_NAME/smali
     
 - APKs: 
 
@@ -196,15 +197,15 @@ IF NOT: alter JADX_CMD, APKTOOL_CMD in config.py and direct it to the executable
 
         `supportFilesVulnLib`: provides the groundtruth.json, LibMap.csv, and tpl_system_apis.json that are used in results validation/evaluation, Mapping the TPL name with the high level TPL name, and list of System APIs for each TPL that we analys in TS3 and TS4 datasets.
 
-Makesure you have the correct dataset downloaded and ready to use!!!
+Make sure you have the correct dataset downloaded and ready to use!!!
 
 ### 1. Build Library Embeddings
 
-From TS{n} datasets first we need to generate TPL Database (this should be done only once per dataset)
+From TS{n} datasets, first we need to generate the TPL Database (this should be done only once per dataset)
 
 Make sure you change LIB_MAP_CSV = Path("supportFilesLibScan/LibMap.csv")  # CSV file mapping library JAR names to library info.
 
-Run following changing the location of TS1,TS2, and TS3 based on the dataset you used (eg: If you want to test DS1 you need to use TS1)
+Run the following, changing the location of TS1, TS2, and TS3 based on the dataset you used (e.g., if you want to test DS1, you need to use TS1)
 
 ```bash
 python main.py build-embeddings \
@@ -276,9 +277,10 @@ logs/pipeline.log
 
 ## Notes
 
-- Ensure library datasets are properly decompiled before building embeddings
-- Detection performance depends on threshold selection
-- Results may vary depending on obfuscation and compilation settings
+- Ensure library datasets are properly decompiled before building embeddings.
+- Detection performance depends on threshold selection.
+- Results may vary depending on obfuscation and compilation settings.
+- This is for POC of the paper, not suitable for commercial use.
 
 ---
 
