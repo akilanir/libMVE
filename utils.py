@@ -118,7 +118,7 @@ def read_and_merge_smali_for_class(class_name: str, smali_dir: Path, smali_index
             smali_index = _SMALI_INDEX_CACHE[key]
         else:
             smali_index = {}
-            smali_files = collect_smali_files(smali_dir)
+            smali_files = collect_files(smali_dir, ".smali")
             for p in smali_files:
                 cname, _ = class_name_from_path(p, smali_dir)
                 norm = re.sub(r'^smali(_classes\d+)?\.', '', cname)
